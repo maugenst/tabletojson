@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name": "Iain Collins",
+    "email": "me@iaincollins.com",
+    "url": "http://iaincollins.com"
+  },
+  "name": "tabletojson",
+  "description": "Converts HTML tables to JSON objects",
+  "version": "0.1.3",
+  "main": "./lib/tabletojson.js",
+  "keywords": [
+    "table2json",
+    "html",
+    "table",
+    "convert",
+    "json",
+    "csv"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/iaincollins/tabletojson.git"
+  },
+  "dependencies": {
+    "cheerio": "0.13.1",
+    "q": "1.0.0",
+    "request": "2.33.0"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
