@@ -17,6 +17,7 @@ You'll need to handle things like work out which tables to parse and (in most ca
 You might want to use it with a module like 'cheerio' if you want to parse specific tables identified by id or class (i.e. select them with cheerio and pass the HTML of them as a string).
 
 If there are duplicate column headings, subsequent headings are suffixed with a count:
+
 ```
 // Table
 | PLACE | VALUE | PLACE | VALUE |
@@ -29,6 +30,17 @@ If there are duplicate column headings, subsequent headings are suffixed with a 
 }]
 ```
 
+If a table contains headings in the first column you might get an unexpected result, but you can pass a second argument with options with `{ useFirstRowForHeadings: true }` to have it treat the first column as it would any other cell.
+
+```
+tabletojson.convertUrl(
+  'https://www.timeanddate.com/holidays/ireland/2017',
+  { useFirstRowForHeadings: true },
+  function(tablesAsJson) {
+    console.log(tablesAsJson);
+  }
+);
+```
 
 ## Example usage
 
@@ -95,3 +107,7 @@ tabletojson.convertUrl(url)
 Improvements, fixes and suggestions for better written modules that other people have created are welcome, as are bug reports against specific tables it is unable to handle.
 
 If there is enough interest and I get some examples that I'll improve the code and actually write some tests.
+
+# Thanks
+
+Thank you to @roryok, Max Thyen (@maxthyen), Thor Jacobsen (@twjacobsen) and Michael Keller (@mhkeller) for improvements and bug fixes.
