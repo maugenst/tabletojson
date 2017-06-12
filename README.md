@@ -32,7 +32,7 @@ If there are duplicate column headings, subsequent headings are suffixed with a 
 
 If a table contains headings in the first column you might get an unexpected result, but you can pass a second argument with options with `{ useFirstRowForHeadings: true }` to have it treat the first column as it would any other cell.
 
-```
+``` javascript
 tabletojson.convertUrl(
   'https://www.timeanddate.com/holidays/ireland/2017',
   { useFirstRowForHeadings: true },
