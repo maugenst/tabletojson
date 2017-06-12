@@ -16,6 +16,20 @@ You'll need to handle things like work out which tables to parse and (in most ca
 
 You might want to use it with a module like 'cheerio' if you want to parse specific tables identified by id or class (i.e. select them with cheerio and pass the HTML of them as a string).
 
+If there are duplicate column headings, subsequent headings are suffixed with a count:
+```
+// Table
+| PLACE | VALUE | PLACE | VALUE |
+|   abc |     1 |   def |     2 |
+
+// Example output
+[{
+  PLACE: 'abc', VALUE: '1',
+  PLACE_2: 'def', VALUE_2: '2',
+}]
+```
+
+
 ## Example usage
 
 ``` javascript
