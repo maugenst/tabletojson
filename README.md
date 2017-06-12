@@ -6,15 +6,47 @@ Can be passed the markup for a single table as a string, a fragment of HTML or a
 
 The response is always an array. Every array entry in the response represents a table found on the page (in same the order they were found in the HTML).
 
-## Known issues / limitations
+## Options
 
-This module only supports parsing basic tables with a simple horizontal set of <th></th> headings and corresponding <td></td> cells.
+### Tables with headings in the first column 
 
-It can give useless results on tables that have complex structures or multiple headers (such as on both X and Y axis).
+If a table contains headings in the first column you might get an unexpected result, but you can pass a second argument with options with `{ useFirstRowForHeadings: true }` to have it treat the first column as it would any other cell.
 
-You'll need to handle things like work out which tables to parse and (in most cases) clean up the data. You might want to combine it it with modules like json2csv.
+``` javascript
+tabletojson.convertUrl(
+  'https://www.timeanddate.com/holidays/ireland/2017',
+  { useFirstRowForHeadings: true },
+  function(tablesAsJson) {
+    console.log(tablesAsJson);
+  }
+);
+```
 
-You might want to use it with a module like 'cheerio' if you want to parse specific tables identified by id or class (i.e. select them with cheerio and pass the HTML of them as a string).
+### Tables with HTML
+
+The following options are true by default, which converts all values to plain text to give you an easier more readable object to work with:
+
+* stripHtmlFromHeadings
+* stripHtmlFromCells
+
+If your table contains HTML you want to parse (for example for links) you can set `stripHtmlFromCells` to `false` to treat it as raw text.
+
+``` javascript
+tabletojson.convertUrl(
+  'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes',
+  { stripHtmlFromCells: false },
+  function(tablesAsJson) {
+    //Print out the 1st row from the 2nd table on the above webpage as JSON 
+    console.log(tablesAsJson[1][0]);
+  }
+);
+```
+
+Note: This doesn't work with nested tables, which it will still try to parse.
+
+You probably don't need to set `stripHtmlFromHeadings` to false (and setting it to false can make the results hard to parse), but if you do you can also set both at the same time by setting `stripHtml` to false.
+
+### Duplicate column headings 
 
 If there are duplicate column headings, subsequent headings are suffixed with a count:
 
@@ -30,17 +62,15 @@ If there are duplicate column headings, subsequent headings are suffixed with a 
 }]
 ```
 
-If a table contains headings in the first column you might get an unexpected result, but you can pass a second argument with options with `{ useFirstRowForHeadings: true }` to have it treat the first column as it would any other cell.
+## Options, known issues and limitations
 
-``` javascript
-tabletojson.convertUrl(
-  'https://www.timeanddate.com/holidays/ireland/2017',
-  { useFirstRowForHeadings: true },
-  function(tablesAsJson) {
-    console.log(tablesAsJson);
-  }
-);
-```
+This module only supports parsing basic tables with a simple horizontal set of <th></th> headings and corresponding <td></td> cells.
+
+It can give useless or weird results on tables that have complex structures (such as nested tables) or multiple headers (such as on both X and Y axis).
+
+You'll need to handle things like work out which tables to parse and (in most cases) clean up the data. You might want to combine it it with modules like json2csv or CsvToMarkdownTable.
+
+You might want to use it with a module like 'cheerio' if you want to parse specific tables identified by id or class (i.e. select them with cheerio and pass the HTML of them as a string).
 
 ## Example usage
 
