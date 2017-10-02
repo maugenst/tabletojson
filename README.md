@@ -61,6 +61,22 @@ If there are duplicate column headings, subsequent headings are suffixed with a 
   PLACE_2: 'def', VALUE_2: '2',
 }]
 ```
+### Options forceIndexAsNumber
+Instead of using column text (that sometime re-order the data), force an index as a number (string number).
+
+``` javascript
+// Some JSON (Other rows)
+{
+  "0": "",
+  "1": "Ａ会",
+  "2": "Ｂ会",
+  "3": "Ｃ会",
+  "4": "Something",
+  "5": "Else",
+  "6": ""
+}
+// Some JSON (Other rows)
+```
 
 ## Options, known issues and limitations
 
