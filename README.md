@@ -114,8 +114,8 @@ var tabletojson = require('tabletojson');
 var url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
 tabletojson.convertUrl(url)
 .then(function(tablesAsJson) {
-  var standardAndPoorRatings = tablesAsJson[0];
-  var fitchRatings = tablesAsJson[1];
+  var standardAndPoorRatings = tablesAsJson[1];
+  var fitchRatings = tablesAsJson[2];
 });
 ```
 
@@ -126,7 +126,7 @@ var json2csv = require('json2csv');
 var url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
 tabletojson.convertUrl(url)
 .then(function(tablesAsJson) {
-  var standardAndPoorCreditRatings = tablesAsJson[0];
+  var standardAndPoorCreditRatings = tablesAsJson[1];
   json2csv({ data: standardAndPoorCreditRatings,
              fields: [ 'Country', 'Outlook']
            }, function(err, csv) {
@@ -152,7 +152,13 @@ tabletojson.convertUrl(url)
 
 Improvements, fixes and suggestions for better written modules that other people have created are welcome, as are bug reports against specific tables it is unable to handle.
 
-If there is enough interest and I get some examples that I'll improve the code and actually write some tests.
+There are no tests for this library because I am a terrible person.
+
+If you'd like to fix that, that would be amazing.
+
+There are some example files included with this project that show usage and would be a good start for some tests if anyone would like to help out with that.
+
+If you submit a pull request, please add an example for your use case, so I can understand what you want it to do (as I want to get around to writing tests for this and want to understand the sort of use cases people have).
 
 # Thanks
 

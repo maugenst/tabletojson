@@ -6,7 +6,7 @@
   },
   "name": "tabletojson",
   "description": "Converts HTML tables to JSON objects",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "./lib/tabletojson.js",
   "keywords": [
     "table2json",
@@ -28,5 +28,8 @@
   "engines": {
     "node": "*"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "json2csv": "^3.11.5"
+  }
 }
