@@ -21,15 +21,16 @@
     "url": "git://github.com/iaincollins/tabletojson.git"
   },
   "dependencies": {
-    "cheerio": "0.19.0",
-    "q": "1.4.1",
-    "request": "2.68.0"
+    "cheerio": "^1.0.0-rc.2",
+    "q": "^1.5.1",
+    "request": "^2.85.0"
   },
   "engines": {
     "node": "*"
   },
   "license": "ISC",
   "devDependencies": {
-    "json2csv": "^3.11.5"
+    "json2csv": "^3.11.5",
+    "prettier": "^1.12.1"
   }
 }
