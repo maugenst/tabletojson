@@ -152,9 +152,7 @@ tabletojson.convertUrl(url)
 
 Improvements, fixes and suggestions for better written modules that other people have created are welcome, as are bug reports against specific tables it is unable to handle.
 
-There are no tests for this library because I am a terrible person.
-
-If you'd like to fix that, that would be amazing.
+There are no tests for this library because I am a terrible person. If you'd like to fix that, that would be amazing.
 
 There are some example files included with this project that show usage and would be a good start for some tests if anyone would like to help out with that.
 
@@ -162,4 +160,6 @@ If you submit a pull request, please add an example for your use case, so I can 
 
 # Thanks
 
-Thank you to @roryok, Max Thyen (@maxthyen), Thor Jacobsen (@twjacobsen) and Michael Keller (@mhkeller) for improvements and bug fixes.
+Special thanks to Marius Augenstein (@maugenst) for the latest major update, which includes ES6 syntax, uses native promises and has much improved code and inline documentation.
+
+Additional thanks to @roryok, Max Thyen (@maxthyen), Thor Jacobsen (@twjacobsen) and Michael Keller (@mhkeller) for improvements and bug fixes.
