@@ -30,7 +30,13 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "config": "^1.30.0",
+    "istanbul": "^0.4.5",
     "json2csv": "^3.11.5",
-    "prettier": "^1.12.1"
+    "lodash": "^4.17.10",
+    "mocha": "^5.1.1",
+    "mocha-junit-reporter": "^1.17.0",
+    "prettier": "^1.12.1",
+    "should": "^13.2.1"
   }
 }
