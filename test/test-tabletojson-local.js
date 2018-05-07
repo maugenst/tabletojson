@@ -39,5 +39,4 @@ describe('TableToJSON Local', function() {
         secondTable[0]['1'].should.be.equal('Race');
         secondTable[0]['2'].should.be.equal('Age');
     });
-
 });

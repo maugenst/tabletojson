@@ -2,22 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fa3f59-cc89-4ab1-a977-b3e0a228a2cd" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/default.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/tables.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test-tabletojson-local.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test-tabletojson-remote.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-1.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/example-1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-2.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/example-2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-3.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/example-3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-4.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/example-4.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-5.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/example-5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gruntfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/lcov.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/npm-shrinkwrap.json" beforeDir="false" afterPath="$PROJECT_DIR$/npm-shrinkwrap.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-tabletojson-local.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-tabletojson-local.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-tabletojson-remote.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-tabletojson-remote.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,8 +27,8 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+            <state relative-caret-position="555">
+              <caret line="53" column="3" selection-start-line="53" selection-start-column="3" selection-end-line="53" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -43,17 +36,8 @@
       <file leaf-file-name="tabletojson.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tabletojson.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
+            <state relative-caret-position="-930">
               <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="example-5.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/example-5.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="32" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -70,53 +54,62 @@
       <file leaf-file-name="test-tabletojson-remote.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test-tabletojson-remote.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="437">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test-tabletojson-local.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test-tabletojson-local.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test-tabletojson-local.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+            <state relative-caret-position="345">
+              <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="example-3.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/example-3.js">
+      <file leaf-file-name="Gruntfile.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Gruntfile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="36" />
+            <state relative-caret-position="398">
+              <caret line="54" column="44" lean-forward="true" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="example-4.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/example-4.js">
+      <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="10" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="34" selection-end-column="10" />
+            <state>
+              <caret column="17" selection-start-column="17" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="example-2.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/example-2.js">
+      <file leaf-file-name="prettierCLI" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/prettierCLI">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="example-1.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/example-1.js">
+      <file leaf-file-name="lcov.info" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/lcov.info">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            <state>
+              <caret column="17" selection-start-column="17" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".eslintrc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.eslintrc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="614">
+              <caret line="142" selection-start-line="142" selection-end-line="142" />
             </state>
           </provider>
         </entry>
@@ -126,8 +119,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -158,10 +151,14 @@
         <option value="$PROJECT_DIR$/lib/TestUtil.js" />
         <option value="$PROJECT_DIR$/test/TestUtil.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/test/test-tabletojson-remote.js" />
         <option value="$PROJECT_DIR$/lib/tabletojson.js" />
         <option value="$PROJECT_DIR$/test/test-tabletojson-local.js" />
         <option value="$PROJECT_DIR$/test/tables.html" />
+        <option value="$PROJECT_DIR$/test/fixtures/lcov.info" />
+        <option value="$PROJECT_DIR$/.eslintrc" />
+        <option value="$PROJECT_DIR$/test/test-tabletojson-remote.js" />
+        <option value="$PROJECT_DIR$/Gruntfile.js" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
       </list>
     </option>
   </component>
@@ -217,6 +214,12 @@
               <item name="tabletojson" type="b2602c69:ProjectViewProjectNode" />
               <item name="tabletojson" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tabletojson" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tabletojson" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="fixtures" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -362,17 +365,11 @@
       <workItem from="1524817874341" duration="7417000" />
       <workItem from="1524839730956" duration="668000" />
       <workItem from="1525224579047" duration="78000" />
-      <workItem from="1525252624289" duration="12033000" />
+      <workItem from="1525252624289" duration="18428000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TableToJSON_Local_Directly_passing_html_content__Using_first_row_as_header - 2018.05.07 at 15h 33m 23s.xml">
-      <configuration name="TableToJSON Local.Directly passing html content: Using first row as header" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="TableToJSON_Local_Directly_passing_html_content__Using_first_row_as_header - 2018.05.07 at 15h 33m 49s.xml">
-      <configuration name="TableToJSON Local.Directly passing html content: Using first row as header" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
     <history-entry file="test_test-tabletojson-local_js - 2018.05.07 at 15h 38m 11s.xml">
       <configuration name="test/test-tabletojson-local.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
@@ -397,9 +394,15 @@
     <history-entry file="TableToJSON_Local - 2018.05.07 at 15h 41m 20s.xml">
       <configuration name="TableToJSON Local" configurationId="mocha-javascript-test-runner" />
     </history-entry>
+    <history-entry file="TableToJSON_Remote - 2018.05.07 at 15h 41m 31s.xml">
+      <configuration name="TableToJSON Remote" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="TableToJSON_Local - 2018.05.07 at 15h 41m 46s.xml">
+      <configuration name="TableToJSON Local" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20196000" />
+    <option name="totallyTimeSpent" value="26591000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1132" extended-state="6" />
@@ -411,10 +414,10 @@
       <window_info anchor="bottom" id="Tail" order="7" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="NativeScript" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32850242" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32850242" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3294686" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3294686" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -655,13 +658,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/prettierCLI">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/TestUtil.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1715">
@@ -714,42 +710,21 @@
     <entry file="file://$PROJECT_DIR$/examples/example-4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="34" column="10" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="34" selection-end-column="10" />
+          <caret line="34" column="10" selection-start-line="11" selection-start-column="8" selection-end-line="34" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/example-5.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="18" column="32" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/example-3.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-tabletojson-remote.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tabletojson.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
+          <caret line="5" column="36" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -760,10 +735,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.eslintrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="614">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/test-tabletojson-local.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+        <state relative-caret-position="345">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-tabletojson-remote.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/lcov.info">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tabletojson.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-930">
+          <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/prettierCLI">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="53" column="3" selection-start-line="53" selection-start-column="3" selection-end-line="53" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="54" column="44" lean-forward="true" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
         </state>
       </provider>
     </entry>
