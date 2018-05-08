@@ -1,3 +1,6 @@
+[![Coverage Status](https://coveralls.io/repos/github/maugenst/tabletojson/badge.svg?branch=master)](https://coveralls.io/github/maugenst/tabletojson?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/maugenst/tabletojson/badge.svg?targetFile=package.json)](https://snyk.io/test/github/maugenst/tabletojson?targetFile=package.json)
+
 # Table to JSON
 
 Attempts to convert HTML tables into JSON.
