@@ -24,6 +24,15 @@ describe('TableToJSON Remote', function() {
         );
     });
 
+    it('Get table from Wikipedia using callBack function without options', async function() {
+        await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', converted => {
+            converted.should.be.ok();
+            const mainTable = converted[1];
+            (mainTable instanceof Array).should.be.true();
+            mainTable[0].should.have.property('Language family');
+        });
+    });
+
     it('Get table from Wikipedia using promise', async function() {
         const converted = await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', {
             request: {
@@ -52,5 +61,13 @@ describe('TableToJSON Remote', function() {
         Object.keys(mainTable[0]).forEach(key => {
             mainTable[0][key].should.be.equal(key);
         });
+    });
+
+    it('Try to get a table from a nonexisting domain', async function() {
+        try {
+            await tabletojson.convertUrl('https://www.klhsfljkag.com/ydasdadad/adsaakhjg/jahsgajhvas.html');
+        } catch (err) {
+            err.message.should.equal('getaddrinfo ENOTFOUND www.klhsfljkag.com www.klhsfljkag.com:443');
+        }
     });
 });
