@@ -97,7 +97,7 @@ You might want to use it with a module like 'cheerio' if you want to parse speci
 
 ## Example usage
 
-``` javascript
+```javascript
 // Convert an HTML blob into an array of all the tables on the page
 var tabletojson = require('tabletojson');
 var tablesAsJson = tabletojson.convert(html);
@@ -106,7 +106,7 @@ var secondTableAsJson = tablesAsJson[1];
 ...
 ```
 
-``` javascript
+```javascript
 // Fetch a URL and parse all it's tables into JSON, using a callback
 var tabletojson = require('tabletojson');
 var url = 'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes';
@@ -115,7 +115,7 @@ tabletojson.convertUrl(url, function(tablesAsJson) {
 });
 ```
 
-``` javascript
+```javascript
 // Fetch a URL and parse all it's tables into JSON, using promises
 var tabletojson = require('tabletojson');
 var url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
@@ -126,7 +126,7 @@ tabletojson.convertUrl(url)
 });
 ```
 
-``` javascript
+```javascript
 // Fetch a table from Wikipedia and combine with json2csv to convert to CSV
 var tabletojson = require('tabletojson');
 var json2csv = require('json2csv');
@@ -155,18 +155,41 @@ tabletojson.convertUrl(url)
 });
 ```
 
+# Issues
+
+Right now the table needs to be "well formatted" to be convertable. Tables in Html pages with not be processed.
+
+```html
+<thead>
+    <tr>
+        <th>Header</th>
+    <tr>
+</thead>
+```
+
 # Contributing
 
-Improvements, fixes and suggestions for better written modules that other people have created are welcome, as are bug reports against specific tables it is unable to handle.
+Improvements, fixes and suggestions for better written modules that other people have created are welcome, as are bug 
+reports against specific tables it is unable to handle.
 
-There are no tests for this library because I am a terrible person. If you'd like to fix that, that would be amazing.
+You can find basic tests in the test folder. I implemented the most straight forward way in using the library. Nonetheless
+there are some edge cases that need to be tested and I would like to ask for support here. Feel free to fork and create
+PRs here. Every bit of help is appreciated.
 
-There are some example files included with this project that show usage and would be a good start for some tests if anyone would like to help out with that.
+To get also an insight you can use Iain's examples located in the example folder included with this project that shows
+usage and would be a good start.
 
-If you submit a pull request, please add an example for your use case, so I can understand what you want it to do (as I want to get around to writing tests for this and want to understand the sort of use cases people have).
+If you submit a pull request, please add an example for your use case, so I can understand what you want it to do (as I 
+want to get around to writing tests for this and want to understand the sort of use cases people have).
 
 # Thanks
 
-Special thanks to Marius Augenstein (@maugenst) for the latest major update, which includes ES6 syntax, uses native promises and has much improved code and inline documentation.
+June 2018 - Very special thanks to the originator of the library, Iain Collins (@iaincollins). Without his investigation in website 
+grasping and mastering cheerio this lib would have not been where it is right now. Also I would personally like to say 
+"Thank you" for your trust in passing me the ownership. @maugenst 
 
-Additional thanks to @roryok, Max Thyen (@maxthyen), Thor Jacobsen (@twjacobsen) and Michael Keller (@mhkeller) for improvements and bug fixes.
+Special thanks to Marius Augenstein (@maugenst) for the latest major update, which includes ES6 syntax, uses native 
+promises and has much improved code and inline documentation.
+
+Additional thanks to @roryok, Max Thyen (@maxthyen), Thor Jacobsen (@twjacobsen) and Michael Keller (@mhkeller) for 
+improvements and bug fixes.
