@@ -1,5 +1,8 @@
+[![NPM](https://nodei.co/npm/tabletojson.png)](https://nodei.co/npm/tabletojson/)
+
 [![Build](https://travis-ci.org/maugenst/tabletojson.svg?branch=master)](https://travis-ci.org/maugenst/tabletojson.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/maugenst/tabletojson/badge.svg?branch=master)](https://coveralls.io/github/maugenst/tabletojson?branch=master)
+[![Dependencies](https://david-dm.org/maugenst/tabletojson.svg)](https://david-dm.org/maugenst/tabletojson.svg)
 [![Known Vulnerabilities](https://snyk.io/test/github/maugenst/tabletojson/badge.svg?targetFile=package.json)](https://snyk.io/test/github/maugenst/tabletojson?targetFile=package.json)
 
 # Table to JSON
