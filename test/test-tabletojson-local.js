@@ -76,6 +76,18 @@ describe('TableToJSON Local', function() {
         _.has(firstTable[0], 'isDumb_2').should.be.true();
     });
 
+    it('Double Header Entry: do not count duplicate headings', async function() {
+        const converted = await tabletojson.convert(html, {
+            countDuplicateHeadings: false
+        });
+        converted.should.be.ok();
+
+        const firstTable = converted[0];
+
+        _.has(firstTable[0], 'isDumb').should.be.true();
+        _.has(firstTable[0], 'isDumb_2').should.be.false();
+    });
+
     it('Directly local html content: Table with header', async function() {
         const converted = await tabletojson.convert(html);
         converted.should.be.ok();
