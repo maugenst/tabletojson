@@ -6,7 +6,7 @@
   },
   "name": "tabletojson",
   "description": "Converts HTML tables to JSON objects",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "main": "./lib/tabletojson.js",
   "keywords": [
     "table2json",
@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "q": "^1.5.1",
     "request": "^2.85.0"
   },
   "engines": {
