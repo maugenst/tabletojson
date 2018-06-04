@@ -63,7 +63,7 @@ describe('TableToJSON Remote', function() {
         });
     });
 
-    it('Try to get a table from a nonexisting domain', async function() {
+    it.skip('Try to get a table from a nonexisting domain', async function() {
         try {
             await tabletojson.convertUrl('https://www.klhsfljkag.com/ydasdadad/adsaakhjg/jahsgajhvas.html');
         } catch (err) {
