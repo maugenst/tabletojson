@@ -66,6 +66,18 @@ describe('TableToJSON Local', function() {
         firstTable[0]['<b>Age</b>'].should.be.equal('2');
     });
 
+    // ADDED TO FIX: https://github.com/maugenst/tabletojson/issues/15
+    it('Double Header Entry: handle double header entries in different tables', async function() {
+        const converted = await tabletojson.convert(html);
+        converted.should.be.ok();
+
+        const firstTable = converted[0];
+        const secondTable = converted[1];
+
+        _.has(firstTable[0], 'Age').should.be.true();
+        _.has(secondTable[0], 'Age').should.be.true();
+    });
+
     it('Double Header Entry: handle double header entries', async function() {
         const converted = await tabletojson.convert(html);
         converted.should.be.ok();
@@ -116,13 +128,27 @@ describe('TableToJSON Local', function() {
         const converted = await tabletojson.convert(html);
         converted.should.be.ok();
 
-        const secondTable = converted[1];
-        _.has(secondTable[0], '0').should.be.true();
-        _.has(secondTable[0], '1').should.be.true();
-        _.has(secondTable[0], '2').should.be.true();
+        const thirdTable = converted[2];
+        _.has(thirdTable[0], '0').should.be.true();
+        _.has(thirdTable[0], '1').should.be.true();
+        _.has(thirdTable[0], '2').should.be.true();
 
-        secondTable[0]['0'].should.be.equal('Dog');
-        secondTable[0]['1'].should.be.equal('Race');
-        secondTable[0]['2'].should.be.equal('Age');
+        thirdTable[0]['0'].should.be.equal('Dog');
+        thirdTable[0]['1'].should.be.equal('Race');
+        thirdTable[0]['2'].should.be.equal('Age');
+    });
+
+    // ADDED TO FIX: https://github.com/maugenst/tabletojson/issues/14
+    it('Empty header: to be converted into their column count and not to the underline field name', async function() {
+        const converted = await tabletojson.convert(html);
+        converted.should.be.ok();
+
+        const forthTable = converted[3];
+        _.has(forthTable[0], 'Dog').should.be.true();
+        _.has(forthTable[0], '1').should.be.true();
+        _.has(forthTable[0], '2').should.be.true();
+        _.has(forthTable[0], 'Height').should.be.true();
+        _.has(forthTable[0], '4').should.be.true();
+
     });
 });
