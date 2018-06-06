@@ -9,49 +9,52 @@
 
 Attempts to convert HTML tables into JSON.
 
-Can be passed the markup for a single table as a string, a fragment of HTML or an entire page or just a URL (with an optional callback function; promises also supported).
+Can be passed the markup for a single table as a string, a fragment of HTML or an entire page or just 
+a URL (with an optional callback function; promises also supported).
 
-The response is always an array. Every array entry in the response represents a table found on the page (in same the order they were found in the HTML).
+The response is always an array. Every array entry in the response represents a table found on the page 
+(in same the order they were found in the HTML).
 
-## Options
+## Basic usage
 
-### Tables with headings in the first column 
+Install via npm
 
-If a table contains headings in the first column you might get an unexpected result, but you can pass a second argument with options with `{ useFirstRowForHeadings: true }` to have it treat the first column as it would any other cell.
-
-``` javascript
-tabletojson.convertUrl(
-  'https://www.timeanddate.com/holidays/ireland/2017',
-  { useFirstRowForHeadings: true },
-  function(tablesAsJson) {
-    console.log(tablesAsJson);
-  }
-);
+```
+npm install tabletojson
 ```
 
-### Tables with HTML
+### Remote (`convertUrl`)
 
-The following options are true by default, which converts all values to plain text to give you an easier more readable object to work with:
+```javascript
+'use strict';
 
-* stripHtmlFromHeadings
-* stripHtmlFromCells
+const tabletojson = require('tabletojson');
 
-If your table contains HTML you want to parse (for example for links) you can set `stripHtmlFromCells` to `false` to treat it as raw text.
-
-``` javascript
 tabletojson.convertUrl(
-  'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes',
-  { stripHtmlFromCells: false },
-  function(tablesAsJson) {
-    //Print out the 1st row from the 2nd table on the above webpage as JSON 
-    console.log(tablesAsJson[1][0]);
-  }
+    'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes',
+    function(tablesAsJson) {
+        console.log(tablesAsJson[1]);
+    }
 );
+
 ```
 
-Note: This doesn't work with nested tables, which it will still try to parse.
+### Local (`convert`)
+Have a look in the examples.
 
-You probably don't need to set `stripHtmlFromHeadings` to false (and setting it to false can make the results hard to parse), but if you do you can also set both at the same time by setting `stripHtml` to false.
+```javascript
+// example-6.js
+'use strict';
+
+const tabletojson = require('../lib/tabletojson');
+const fs = require('fs');
+const path = require('path');
+
+const html = fs.readFileSync(path.resolve(__dirname, '../test/tables.html'), {encoding: 'UTF-8'});
+const converted = tabletojson.convert(html);
+
+console.log(converted);
+```
 
 ### Duplicate column headings 
 
@@ -68,7 +71,130 @@ If there are duplicate column headings, subsequent headings are suffixed with a 
   PLACE_2: 'def', VALUE_2: '2',
 }]
 ```
-### Options forceIndexAsNumber
+
+### Tables with headings in the first column 
+
+If a table contains headings in the first column you might get an unexpected result, but you can pass a 
+second argument with options with `{ useFirstRowForHeadings: true }` to have it treat the first column 
+as it would any other cell.
+
+``` javascript
+tabletojson.convertUrl(
+  'https://www.timeanddate.com/holidays/ireland/2017',
+  { useFirstRowForHeadings: true },
+  function(tablesAsJson) {
+    console.log(tablesAsJson);
+  }
+);
+```
+
+### Tables with HTML
+
+The following options are true by default, which converts all values to plain text to give you an easier 
+more readable object to work with:
+
+* stripHtmlFromHeadings
+* stripHtmlFromCells
+
+If your table contains HTML you want to parse (for example for links) you can set `stripHtmlFromCells` 
+to `false` to treat it as raw text.
+
+``` javascript
+tabletojson.convertUrl(
+  'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes',
+  { stripHtmlFromCells: false },
+  function(tablesAsJson) {
+    //Print out the 1st row from the 2nd table on the above webpage as JSON 
+    console.log(tablesAsJson[1][0]);
+  }
+);
+```
+
+Note: This doesn't work with nested tables, which it will still try to parse.
+
+You probably don't need to set `stripHtmlFromHeadings` to false (and setting it to false can make the 
+results hard to parse), but if you do you can also set both at the same time by setting `stripHtml` to 
+false.
+
+
+## Options
+
+### request (only `convertUrl`)
+If you need to get data from a remote server to pass it to the parser you can call `tabletojson.convertUrl`.
+When working behind a proxy you can pass any request-options (proxy, headers,...) by adding a request
+object to the options passed to `convertUrl`.
+for more information on how to configure request please have a look at: [https://github.com/request/request](https://github.com/request/request)
+
+``` javascript
+tabletojson.convertUrl('https://www.timeanddate.com/holidays/ireland/2017', {
+    useFirstRowForHeadings: true,
+    request: {
+        proxy: 'http://proxy:8080'
+    }
+});
+```
+
+### stripHtmlFromHeadings
+Strip any HTML from heading cells. Default is true.
+
+```
+// Table
+| KEY | <b>VALUE</b> |
+| abc |            1 |
+| dev |            2 |
+
+// Example output with stripHtmlFromHeadings:true
+[
+    {
+        KEY: 'abc', VALUE: '1'
+    },
+    {    
+        KEY: 'dev', VALUE: '2'
+    }
+]
+// Example output with stripHtmlFromHeadings:false
+[
+    {
+        KEY: 'abc', '<b>VALUE</b>': '1'
+    },
+    {    
+        KEY: 'dev', '<b>VALUE</b>': '2'
+    }
+]
+```
+
+### stripHtmlFromCells
+
+Strip any HTML from tableBody cells. Default is true.
+
+```
+// Table
+| KEY |    VALUE |
+| abc | <i>1</i> |
+| dev | <i>2</i> |
+
+// Example output with stripHtmlFromHeadings:true
+[
+    {
+        KEY: 'abc', VALUE: '1'
+    },
+    {    
+        KEY: 'dev', VALUE: '2'
+    }
+]
+// Example output with stripHtmlFromHeadings:false
+[
+    {
+        KEY: 'abc', 'VALUE': '<i>1</i>'
+    },
+    {    
+        KEY: 'dev', 'VALUE': '<i>2</i>'
+    }
+]
+```
+
+
+### forceIndexAsNumber
 Instead of using column text (that sometime re-order the data), force an index as a number (string number).
 
 ``` javascript
@@ -85,15 +211,196 @@ Instead of using column text (that sometime re-order the data), force an index a
 // Some JSON (Other rows)
 ```
 
-## Options, known issues and limitations
+### countDuplicateHeadings
+Default is 'true'. If set to 'false' duplicate headings will not get a trailing _<NUMBER>. The value of 
+the field will be the last value found in the table row:
 
-This module only supports parsing basic tables with a simple horizontal set of <th></th> headings and corresponding <td></td> cells.
+```
+// Table
+| PLACE | VALUE | PLACE | VALUE |
+|   abc |     1 |   def |     2 |
+|   ghi |     3 |   jkl |     4 |
 
-It can give useless or weird results on tables that have complex structures (such as nested tables) or multiple headers (such as on both X and Y axis).
+// Example output with countDuplicateHeadings:false
+[
+    {
+        PLACE: 'def', VALUE: '2'
+    },
+    {    
+        PLACE: 'jkl', VALUE: '4'
+    }
+]
+```
 
-You'll need to handle things like work out which tables to parse and (in most cases) clean up the data. You might want to combine it it with modules like json2csv or CsvToMarkdownTable.
+### ignoreColumns
+Array of indexes to be ignored, starting with 0. Default is 'null/undefined'.
 
-You might want to use it with a module like 'cheerio' if you want to parse specific tables identified by id or class (i.e. select them with cheerio and pass the HTML of them as a string).
+```
+// Table
+| NAME | PLACE | WEIGHT | SEX | AGE |
+|  Mel |     1 |     58 |   W |  23 |
+|  Tom |     2 |     78 |   M |  54 |
+| Bill |     3 |     92 |   M |  31 |
+
+// Example output with ignoreColumns: [2, 3]
+[
+    {
+        NAME: 'Mel', PLACE: '1', AGE: '23'
+    },
+    {    
+        NAME: 'Tom', PLACE: '2', AGE: '54'
+    },
+    {    
+        NAME: 'Bill', PLACE: '3', AGE: '31'
+    }
+]
+```
+
+### onlyColumns
+Array of indexes that are taken, starting with 0. Default is 'null/undefined'.
+If given, this option overrides ignoreColumns.
+
+```
+// Table
+| NAME | PLACE | WEIGHT | SEX | AGE |
+|  Mel |     1 |     58 |   W |  23 |
+|  Tom |     2 |     78 |   M |  54 |
+| Bill |     3 |     92 |   M |  31 |
+
+// Example output with onlyColumns: [0, 4]
+[
+    {
+        NAME: 'Mel', AGE: '23'
+    },
+    {    
+        NAME: 'Tom', AGE: '54'
+    },
+    {    
+        NAME: 'Bill', AGE: '31'
+    }
+]
+```
+
+### ignoreHiddenRows
+Indicates if hidden rows (display:none) are ignored. Default is true:
+
+```
+// Table
+ | NAME | PLACE | WEIGHT | SEX | AGE |
+ |  Mel |     1 |     58 |   W |  23 |
+ |  Tom |     2 |     78 |   M |  54 |
+ | Bill |     3 |     92 |   M |  31 |
+*|  Cat |     4 |      4 |   W |   2 |*
+
+// Example output with ignoreHiddenRows:true
+[
+    {
+        NAME: 'Mel', PLACE: '1', WEIGHT: '58', SEX: 'W', AGE: '23'
+    },
+    {    
+        NAME: 'Tom', PLACE: '2', WEIGHT: '78', SEX: 'M', AGE: '54'
+    },
+    {    
+        NAME: 'Bill', PLACE: '3', WEIGHT: '92', SEX: 'M', AGE: '31'
+    }
+]
+// Example output with ignoreHiddenRows:false
+[
+    {
+        NAME: 'Mel', PLACE: '1', WEIGHT: '58', SEX: 'W', AGE: '23'
+    },
+    {    
+        NAME: 'Tom', PLACE: '2', WEIGHT: '78', SEX: 'M', AGE: '54'
+    },
+    {    
+        NAME: 'Bill', PLACE: '3', WEIGHT: '92', SEX: 'M', AGE: '31'
+    }
+    },
+    {    
+        NAME: 'Cat', PLACE: '4', WEIGHT: '4', SEX: 'W', AGE: '2'
+    }
+]
+```
+
+### headings
+Array of Strings to be used as headings. Default is 'null/undefined'.
+
+If more headings are given than columns exist the overcounting ones will be ignored. If less headings 
+are given than existing values the overcounting values are ignored.
+
+```
+// Table
+ | NAME | PLACE | WEIGHT | SEX | AGE |
+ |  Mel |     1 |     58 |   W |  23 |
+ |  Tom |     2 |     78 |   M |  54 |
+ | Bill |     3 |     92 |   M |  31 |
+*|  Cat |     4 |      4 |   W |   2 |*
+
+
+// Example output with headings: ['A','B','C','D','E']
+[
+    {
+        A: 'Mel', B: '1', C: '58', D: 'W', E: '23'
+    },
+    {    
+        A: 'Tom', B: '2', C: '78', D: 'M', E: '54'
+    },
+    {    
+        A: 'Bill', B: '3', C: '92', D: 'M', E: '31'
+    }
+]
+// Example output with headings: ['A','B','C']
+[
+    {
+        A: 'Mel', B: '1', C: '58'
+    },
+    {    
+        A: 'Tom', B: '2', C: '78'
+    },
+    {    
+        A: 'Bill', B: '3', C: '92'
+    }
+]
+// Example output with headings: ['A','B','C','D','E','F','G','H']
+[
+    {
+        A: 'Mel', B: '1', C: '58', D: 'W', E: '23'
+    },
+    {    
+        A: 'Tom', B: '2', C: '78', D: 'M', E: '54'
+    },
+    {    
+        A: 'Bill', B: '3', C: '92', D: 'M', E: '31'
+    }
+]
+// Example output with headings: ['A','B','C'] && ignoreColumns: [2, 3]
+[
+    {
+        A: 'Mel', B: 'W', C: '23'
+    },
+    {    
+        A: 'Tom', B: 'M', C: '54'
+    },
+    {    
+        A: 'Bill', B: 'M', C: '31'
+    }
+]
+
+```
+
+## Known issues and limitations
+
+This module only supports parsing basic tables with a simple horizontal set of <th></th> headings and 
+corresponding <td></td> cells.
+
+It can give useless or weird results on tables that have complex structures (such as nested tables) or 
+multiple headers (such as on both X and Y axis).
+
+You'll need to handle things like work out which tables to parse and (in most cases) clean up the data. 
+You might want to combine it it with modules like json2csv or CsvToMarkdownTable.
+
+You might want to use it with a module like 'cheerio' if you want to parse specific tables identified 
+by id or class (i.e. select them with cheerio and pass the HTML of them as a string).
 
 ## Example usage
 
@@ -157,7 +464,8 @@ tabletojson.convertUrl(url)
 
 # Issues
 
-Right now the table needs to be "well formatted" to be convertable. Tables in Html pages with not be processed.
+Right now the table needs to be "well formatted" to be convertable. Tables in Html pages with not be 
+processed.
 
 ```html
 <thead>
@@ -187,9 +495,6 @@ want to get around to writing tests for this and want to understand the sort of 
 June 2018 - Very special thanks to the originator of the library, Iain Collins (@iaincollins). Without his investigation in website 
 grasping and mastering cheerio this lib would have not been where it is right now. Also I would personally like to say 
 "Thank you" for your trust in passing me the ownership. @maugenst 
-
-Special thanks to Marius Augenstein (@maugenst) for the latest major update, which includes ES6 syntax, uses native 
-promises and has much improved code and inline documentation.
 
 Additional thanks to @roryok, Max Thyen (@maxthyen), Thor Jacobsen (@twjacobsen) and Michael Keller (@mhkeller) for 
 improvements and bug fixes.

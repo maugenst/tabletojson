@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h2>With Heading</h2>
+<h2>Table #1: With Heading</h2>
 <table>
     <thead>
         <tr>
@@ -53,33 +53,40 @@
             <td>yes</td>
             <td>yes</td>
         </tr>
+        <tr style="display: none;">
+            <td>Hidden</td>
+            <td>Wolf</td>
+            <td>4</td>
+            <td>no</td>
+            <td>no</td>
+        </tr>
     </tbody>
 </table>
 
-<h2>With heading and probably duplicated headings</h2>
+<h2>Table #2: With heading and probably duplicated headings</h2>
 <table>
     <thead>
-    <tr>
-        <th>Dog</th>
-        <th>Race</th>
-        <th><b>Age</b></th>
-    </tr>
+        <tr>
+            <th>Dog</th>
+            <th>Race</th>
+            <th><b>Age</b></th>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>Donald</td>
-        <td>Bobtail</td>
-        <td><i>2</i></td>
-    </tr>
-    <tr>
-        <td>MaggyT</td>
-        <td>Bullterrier</td>
-        <td>3</td>
-    </tr>
+        <tr>
+            <td>Donald</td>
+            <td>Bobtail</td>
+            <td><i>2</i></td>
+        </tr>
+        <tr>
+            <td>MaggyT</td>
+            <td>Bullterrier</td>
+            <td>3</td>
+        </tr>
     </tbody>
 </table>
 
-<h2>No explicit heading</h2>
+<h2>Table #3: No explicit heading</h2>
 <table>
     <tr>
         <td>Dog</td>
@@ -113,33 +120,103 @@
     </tr>
 </table>
 
-<h2>With heading and probably duplicated headings</h2>
+<h2>Table #4: With heading and probably duplicated headings</h2>
 <table>
     <thead>
-    <tr>
-        <th>Dog</th>
-        <th></th>
-        <th></th>
-        <th>Height</th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>Dog</th>
+            <th></th>
+            <th></th>
+            <th>Height</th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>Donald</td>
-        <td>Bobtail</td>
-        <td><i>2</i></td>
-        <td>180</td>
-        <td>42</td>
-    </tr>
-    <tr>
-        <td>MaggyT</td>
-        <td>Bullterrier</td>
-        <td>3</td>
-        <td>150</td>
-        <td>41</td>
-    </tr>
+        <tr>
+            <td>Donald</td>
+            <td>Bobtail</td>
+            <td><i>2</i></td>
+            <td>180</td>
+            <td>42</td>
+        </tr>
+        <tr>
+            <td>MaggyT</td>
+            <td>Bullterrier</td>
+            <td>3</td>
+            <td>150</td>
+            <td>41</td>
+        </tr>
     </tbody>
 </table>
+
+<h2>Table #5: Table conversion with countDuplicateHeadings:false</h2>
+<table>
+    <thead>
+        <tr>
+            <th>PLACE</th>
+            <th>VALUE</th>
+            <th>PLACE</th>
+            <th>VALUE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>abc</td>
+            <td>1</td>
+            <td>def</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>ghi</td>
+            <td>3</td>
+            <td>jkl</td>
+            <td>4</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Table #6: Table for conversion using options 'ignoreColumns' and 'onlyColumns'</h2>
+<table>
+    <thead>
+        <tr>
+            <th>NAME</th>
+            <th>PLACE</th>
+            <th>WEIGHT</th>
+            <th>SEX</th>
+            <th>AGE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Mel</td>
+            <td>1</td>
+            <td>58</td>
+            <td>W</td>
+            <td>23</td>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>2</td>
+            <td>78</td>
+            <td>M</td>
+            <td>54</td>
+        </tr>
+        <tr>
+            <td>Bill</td>
+            <td>3</td>
+            <td>92</td>
+            <td>M</td>
+            <td>31</td>
+        </tr>
+        <tr style="color:black;display : none ;text-decoration-color: bisque">
+            <td>Cat</td>
+            <td>4</td>
+            <td>4</td>
+            <td>W</td>
+            <td>2</td>
+        </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
