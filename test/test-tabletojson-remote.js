@@ -2,6 +2,7 @@
 
 require('should');
 const config = require('config');
+const _ = require('lodash');
 const tabletojson = require('../lib/tabletojson');
 
 describe('TableToJSON Remote', function() {
@@ -61,6 +62,31 @@ describe('TableToJSON Remote', function() {
         Object.keys(mainTable[0]).forEach(key => {
             mainTable[0][key].should.be.equal(key);
         });
+    });
+
+    it('Get table from wikipedia containing Kanji, Hiragana, Katakana and latin texts', async function() {
+        const converted = await tabletojson.convertUrl('https://en.wikipedia.org/wiki/Japanese_writing_system', {
+            containsClasses: ['wikitable'],
+            request: {
+                proxy: config.get('request.proxy')
+            }
+        });
+
+        converted.should.be.ok();
+        const table = converted[0];
+        (table instanceof Array).should.be.true();
+
+        _.has(table[0], 'Kanji').should.be.true();
+        _.has(table[0], 'Hiragana').should.be.true();
+        _.has(table[0], 'Katakana').should.be.true();
+        _.has(table[0], 'Rōmaji').should.be.true();
+        _.has(table[0], 'English').should.be.true();
+
+        table[0]['Kanji'].should.equal('私');
+        table[0]['Hiragana'].should.equal('わたし');
+        table[0]['Katakana'].should.equal('ワタシ');
+        table[0]['Rōmaji'].should.equal('watashi');
+        table[0]['English'].should.equal('I, me');
     });
 
     it.skip('Try to get a table from a nonexisting domain', async function() {

@@ -388,6 +388,9 @@ are given than existing values the overcounting values are ignored.
 
 ```
 
+### containsClasses
+Array of classes to find a specific table using this class. Default is 'null/undefined'.
+
 ## Known issues and limitations
 
 This module only supports parsing basic tables with a simple horizontal set of <th></th> headings and 
@@ -464,7 +467,7 @@ tabletojson.convertUrl(url)
 
 # Issues
 
-Right now the table needs to be "well formatted" to be convertable. Tables in Html pages with not be 
+Right now the table needs to be "well formatted" to be convertable. Tables in tables with not be 
 processed.
 
 ```html

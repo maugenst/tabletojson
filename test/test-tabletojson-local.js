@@ -479,4 +479,24 @@ describe('TableToJSON Local', function() {
 
         table[2].A.should.equal('Bill');
     });
+
+    // FIX/TEST: https://github.com/maugenst/tabletojson/issues/19
+    it('Test to check conversion and handling of Kanji, Hiragana, Katakana and latin texts', async function() {
+        const converted = await tabletojson.convert(html);
+        converted.should.be.ok();
+
+        const table = converted[6];
+
+        _.has(table[0], 'Kanji').should.be.true();
+        _.has(table[0], 'Hiragana').should.be.true();
+        _.has(table[0], 'Katakana').should.be.true();
+        _.has(table[0], 'Rōmaji').should.be.true();
+        _.has(table[0], 'English').should.be.true();
+
+        table[0]['Kanji'].should.equal('私');
+        table[0]['Hiragana'].should.equal('わたし');
+        table[0]['Katakana'].should.equal('ワタシ');
+        table[0]['Rōmaji'].should.equal('watashi');
+        table[0]['English'].should.equal('I, me');
+    });
 });
