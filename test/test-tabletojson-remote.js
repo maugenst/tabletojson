@@ -89,11 +89,9 @@ describe('TableToJSON Remote', function() {
         table[0]['English'].should.equal('I, me');
     });
 
-    it.skip('Try to get a table from a nonexisting domain', async function() {
-        try {
-            await tabletojson.convertUrl('https://www.klhsfljkag.com/ydasdadad/adsaakhjg/jahsgajhvas.html');
-        } catch (err) {
-            err.message.should.equal('getaddrinfo ENOTFOUND www.klhsfljkag.com www.klhsfljkag.com:443');
-        }
+    it('Try to get a table from a nonexisting domain', async function() {
+        tabletojson.convertUrl('https://www.klhsfljkag.com/ydasdadad/adsaakhjg/jahsgajhvas.html').catch(e => {
+            e.message.should.equal('getaddrinfo ENOTFOUND www.klhsfljkag.com www.klhsfljkag.com:443');
+        });
     });
 });
