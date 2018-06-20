@@ -6,7 +6,7 @@
   },
   "name": "tabletojson",
   "description": "Converts HTML tables to JSON objects",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "main": "./lib/tabletojson.js",
   "keywords": [
     "table2json",
@@ -31,18 +31,12 @@
   "devDependencies": {
     "config": "^1.30.0",
     "coveralls": "^3.0.1",
-    "json2csv": "^3.11.5",
+    "eslint-plugin-jest": "^21.17.0",
+    "jest": "^23.1.0",
     "lodash": "^4.17.10",
-    "mocha": "^5.1.1",
-    "mocha-junit-reporter": "^1.17.0",
-    "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^11.9.0",
-    "prettier": "^1.13.5",
-    "should": "^13.2.1"
+    "prettier": "^1.13.5"
   },
   "scripts": {
-    "test": "npm run mocha && npm run coverage",
-    "mocha": "node_modules/nyc/bin/nyc.js --reporter=text node_modules/mocha/bin/mocha",
-    "coverage": "node_modules/nyc/bin/nyc.js report --reporter=text-lcov node_modules/mocha/bin/mocha |node_modules/coveralls/bin/coveralls.js"
+    "test": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   }
 }

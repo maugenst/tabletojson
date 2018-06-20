@@ -1,12 +1,10 @@
 'use strict';
 
-require('should');
 const config = require('config');
 const _ = require('lodash');
 const tabletojson = require('../lib/tabletojson');
 
 describe('TableToJSON Remote', function() {
-    this.timeout(0);
 
     it('Get table from Wikipedia using callBack function', async function() {
         await tabletojson.convertUrl(
@@ -17,20 +15,20 @@ describe('TableToJSON Remote', function() {
                 }
             },
             converted => {
-                converted.should.be.ok();
                 const mainTable = converted[1];
-                (mainTable instanceof Array).should.be.true();
-                mainTable[0].should.have.property('Language family');
+                expect(mainTable[0]).toHaveProperty('Language family');
+                expect(mainTable instanceof Array).toBeTruthy();
+                expect(mainTable[0]).toHaveProperty('Language family');
             }
         );
     });
 
     it('Get table from Wikipedia using callBack function without options', async function() {
         await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', converted => {
-            converted.should.be.ok();
+            expect(converted).toBeDefined();
             const mainTable = converted[1];
-            (mainTable instanceof Array).should.be.true();
-            mainTable[0].should.have.property('Language family');
+            expect(mainTable instanceof Array).toBeTruthy();
+            expect(mainTable[0]).toHaveProperty('Language family');
         });
     });
 
@@ -41,10 +39,10 @@ describe('TableToJSON Remote', function() {
             }
         });
 
-        converted.should.be.ok();
+        expect(converted).toBeDefined();
         const mainTable = converted[1];
-        (mainTable instanceof Array).should.be.true();
-        mainTable[0].should.have.property('Language family');
+        expect(mainTable instanceof Array).toBeTruthy();
+        expect(mainTable[0]).toHaveProperty('Language family');
     });
 
     it('Get table from timeanddate.com and use first row as heading', async function() {
@@ -55,12 +53,12 @@ describe('TableToJSON Remote', function() {
             }
         });
 
-        converted.should.be.ok();
+        expect(converted).toBeDefined();
         const mainTable = converted[0];
-        (mainTable instanceof Array).should.be.true();
+        expect(mainTable instanceof Array).toBeTruthy();
 
         Object.keys(mainTable[0]).forEach(key => {
-            mainTable[0][key].should.be.equal(key);
+            expect(mainTable[0][key]).toEqual(key);
         });
     });
 
@@ -72,26 +70,26 @@ describe('TableToJSON Remote', function() {
             }
         });
 
-        converted.should.be.ok();
-        const table = converted[0];
-        (table instanceof Array).should.be.true();
+        expect(converted).toBeDefined();
+        const table = converted[2];
+        expect(table instanceof Array).toBeTruthy();
 
-        _.has(table[0], 'Kanji').should.be.true();
-        _.has(table[0], 'Hiragana').should.be.true();
-        _.has(table[0], 'Katakana').should.be.true();
-        _.has(table[0], 'Rōmaji').should.be.true();
-        _.has(table[0], 'English').should.be.true();
+        expect(_.has(table[0], 'Kanji')).toBeTruthy();
+        expect(_.has(table[0], 'Hiragana')).toBeTruthy();
+        expect(_.has(table[0], 'Katakana')).toBeTruthy();
+        expect(_.has(table[0], 'Rōmaji')).toBeTruthy();
+        expect(_.has(table[0], 'English')).toBeTruthy();
 
-        table[0]['Kanji'].should.equal('私');
-        table[0]['Hiragana'].should.equal('わたし');
-        table[0]['Katakana'].should.equal('ワタシ');
-        table[0]['Rōmaji'].should.equal('watashi');
-        table[0]['English'].should.equal('I, me');
+        expect(table[0]['Kanji']).toEqual('私');
+        expect(table[0]['Hiragana']).toEqual('わたし');
+        expect(table[0]['Katakana']).toEqual('ワタシ');
+        expect(table[0]['Rōmaji']).toEqual('watashi');
+        expect(table[0]['English']).toEqual('I, me');
     });
 
     it('Try to get a table from a nonexisting domain', async function() {
         tabletojson.convertUrl('https://www.klhsfljkag.com/ydasdadad/adsaakhjg/jahsgajhvas.html').catch(e => {
-            e.message.should.equal('getaddrinfo ENOTFOUND www.klhsfljkag.com www.klhsfljkag.com:443');
+            expect(e.message).toEqual('getaddrinfo ENOTFOUND www.klhsfljkag.com www.klhsfljkag.com:443');
         });
     });
 });
