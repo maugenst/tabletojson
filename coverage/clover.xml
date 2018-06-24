@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1529477794413" clover="3.2.0">
-  <project timestamp="1529477794414" name="All files">
-    <metrics statements="72" coveredstatements="72" conditionals="68" coveredconditionals="66" methods="7" coveredmethods="7" elements="147" coveredelements="145" complexity="0" loc="72" ncloc="72" packages="1" files="1" classes="1">
+<coverage generated="1529842230437" clover="3.2.0">
+  <project timestamp="1529842230437" name="All files">
+    <metrics statements="72" coveredstatements="72" conditionals="70" coveredconditionals="68" methods="7" coveredmethods="7" elements="149" coveredelements="147" complexity="0" loc="72" ncloc="72" packages="1" files="1" classes="1">
       <file name="tabletojson.js" path="/Users/d032233/dev/github/tabletojson/lib/tabletojson.js">
-        <metrics statements="72" coveredstatements="72" conditionals="68" coveredconditionals="66" methods="7" coveredmethods="7"/>
+        <metrics statements="72" coveredstatements="72" conditionals="70" coveredconditionals="68" methods="7" coveredmethods="7"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
         <line num="25" count="31" type="stmt"/>
@@ -55,7 +55,7 @@
         <line num="132" count="6820" type="stmt"/>
         <line num="134" count="1119" type="stmt"/>
         <line num="139" count="1592" type="cond" truecount="2" falsecount="0"/>
-        <line num="143" count="241" type="cond" truecount="1" falsecount="1"/>
+        <line num="143" count="241" type="cond" truecount="3" falsecount="1"/>
         <line num="144" count="241" type="stmt"/>
         <line num="147" count="31" type="stmt"/>
         <line num="170" count="6" type="stmt"/>
