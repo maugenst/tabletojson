@@ -6,7 +6,7 @@
   },
   "name": "tabletojson",
   "description": "Converts HTML tables to JSON objects",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "main": "./lib/tabletojson.js",
   "keywords": [
     "table2json",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "pagetojson": "*"
+    "pagetojson": "0.0.6"
   },
   "engines": {
     "node": "*"
@@ -32,7 +32,7 @@
     "config": "^1.30.0",
     "coveralls": "^3.0.1",
     "eslint-plugin-jest": "^21.17.0",
-    "jest": "^23.1.0",
+    "jest": "^23.6.0",
     "lodash": "^4.17.10",
     "prettier": "^1.13.5"
   },
