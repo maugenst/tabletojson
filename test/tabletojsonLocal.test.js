@@ -499,6 +499,27 @@ describe('TableToJSON Local', function() {
         expect(table[0]['English']).toEqual('I, me');
     });
 
+    // ENHANCEMENT: https://github.com/maugenst/tabletojson/issues/30
+    it('limit results to only get a configurable amount of rows', async function() {
+        let converted = await tabletojson.convert(html);
+        expect(converted).toBeDefined();
+
+        let table = converted[9];
+
+        expect(table.length).toBe(200);
+
+        converted = await tabletojson.convert(html, {
+            limitrows: 10
+        });
+
+        expect(converted).toBeDefined();
+
+        table = converted[9];
+
+        expect(table.length).toBe(10);
+
+    });
+
     it('Options: containsClasses', async function() {
         const converted = await tabletojson.convert(html, {
             containsClasses: ['table']
@@ -529,6 +550,5 @@ describe('TableToJSON Local', function() {
         expect(converted).toBeDefined();
         expect(converted.length).toBe(0);
     });
-
 
 });

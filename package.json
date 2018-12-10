@@ -31,7 +31,9 @@
   "devDependencies": {
     "config": "^1.30.0",
     "coveralls": "^3.0.1",
+    "eslint": "^5.10.0",
     "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "jest": "^23.6.0",
     "lodash": "^4.17.10",
     "prettier": "^1.13.5"
