@@ -388,6 +388,45 @@ are given than existing values the overcounting values are ignored.
 
 ```
 
+### limitrows
+Number of rows to which the resulting object should be limited to. Default is 'null/undefined'.
+
+```
+// Huge Table (see test/tables.html)
+ | Roleplayer Number | Name            | Text to say                                     |
+ |  0                | Raife Parkinson | re dolor in hendrerit in vulputate ve           | 
+ |  1                | Hazel Schultz   | usto duo dolores et ea rebum. Ste               | 
+ |  2                | Montana Delgado | psum dolor sit amet. Lorem ipsum dolor sit ame  | 
+ |  3                | Dianne Mcbride  | olor sit amet. Lorem ipsum                      | 
+ |  4                | Xena Lynch      | us est Lorem ipsum dol                          |
+ |  5                | Najma Holding   | akimata sanctus est Lorem ipsum dolor sit ame   |
+ |  6                | Kiki House      | nvidunt ut                                      |
+.
+.
+.
+ | 197               | Montana Delgado | lores et ea rebum. Stet clita kasd gu           | 
+ | 198               | Myrtle Conley   | a rebum. Stet clita kasd gubergren, no sea taki | 
+ | 199               | Hanna Ellis     | kimata sanctus est Lorem ipsum dolor si         | 
+
+
+// Example output with limitrows: 5
+[ { 'Roleplayer Number': '0',
+        Name: 'Raife Parkinson',
+        'Text to say': 're dolor in hendrerit in vulputate ve' },
+      { 'Roleplayer Number': '1',
+        Name: 'Hazel Schultz',
+        'Text to say': 'usto duo dolores et ea rebum. Ste' },
+      { 'Roleplayer Number': '2',
+        Name: 'Montana Delgado',
+        'Text to say': 'psum dolor sit amet. Lorem ipsum dolor sit ame' },
+      { 'Roleplayer Number': '3',
+        Name: 'Dianne Mcbride',
+        'Text to say': 'olor sit amet. Lorem ipsum' },
+      { 'Roleplayer Number': '4',
+        Name: 'Xena Lynch',
+        'Text to say': 'us est Lorem ipsum dol' } ]
+```
+
 ### containsClasses
 Array of classes to find a specific table using this class. Default is 'null/undefined'.
 

@@ -509,15 +509,16 @@ describe('TableToJSON Local', function() {
         expect(table.length).toBe(200);
 
         converted = await tabletojson.convert(html, {
-            limitrows: 10
+            limitrows: 5
         });
 
         expect(converted).toBeDefined();
 
         table = converted[9];
 
-        expect(table.length).toBe(10);
+        expect(table.length).toBe(5);
 
+        console.log(table);
     });
 
     it('Options: containsClasses', async function() {
