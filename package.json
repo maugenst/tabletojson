@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "pagetojson": "0.0.6"
+    "pagetojson": "0.0.7"
   },
   "engines": {
     "node": "*"
@@ -35,7 +35,7 @@
     "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-prettier": "^3.0.0",
     "jest": "^23.6.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "prettier": "^1.13.5"
   },
   "scripts": {
