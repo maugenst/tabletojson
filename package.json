@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "pagetojson": "*"
+    "pagetojson": "*",
+    "snyk": "^1.230.5"
   },
   "engines": {
     "node": "*"
@@ -39,6 +40,9 @@
     "prettier": "^1.13.5"
   },
   "scripts": {
-    "test": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-  }
+    "test": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }

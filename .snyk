@@ -1,0 +1,90 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - pagetojson > tabletojson > npm > libcipm > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > pacote > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libcipm > pacote > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpmsearch > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpmaccess > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > pacote > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpmhook > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > npm-profile > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpmorg > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpmteam > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > libnpmaccess > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > libnpmsearch > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > libnpmorg > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > npm-profile > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > pacote > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > libnpmpublish > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > libnpmteam > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > tabletojson > npm > libnpm > libnpmhook > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpmsearch > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpmteam > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > pacote > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libcipm > pacote > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpmorg > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > npm-profile > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpmaccess > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpmhook > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > libnpmteam > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > libnpmhook > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > libnpmorg > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > npm-profile > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > libnpmaccess > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > libnpmpublish > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > libnpmsearch > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libnpm > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
+    - pagetojson > listtojson > pagetojson > tabletojson > npm > libcipm > pacote > npm-registry-fetch > make-fetch-happen > https-proxy-agent:
+        patched: '2019-10-04T08:38:43.035Z'
