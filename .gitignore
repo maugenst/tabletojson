@@ -20,3 +20,4 @@ config/local.yaml
 config/local*.yaml
 
 .coveralls.yml
+coverage/
