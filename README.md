@@ -536,7 +536,12 @@ want to get around to writing tests for this and want to understand the sort of 
 
 June 2018 - Very special thanks to the originator of the library, Iain Collins (@iaincollins). Without his investigation in website 
 grasping and mastering cheerio this lib would have not been where it is right now. Also I would personally like to say 
-"Thank you" for your trust in passing me the ownership. @maugenst 
+"Thank you" for your trust in passing me the ownership. Marius (@maugenst) 
 
-Additional thanks to @roryok, Max Thyen (@maxthyen), Thor Jacobsen (@twjacobsen) and Michael Keller (@mhkeller) for 
-improvements and bug fixes.
+Additional thanks to 
+* @roryok
+* Max Thyen (@maxthyen)
+* Thor Jacobsen (@twjacobsen)
+* Michael Keller (@mhkeller)
+* Jesús Leganés-Combarro (@piranna)
+for improvements and bug fixes.
