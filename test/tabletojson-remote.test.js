@@ -89,7 +89,7 @@ describe('TableToJSON Remote', function() {
 
     it('Try to get a table from a nonexisting domain', async function() {
         tabletojson.convertUrl('https://www.klhsfljkag.com/ydasdadad/adsaakhjg/jahsgajhvas.html').catch(e => {
-            expect(e.message).toEqual('getaddrinfo ENOTFOUND www.klhsfljkag.com www.klhsfljkag.com:443');
+            expect(e.message).toContain('getaddrinfo ENOTFOUND www.klhsfljkag.com');
         });
     });
 });

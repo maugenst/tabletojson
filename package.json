@@ -6,7 +6,7 @@
   },
   "name": "tabletojson",
   "description": "Converts HTML tables to JSON objects",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "./lib/tabletojson.js",
   "keywords": [
     "table2json",

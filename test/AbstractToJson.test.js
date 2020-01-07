@@ -32,7 +32,7 @@ describe('AbstractToJson testing', function() {
         const oResult = await AbstractToJson.fetchUrl(
             'https://www.klhsfljkag.com/ydasdadad/adsaakhjg/jahsgajhvas.html'
         ).catch(e => {
-            expect(e.message).toBe('getaddrinfo ENOTFOUND www.klhsfljkag.com www.klhsfljkag.com:443');
+            expect(e.message).toContain('getaddrinfo ENOTFOUND www.klhsfljkag.com');
         });
     });
 
