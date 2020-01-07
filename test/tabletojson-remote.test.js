@@ -45,8 +45,8 @@ describe('TableToJSON Remote', function() {
         expect(mainTable[0]).toHaveProperty('Language family');
     });
 
-    it('Get table from timeanddate.com and use first row as heading', async function() {
-        const converted = await tabletojson.convertUrl('https://www.timeanddate.com/holidays/ireland/2017', {
+    it('Get table from w3schools.com and use first row as heading', async function() {
+        const converted = await tabletojson.convertUrl('https://www.w3schools.com/html/html_tables.asp', {
             useFirstRowForHeadings: true,
             request: {
                 proxy: config.get('request.proxy')

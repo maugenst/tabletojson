@@ -517,8 +517,24 @@ describe('TableToJSON Local', function() {
         table = converted[9];
 
         expect(table.length).toBe(5);
+    });
 
-        console.log(table);
+    // ENHANCEMENT: Coverage improvement to also cover rowspan tables
+    it('Rowspan usage leads to correct object representation', async function() {
+        const converted = await tabletojson.convert(html, {
+            id: ['table11']
+        });
+        expect(converted).toBeDefined();
+        expect(converted.length).toBe(1);
+        const table = converted[0];
+
+        expect(table.length).toBe(3);
+
+        expect(_.has(table[0], 'Parent')).toBeTruthy();
+        expect(table.length).toBe(3);
+        expect(table[0].Parent).toBe('Martha');
+        expect(table[1].Parent).toBe('Martha');
+        expect(table[1].Parent).toBe('Martha');
     });
 
     it('Options: containsClasses', async function() {
