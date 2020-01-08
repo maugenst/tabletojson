@@ -72,6 +72,54 @@ If there are duplicate column headings, subsequent headings are suffixed with a 
 }]
 ```
 
+### Tables with rowspan 
+
+Having tables with rowspan, the content of the spawned cell must be available in the respective object.
+
+```
+// Table
+| PARENT | CHILD | AGE |
+|        |   Tom |   3 |
+| Marry  | Steve |  12 |
+|        |   Sue |  15 |
+
+// Example output
+[{
+  PARENT: 'Marry', CHILD: 'Tom', AGE, '3',
+  PARENT: 'Marry', CHILD: 'Steve', AGE, '12',
+  PARENT: 'Marry', CHILD: 'Sue', AGE, '15'
+}]
+```
+
+### Tables with complex rowspan 
+
+Having tables with complex rowspans, the content of the spawned cell must be available in the respective object.
+
+```
+// Table
+| PARENT | CHILD | AGE |
++--------+-------+-----+
+|        |   Sue |  15 |
++        +-------+-----+
+| Marry  | Steve |  12 |
++        +-------+-----+
+|        |       |     |
++--------+   Tom |   3 +
+|        |       |     |
++ Taylor +-------+-----+
+|        | Peter |  17 |
++--------+-------+-----+
+
+// Example output
+[{
+  PARENT: 'Marry', CHILD: 'Sue', AGE, '15'
+  PARENT: 'Marry', CHILD: 'Steve', AGE, '12',
+  PARENT: 'Marry', CHILD: 'Tom', AGE, '3',
+  PARENT: 'Taylor', CHILD: 'Tom', AGE, '3',
+  PARENT: 'Taylor', CHILD: 'Peter', AGE, '17'
+}]
+```
+
 ### Tables with headings in the first column 
 
 If a table contains headings in the first column you might get an unexpected result, but you can pass a 
@@ -321,6 +369,7 @@ Indicates if hidden rows (display:none) are ignored. Default is true:
     }
 ]
 ```
+
 
 ### headings
 Array of Strings to be used as headings. Default is 'null/undefined'.
