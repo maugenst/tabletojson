@@ -569,6 +569,13 @@ describe('TableToJSON Local', function() {
         expect(table[0].Parent).toBe('Marry');
         expect(table[1].Parent).toBe('Marry');
         expect(table[2].Parent).toBe('Marry');
+        expect(table[3].Parent).toBe('Taylor');
+        expect(table[4].Parent).toBe('Taylor');
+        expect(table[0].Child).toBe('Sue');
+        expect(table[1].Child).toBe('Steve');
+        expect(table[2].Child).toBe('Tom');
+        expect(table[3].Child).toBe('Tom');
+        expect(table[4].Child).toBe('Peter');
     });
 
     it('Options: containsClasses', async function() {
