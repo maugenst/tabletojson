@@ -1,25 +1,26 @@
-[![NPM](https://nodei.co/npm/tabletojson.png)](https://nodei.co/npm/tabletojson/)
+# Table to JSON
+
+Attempts to convert HTML tables into JSON.
+
+[![NPM](https://nodei.co/npm/tabletojson.png)](https://nodei.co/npm/tabletojson)
 
 [![Build](https://travis-ci.org/maugenst/tabletojson.svg?branch=master)](https://travis-ci.org/maugenst/tabletojson.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/maugenst/tabletojson/badge.svg?branch=master)](https://coveralls.io/github/maugenst/tabletojson?branch=master)
 [![Dependencies](https://david-dm.org/maugenst/tabletojson.svg)](https://david-dm.org/maugenst/tabletojson)
 [![Known Vulnerabilities](https://snyk.io/test/github/maugenst/tabletojson/badge.svg?targetFile=package.json)](https://snyk.io/test/github/maugenst/tabletojson?targetFile=package.json)
 
-# Table to JSON
+Can be passed the markup for a single table as a string, a fragment of HTML or
+an entire page or just a URL (with an optional callback function; promises also
+supported).
 
-Attempts to convert HTML tables into JSON.
-
-Can be passed the markup for a single table as a string, a fragment of HTML or an entire page or just 
-a URL (with an optional callback function; promises also supported).
-
-The response is always an array. Every array entry in the response represents a table found on the page 
-(in same the order they were found in the HTML).
+The response is always an array. Every array entry in the response represents a
+table found on the page (in same the order they were found in the HTML).
 
 ## Basic usage
 
 Install via npm
 
-```
+```sh
 npm install tabletojson
 ```
 
@@ -36,10 +37,10 @@ tabletojson.convertUrl(
         console.log(tablesAsJson[1]);
     }
 );
-
 ```
 
 ### Local (`convert`)
+
 Have a look in the examples.
 
 ```javascript
@@ -56,34 +57,53 @@ const converted = tabletojson.convert(html);
 console.log(converted);
 ```
 
-### Duplicate column headings 
+### Duplicate column headings
 
-If there are duplicate column headings, subsequent headings are suffixed with a count:
+If there are duplicate column headings, subsequent headings are suffixed with a
+count:
 
-```
-// Table
-| PLACE | VALUE | PLACE | VALUE |
-|   abc |     1 |   def |     2 |
+PLACE | VALUE | PLACE | VALUE
+------|-------|-------|------
+  abc |     1 |   def |     2
 
-// Example output
+```js
 [{
   PLACE: 'abc', VALUE: '1',
   PLACE_2: 'def', VALUE_2: '2',
 }]
 ```
 
-### Tables with rowspan 
+### Tables with rowspan
 
-Having tables with rowspan, the content of the spawned cell must be available in the respective object.
+Having tables with rowspan, the content of the spawned cell must be available in
+the respective object.
 
-```
-// Table
-| PARENT | CHILD | AGE |
-|        |   Tom |   3 |
-| Marry  | Steve |  12 |
-|        |   Sue |  15 |
+<table id="table11" class="table" border="1">
+    <thead>
+    <tr>
+        <th>Parent</th>
+        <th>Child</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="3">Marry</td>
+            <td>Sue</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>Steve</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>3</td>
+        </tr>
+    </tbody>
+</table>
 
-// Example output
+```js
 [{
   PARENT: 'Marry', CHILD: 'Tom', AGE, '3',
   PARENT: 'Marry', CHILD: 'Steve', AGE, '12',
@@ -91,26 +111,43 @@ Having tables with rowspan, the content of the spawned cell must be available in
 }]
 ```
 
-### Tables with complex rowspan 
+### Tables with complex rowspan
 
 Having tables with complex rowspans, the content of the spawned cell must be available in the respective object.
 
-```
-// Table
-| PARENT | CHILD | AGE |
-+--------+-------+-----+
-|        |   Sue |  15 |
-+        +-------+-----+
-| Marry  | Steve |  12 |
-+        +-------+-----+
-|        |       |     |
-+--------+   Tom |   3 +
-|        |       |     |
-+ Taylor +-------+-----+
-|        | Peter |  17 |
-+--------+-------+-----+
+<table id="table12" class="table" border="1">
+    <thead>
+    <tr>
+        <th>Parent</th>
+        <th>Child</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="3">Marry</td>
+            <td>Sue</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>Steve</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Tom</td>
+            <td rowspan="2">3</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Taylor</td>
+        </tr>
+        <tr>
+            <td>Peter</td>
+            <td>17</td>
+        </tr>
+    </tbody>
+</table>
 
-// Example output
+```js
 [{
   PARENT: 'Marry', CHILD: 'Sue', AGE, '15'
   PARENT: 'Marry', CHILD: 'Steve', AGE, '12',
@@ -120,11 +157,12 @@ Having tables with complex rowspans, the content of the spawned cell must be ava
 }]
 ```
 
-### Tables with headings in the first column 
+### Tables with headings in the first column
 
-If a table contains headings in the first column you might get an unexpected result, but you can pass a 
-second argument with options with `{ useFirstRowForHeadings: true }` to have it treat the first column 
-as it would any other cell.
+If a table contains headings in the first column you might get an unexpected
+result, but you can pass a second argument with options with
+`{ useFirstRowForHeadings: true }` to have it treat the first column as it would
+any other cell.
 
 ``` javascript
 tabletojson.convertUrl(
@@ -138,21 +176,21 @@ tabletojson.convertUrl(
 
 ### Tables with HTML
 
-The following options are true by default, which converts all values to plain text to give you an easier 
-more readable object to work with:
+The following options are true by default, which converts all values to plain
+text to give you an easier more readable object to work with:
 
 * stripHtmlFromHeadings
 * stripHtmlFromCells
 
-If your table contains HTML you want to parse (for example for links) you can set `stripHtmlFromCells` 
-to `false` to treat it as raw text.
+If your table contains HTML you want to parse (for example for links) you can
+set `stripHtmlFromCells` to `false` to treat it as raw text.
 
 ``` javascript
 tabletojson.convertUrl(
   'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes',
   { stripHtmlFromCells: false },
   function(tablesAsJson) {
-    //Print out the 1st row from the 2nd table on the above webpage as JSON 
+    //Print out the 1st row from the 2nd table on the above webpage as JSON
     console.log(tablesAsJson[1][0]);
   }
 );
@@ -160,18 +198,20 @@ tabletojson.convertUrl(
 
 Note: This doesn't work with nested tables, which it will still try to parse.
 
-You probably don't need to set `stripHtmlFromHeadings` to false (and setting it to false can make the 
-results hard to parse), but if you do you can also set both at the same time by setting `stripHtml` to 
-false.
-
+You probably don't need to set `stripHtmlFromHeadings` to `false` (and setting
+it to false can make the results hard to parse), but if you do you can also set
+both at the same time by setting `stripHtml` to `false`.
 
 ## Options
 
 ### request (only `convertUrl`)
-If you need to get data from a remote server to pass it to the parser you can call `tabletojson.convertUrl`.
-When working behind a proxy you can pass any request-options (proxy, headers,...) by adding a request
-object to the options passed to `convertUrl`.
-for more information on how to configure request please have a look at: [https://github.com/request/request](https://github.com/request/request)
+
+If you need to get data from a remote server to pass it to the parser you can
+call `tabletojson.convertUrl`. When working behind a proxy you can pass any
+request-options (proxy, headers,...) by adding a request object to the options
+passed to `convertUrl`. for more information on how to configure request please
+have a look at
+[https://github.com/request/request](https://github.com/request/request)
 
 ``` javascript
 tabletojson.convertUrl('https://www.timeanddate.com/holidays/ireland/2017', {
@@ -183,20 +223,23 @@ tabletojson.convertUrl('https://www.timeanddate.com/holidays/ireland/2017', {
 ```
 
 ### stripHtmlFromHeadings
+
 Strip any HTML from heading cells. Default is true.
 
+```md
+KEY | <b>VALUE</b>
+----|-------------
+abc |            1
+dev |            2
 ```
-// Table
-| KEY | <b>VALUE</b> |
-| abc |            1 |
-| dev |            2 |
 
+```js
 // Example output with stripHtmlFromHeadings:true
 [
     {
         KEY: 'abc', VALUE: '1'
     },
-    {    
+    {
         KEY: 'dev', VALUE: '2'
     }
 ]
@@ -205,7 +248,7 @@ Strip any HTML from heading cells. Default is true.
     {
         KEY: 'abc', '<b>VALUE</b>': '1'
     },
-    {    
+    {
         KEY: 'dev', '<b>VALUE</b>': '2'
     }
 ]
@@ -215,18 +258,20 @@ Strip any HTML from heading cells. Default is true.
 
 Strip any HTML from tableBody cells. Default is true.
 
+```md
+KEY |    VALUE
+----|---------
+abc | <i>1</i>
+dev | <i>2</i>
 ```
-// Table
-| KEY |    VALUE |
-| abc | <i>1</i> |
-| dev | <i>2</i> |
 
+```js
 // Example output with stripHtmlFromHeadings:true
 [
     {
         KEY: 'abc', VALUE: '1'
     },
-    {    
+    {
         KEY: 'dev', VALUE: '2'
     }
 ]
@@ -235,17 +280,17 @@ Strip any HTML from tableBody cells. Default is true.
     {
         KEY: 'abc', 'VALUE': '<i>1</i>'
     },
-    {    
+    {
         KEY: 'dev', 'VALUE': '<i>2</i>'
     }
 ]
 ```
 
-
 ### forceIndexAsNumber
+
 Instead of using column text (that sometime re-order the data), force an index as a number (string number).
 
-``` javascript
+``` json
 // Some JSON (Other rows)
 {
   "0": "",
@@ -260,95 +305,99 @@ Instead of using column text (that sometime re-order the data), force an index a
 ```
 
 ### countDuplicateHeadings
-Default is 'true'. If set to 'false' duplicate headings will not get a trailing _<NUMBER>. The value of 
-the field will be the last value found in the table row:
 
-```
-// Table
-| PLACE | VALUE | PLACE | VALUE |
-|   abc |     1 |   def |     2 |
-|   ghi |     3 |   jkl |     4 |
+Default is `true`. If set to `false`, duplicate headings will not get a trailing
+number. The value of the field will be the last value found in the table row:
 
+PLACE | VALUE | PLACE | VALUE
+------|-------|-------|------
+  abc |     1 |   def |     2
+  ghi |     3 |   jkl |     4
+
+```js
 // Example output with countDuplicateHeadings:false
 [
     {
         PLACE: 'def', VALUE: '2'
     },
-    {    
+    {
         PLACE: 'jkl', VALUE: '4'
     }
 ]
 ```
 
 ### ignoreColumns
+
 Array of indexes to be ignored, starting with 0. Default is 'null/undefined'.
 
-```
-// Table
-| NAME | PLACE | WEIGHT | SEX | AGE |
-|  Mel |     1 |     58 |   W |  23 |
-|  Tom |     2 |     78 |   M |  54 |
-| Bill |     3 |     92 |   M |  31 |
+ NAME | PLACE | WEIGHT | SEX | AGE
+------|-------|--------|-----|----
+ Mel  |     1 |     58 |   W |  23
+ Tom  |     2 |     78 |   M |  54
+ Bill |     3 |     92 |   M |  31
 
+```js
 // Example output with ignoreColumns: [2, 3]
 [
     {
         NAME: 'Mel', PLACE: '1', AGE: '23'
     },
-    {    
+    {
         NAME: 'Tom', PLACE: '2', AGE: '54'
     },
-    {    
+    {
         NAME: 'Bill', PLACE: '3', AGE: '31'
     }
 ]
 ```
 
 ### onlyColumns
+
 Array of indexes that are taken, starting with 0. Default is 'null/undefined'.
 If given, this option overrides ignoreColumns.
 
-```
-// Table
-| NAME | PLACE | WEIGHT | SEX | AGE |
-|  Mel |     1 |     58 |   W |  23 |
-|  Tom |     2 |     78 |   M |  54 |
-| Bill |     3 |     92 |   M |  31 |
+ NAME | PLACE | WEIGHT | SEX | AGE
+------|-------|--------|-----|----
+ Mel  |     1 |     58 |   W |  23
+ Tom  |     2 |     78 |   M |  54
+ Bill |     3 |     92 |   M |  31
 
+```js
 // Example output with onlyColumns: [0, 4]
 [
     {
         NAME: 'Mel', AGE: '23'
     },
-    {    
+    {
         NAME: 'Tom', AGE: '54'
     },
-    {    
+    {
         NAME: 'Bill', AGE: '31'
     }
 ]
 ```
 
 ### ignoreHiddenRows
+
 Indicates if hidden rows (display:none) are ignored. Default is true:
 
-```
-// Table
- | NAME | PLACE | WEIGHT | SEX | AGE |
- |  Mel |     1 |     58 |   W |  23 |
- |  Tom |     2 |     78 |   M |  54 |
- | Bill |     3 |     92 |   M |  31 |
-*|  Cat |     4 |      4 |   W |   2 |*
+ NAME | PLACE | WEIGHT | SEX | AGE
+------|-------|--------|-----|----
+ Mel  |     1 |     58 |   W |  23
+ Tom  |     2 |     78 |   M |  54
+ Bill |     3 |     92 |   M |  31
+* Cat |     4 |      4 |   W |   2*
 
+```js
 // Example output with ignoreHiddenRows:true
 [
     {
         NAME: 'Mel', PLACE: '1', WEIGHT: '58', SEX: 'W', AGE: '23'
     },
-    {    
+    {
         NAME: 'Tom', PLACE: '2', WEIGHT: '78', SEX: 'M', AGE: '54'
     },
-    {    
+    {
         NAME: 'Bill', PLACE: '3', WEIGHT: '92', SEX: 'M', AGE: '31'
     }
 ]
@@ -357,44 +406,43 @@ Indicates if hidden rows (display:none) are ignored. Default is true:
     {
         NAME: 'Mel', PLACE: '1', WEIGHT: '58', SEX: 'W', AGE: '23'
     },
-    {    
+    {
         NAME: 'Tom', PLACE: '2', WEIGHT: '78', SEX: 'M', AGE: '54'
     },
-    {    
+    {
         NAME: 'Bill', PLACE: '3', WEIGHT: '92', SEX: 'M', AGE: '31'
     }
     },
-    {    
+    {
         NAME: 'Cat', PLACE: '4', WEIGHT: '4', SEX: 'W', AGE: '2'
     }
 ]
 ```
 
-
 ### headings
-Array of Strings to be used as headings. Default is 'null/undefined'.
 
-If more headings are given than columns exist the overcounting ones will be ignored. If less headings 
+Array of Strings to be used as headings. Default is `null`/`undefined`.
+
+If more headings are given than columns exist the overcounting ones will be ignored. If less headings
 are given than existing values the overcounting values are ignored.
 
-```
-// Table
- | NAME | PLACE | WEIGHT | SEX | AGE |
- |  Mel |     1 |     58 |   W |  23 |
- |  Tom |     2 |     78 |   M |  54 |
- | Bill |     3 |     92 |   M |  31 |
-*|  Cat |     4 |      4 |   W |   2 |*
+ NAME | PLACE | WEIGHT | SEX | AGE
+------|-------|--------|-----|----
+ Mel  |     1 |     58 |   W |  23
+ Tom  |     2 |     78 |   M |  54
+ Bill |     3 |     92 |   M |  31
+* Cat |     4 |      4 |   W |   2*
 
-
+```js
 // Example output with headings: ['A','B','C','D','E']
 [
     {
         A: 'Mel', B: '1', C: '58', D: 'W', E: '23'
     },
-    {    
+    {
         A: 'Tom', B: '2', C: '78', D: 'M', E: '54'
     },
-    {    
+    {
         A: 'Bill', B: '3', C: '92', D: 'M', E: '31'
     }
 ]
@@ -403,10 +451,10 @@ are given than existing values the overcounting values are ignored.
     {
         A: 'Mel', B: '1', C: '58'
     },
-    {    
+    {
         A: 'Tom', B: '2', C: '78'
     },
-    {    
+    {
         A: 'Bill', B: '3', C: '92'
     }
 ]
@@ -415,10 +463,10 @@ are given than existing values the overcounting values are ignored.
     {
         A: 'Mel', B: '1', C: '58', D: 'W', E: '23'
     },
-    {    
+    {
         A: 'Tom', B: '2', C: '78', D: 'M', E: '54'
     },
-    {    
+    {
         A: 'Bill', B: '3', C: '92', D: 'M', E: '31'
     }
 ]
@@ -427,10 +475,10 @@ are given than existing values the overcounting values are ignored.
     {
         A: 'Mel', B: 'W', C: '23'
     },
-    {    
+    {
         A: 'Tom', B: 'M', C: '54'
     },
-    {    
+    {
         A: 'Bill', B: 'M', C: '31'
     }
 ]
@@ -438,27 +486,29 @@ are given than existing values the overcounting values are ignored.
 ```
 
 ### limitrows
-Number of rows to which the resulting object should be limited to. Default is 'null/undefined'.
 
-```
-// Huge Table (see test/tables.html)
- | Roleplayer Number | Name            | Text to say                                     |
- |  0                | Raife Parkinson | re dolor in hendrerit in vulputate ve           | 
- |  1                | Hazel Schultz   | usto duo dolores et ea rebum. Ste               | 
- |  2                | Montana Delgado | psum dolor sit amet. Lorem ipsum dolor sit ame  | 
- |  3                | Dianne Mcbride  | olor sit amet. Lorem ipsum                      | 
- |  4                | Xena Lynch      | us est Lorem ipsum dol                          |
- |  5                | Najma Holding   | akimata sanctus est Lorem ipsum dolor sit ame   |
- |  6                | Kiki House      | nvidunt ut                                      |
-.
-.
-.
- | 197               | Montana Delgado | lores et ea rebum. Stet clita kasd gu           | 
- | 198               | Myrtle Conley   | a rebum. Stet clita kasd gubergren, no sea taki | 
- | 199               | Hanna Ellis     | kimata sanctus est Lorem ipsum dolor si         | 
+Number of rows to which the resulting object should be limited to. Default is
+`null`/`undefined`.
 
+#### Huge Table (see test/tables.html)
 
-// Example output with limitrows: 5
+Roleplayer Number | Name            | Text to say
+------------------|-----------------|------------
+ 0                | Raife Parkinson | re dolor in hendrerit in vulputate ve
+ 1                | Hazel Schultz   | usto duo dolores et ea rebum. Ste
+ 2                | Montana Delgado | psum dolor sit amet. Lorem ipsum dolor
+ 3                | Dianne Mcbride  | sit ame olor sit amet. Lorem ipsum
+ 4                | Xena Lynch      | us est Lorem ipsum dol
+ 5                | Najma Holding   | akimata sanctus est Lorem ipsum dolor sit
+ 6                | Kiki House      | ame nvidunt ut
+...|
+197               | Montana Delgado | lores et ea rebum. Stet clita kasd gu a
+198               | Myrtle Conley   | rebum. Stet clita kasd gubergren, no sea
+199               | Hanna Ellis     | kimata sanctus est Lorem ipsum dolor si
+
+#### Example output with limitrows: 5
+
+```js
 [ { 'Roleplayer Number': '0',
         Name: 'Raife Parkinson',
         'Text to say': 're dolor in hendrerit in vulputate ve' },
@@ -477,21 +527,25 @@ Number of rows to which the resulting object should be limited to. Default is 'n
 ```
 
 ### containsClasses
-Array of classes to find a specific table using this class. Default is 'null/undefined'.
+
+Array of classes to find a specific table using this class. Default is `null`/
+`undefined`.
 
 ## Known issues and limitations
 
-This module only supports parsing basic tables with a simple horizontal set of <th></th> headings and 
-corresponding <td></td> cells.
+This module only supports parsing basic tables with a simple horizontal set of
+`<th></th>` headings and corresponding `<td></td>` cells.
 
-It can give useless or weird results on tables that have complex structures (such as nested tables) or 
-multiple headers (such as on both X and Y axis).
+It can give useless or weird results on tables that have complex structures
+(such as nested tables) or multiple headers (such as on both X and Y axis).
 
-You'll need to handle things like work out which tables to parse and (in most cases) clean up the data. 
-You might want to combine it it with modules like json2csv or CsvToMarkdownTable.
+You'll need to handle things like work out which tables to parse and (in most
+cases) clean up the data. You might want to combine it it with modules like
+json2csv or CsvToMarkdownTable.
 
-You might want to use it with a module like 'cheerio' if you want to parse specific tables identified 
-by id or class (i.e. select them with cheerio and pass the HTML of them as a string).
+You might want to use it with a module like 'cheerio' if you want to parse
+specific tables identified by id or class (i.e. select them with cheerio and
+pass the HTML of them as a string).
 
 ## Example usage
 
@@ -553,10 +607,10 @@ tabletojson.convertUrl(url)
 });
 ```
 
-# Issues
+## Issues
 
-Right now the table needs to be "well formatted" to be convertable. Tables in tables with not be 
-processed.
+Right now the table needs to be "well formatted" to be convertable. Tables in
+tables with not be processed.
 
 ```html
 <thead>
@@ -566,31 +620,38 @@ processed.
 </thead>
 ```
 
-# Contributing
+## Contributing
 
-Improvements, fixes and suggestions for better written modules that other people have created are welcome, as are bug 
-reports against specific tables it is unable to handle.
+Improvements, fixes and suggestions for better written modules that other people
+have created are welcome, as are bug reports against specific tables it is
+unable to handle.
 
-You can find basic tests in the test folder. I implemented the most straight forward way in using the library. Nonetheless
-there are some edge cases that need to be tested and I would like to ask for support here. Feel free to fork and create
-PRs here. Every bit of help is appreciated.
+You can find basic tests in the test folder. I implemented the most straight
+forward way in using the library. Nonetheless there are some edge cases that
+need to be tested and I would like to ask for support here. Feel free to fork
+and create PRs here. Every bit of help is appreciated.
 
-To get also an insight you can use Iain's examples located in the example folder included with this project that shows
-usage and would be a good start.
+To get also an insight you can use Iain's examples located in the example folder
+included with this project that shows usage and would be a good start.
 
-If you submit a pull request, please add an example for your use case, so I can understand what you want it to do (as I 
-want to get around to writing tests for this and want to understand the sort of use cases people have).
+If you submit a pull request, please add an example for your use case, so I can
+understand what you want it to do (as I want to get around to writing tests for
+this and want to understand the sort of use cases people have).
 
-# Thanks
+## Thanks
 
-June 2018 - Very special thanks to the originator of the library, Iain Collins (@iaincollins). Without his investigation in website 
-grasping and mastering cheerio this lib would have not been where it is right now. Also I would personally like to say 
-"Thank you" for your trust in passing me the ownership. Marius (@maugenst) 
+June 2018 - Very special thanks to the originator of the library, Iain Collins
+(@iaincollins). Without his investigation in website grasping and mastering
+cheerio this lib would have not been where it is right now. Also I would
+personally like to say "Thank you" for your trust in passing me the ownership.
+Marius (@maugenst)
 
-Additional thanks to 
+Additional thanks to
+
 * @roryok
 * Max Thyen (@maxthyen)
 * Thor Jacobsen (@twjacobsen)
 * Michael Keller (@mhkeller)
 * Jesús Leganés-Combarro (@piranna)
+
 for improvements and bug fixes.
