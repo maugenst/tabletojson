@@ -520,6 +520,11 @@ describe('TableToJSON Local', function() {
     });
 
     // ENHANCEMENT: Coverage improvement to also cover rowspan tables
+    // | PARENT | CHILD | AGE |
+    // |        |   Sue |  15 |
+    // | Marry  | Steve |  12 |
+    // |        |   Tom |   3 |
+
     it('Rowspan usage leads to correct object representation', async function() {
         const converted = await tabletojson.convert(html, {
             id: ['table11']
@@ -531,10 +536,52 @@ describe('TableToJSON Local', function() {
         expect(table.length).toBe(3);
 
         expect(_.has(table[0], 'Parent')).toBeTruthy();
-        expect(table.length).toBe(3);
-        expect(table[0].Parent).toBe('Martha');
-        expect(table[1].Parent).toBe('Martha');
-        expect(table[1].Parent).toBe('Martha');
+        expect(table[0].Parent).toBe('Marry');
+        expect(table[1].Parent).toBe('Marry');
+        expect(table[2].Parent).toBe('Marry');
+    });
+
+    // ENHANCEMENT: Coverage improvement to also cover complex rowspan tables
+    // | PARENT | CHILD | AGE |
+    // +--------+-------+-----+
+    // |        |   Sue |  15 |
+    // +        +-------+-----+
+    // | Marry  | Steve |  12 |
+    // +        +-------+-----+
+    // |        |       |     |
+    // +--------+   Tom |   3 +
+    // |        |       |     |
+    // + Taylor +-------+-----+
+    // |        | Peter |  17 |
+    // +--------+-------+-----+
+
+    it('Complex rowspan usage leads to correct object representation', async function() {
+        const converted = await tabletojson.convert(html, {
+            id: ['table12']
+        });
+        expect(converted).toBeDefined();
+        expect(converted.length).toBe(1);
+        const table = converted[0];
+
+        expect(table.length).toBe(5);
+
+        expect(_.has(table[0], 'Parent')).toBeTruthy();
+
+        expect(table[0].Parent).toBe('Marry');
+        expect(table[1].Parent).toBe('Marry');
+        expect(table[2].Parent).toBe('Marry');
+        expect(table[3].Parent).toBe('Taylor');
+        expect(table[4].Parent).toBe('Taylor');
+        expect(table[0].Child).toBe('Sue');
+        expect(table[1].Child).toBe('Steve');
+        expect(table[2].Child).toBe('Tom');
+        expect(table[3].Child).toBe('Tom');
+        expect(table[4].Child).toBe('Peter');
+        expect(table[0].Age).toBe('15');
+        expect(table[1].Age).toBe('12');
+        expect(table[2].Age).toBe('3');
+        expect(table[3].Age).toBe('3');
+        expect(table[4].Age).toBe('17');
     });
 
     it('Options: containsClasses', async function() {

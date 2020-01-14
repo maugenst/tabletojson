@@ -1332,31 +1332,63 @@
 
 
 <h2>Table #11: Table with rowspans</h2>
-<table id="table11" class="table">
+<table id="table11" class="table" border="1">
     <thead>
     <tr>
         <th>Parent</th>
-        <th>Childs</th>
+        <th>Child</th>
         <th>Age</th>
     </tr>
     </thead>
     <tbody>
         <tr>
-            <td rowspan="3">Martha</td>
-            <td>Ken</td>
-            <td>2</td>
+            <td rowspan="3">Marry</td>
+            <td>Sue</td>
+            <td>15</td>
         </tr>
         <tr>
-            <td>Hillary</td>
-            <td>6</td>
+            <td>Steve</td>
+            <td>12</td>
         </tr>
         <tr>
-            <td>Benjamin</td>
-            <td>11</td>
+            <td>Tom</td>
+            <td>3</td>
         </tr>
     </tbody>
 </table>
 
+<h2>Table #12: Table with complex rowspans</h2>
+<table id="table12" class="table" border="1">
+    <thead>
+    <tr>
+        <th>Parent</th>
+        <th>Child</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="3">Marry</td>
+            <td>Sue</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>Steve</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Tom</td>
+            <td rowspan="2">3</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Taylor</td>
+        </tr>
+        <tr>
+            <td>Peter</td>
+            <td>17</td>
+        </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
