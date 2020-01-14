@@ -566,6 +566,7 @@ describe('TableToJSON Local', function() {
         expect(table.length).toBe(5);
 
         expect(_.has(table[0], 'Parent')).toBeTruthy();
+
         expect(table[0].Parent).toBe('Marry');
         expect(table[1].Parent).toBe('Marry');
         expect(table[2].Parent).toBe('Marry');
@@ -576,6 +577,11 @@ describe('TableToJSON Local', function() {
         expect(table[2].Child).toBe('Tom');
         expect(table[3].Child).toBe('Tom');
         expect(table[4].Child).toBe('Peter');
+        expect(table[0].Age).toBe('15');
+        expect(table[1].Age).toBe('12');
+        expect(table[2].Age).toBe('3');
+        expect(table[3].Age).toBe('3');
+        expect(table[4].Age).toBe('17');
     });
 
     it('Options: containsClasses', async function() {
