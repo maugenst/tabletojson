@@ -521,9 +521,9 @@ describe('TableToJSON Local', function() {
 
     // ENHANCEMENT: Coverage improvement to also cover rowspan tables
     // | PARENT | CHILD | AGE |
-    // |        |   Tom |   3 |
-    // | Marry  | Steve |  12 |
     // |        |   Sue |  15 |
+    // | Marry  | Steve |  12 |
+    // |        |   Tom |   3 |
 
     it('Rowspan usage leads to correct object representation', async function() {
         const converted = await tabletojson.convert(html, {
