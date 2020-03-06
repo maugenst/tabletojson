@@ -1,0 +1,12 @@
+
+{
+    "name": "Tabletojson",
+    "transform": {
+        "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": "/.+test\\.ts",
+    "forceExit": true,
+    "silent": true,
+    "testTimeout": 3000000,
+    "rootDir": "./"
+}
