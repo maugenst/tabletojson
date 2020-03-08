@@ -6,7 +6,7 @@
   },
   "name": "tabletojson",
   "description": "Converts HTML tables to JSON objects",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "./dist/lib/Tabletojson.js",
   "keywords": [
     "table2json",
@@ -16,6 +16,10 @@
     "json",
     "csv"
   ],
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/maugenst/tabletojson.git"
