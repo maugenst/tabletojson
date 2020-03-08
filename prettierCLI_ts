@@ -1,0 +1,5 @@
+#!/bin/bash
+echo Version
+echo Calling prettier on $1
+node node_modules/prettier/bin-prettier.js --version
+node node_modules/prettier/bin-prettier.js --parser typescript --write $1

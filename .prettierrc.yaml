@@ -1,0 +1,7 @@
+#trailingComma: "es5"
+#semi: false
+singleQuote: true
+bracketSpacing: false
+printWidth: 120
+tabWidth: 4
+parser: flow

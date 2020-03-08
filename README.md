@@ -16,6 +16,11 @@ supported).
 The response is always an array. Every array entry in the response represents a
 table found on the page (in same the order they were found in the HTML).
 
+As of version 2.0 tabletojson is completely written in typescript.
+
+!!! ATTENTION !!!: Incompatible API change in version 2.0.0 since request.js got
+deprecated. More information [here](#options)...  
+
 ## Basic usage
 
 Install via npm
@@ -204,20 +209,34 @@ both at the same time by setting `stripHtml` to `false`.
 
 ## Options
 
-### request (only `convertUrl`)
+!!! ATTENTION !!! Since request is not actively supported we need to switch to a
+reliable request replacement and I decided to use got.
+ 
+This is an incompatible change in version 2++ so keep this in mind and follow
+Sindre's [Migration Guide](https://github.com/sindresorhus/got/blob/master/documentation/migration-guides.md).
 
-If you need to get data from a remote server to pass it to the parser you can
-call `tabletojson.convertUrl`. When working behind a proxy you can pass any
-request-options (proxy, headers,...) by adding a request object to the options
+For special features like using a proxy you should follow this instructions: 
+[Proxies](https://github.com/sindresorhus/got#proxies)
+
+
+### got (only `convertUrl`)
+
+We are using got to fetch remoter HTML pages. So if you need to get data from a 
+remote server you can call `tabletojson.convertUrl` and pass any
+got-options (proxy, headers,...) by adding a got object to the options
 passed to `convertUrl`. for more information on how to configure request please
 have a look at
-[https://github.com/request/request](https://github.com/request/request)
+[Proxies](https://github.com/sindresorhus/got#proxies)
 
 ``` javascript
 tabletojson.convertUrl('https://www.timeanddate.com/holidays/ireland/2017', {
     useFirstRowForHeadings: true,
-    request: {
-        proxy: 'http://proxy:8080'
+    got: {
+        agent: tunnel.httpOverHttp({
+            proxy: {
+                host: 'proxy:8080'
+            }
+        })
     }
 });
 ```
@@ -653,5 +672,6 @@ Additional thanks to
 * Thor Jacobsen (@twjacobsen)
 * Michael Keller (@mhkeller)
 * Jesús Leganés-Combarro (@piranna)
+* João Otávio Ferreira Barbosa (@joaobarbosa)
 
 for improvements and bug fixes.

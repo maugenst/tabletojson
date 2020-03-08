@@ -1,9 +1,9 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const _ = require('lodash');
-const tabletojson = require('../lib/tabletojson');
+import * as fs from 'fs';
+import * as path from 'path';
+import * as _ from 'lodash';
+import {Tabletojson as tabletojson} from "../lib/Tabletojson";
 
 describe('TableToJSON Local', function() {
     let html = '';
@@ -566,6 +566,7 @@ describe('TableToJSON Local', function() {
         expect(table.length).toBe(5);
 
         expect(_.has(table[0], 'Parent')).toBeTruthy();
+
         expect(table[0].Parent).toBe('Marry');
         expect(table[1].Parent).toBe('Marry');
         expect(table[2].Parent).toBe('Marry');
@@ -576,6 +577,11 @@ describe('TableToJSON Local', function() {
         expect(table[2].Child).toBe('Tom');
         expect(table[3].Child).toBe('Tom');
         expect(table[4].Child).toBe('Peter');
+        expect(table[0].Age).toBe('15');
+        expect(table[1].Age).toBe('12');
+        expect(table[2].Age).toBe('3');
+        expect(table[3].Age).toBe('3');
+        expect(table[4].Age).toBe('17');
     });
 
     it('Options: containsClasses', async function() {
@@ -601,6 +607,34 @@ describe('TableToJSON Local', function() {
 
         expect(_.has(table[0], 'Age')).toBeTruthy();
         expect(table[0].Age).toBe('2');
+    });
+
+    it('Options: useFirstRowForHeadings', async function() {
+        const converted = await tabletojson.convert(html, {
+            id: ['table13'],
+            useFirstRowForHeadings: true
+        });
+        expect(converted).toBeDefined();
+        expect(converted.length).toBe(1);
+
+        const table = converted[0];
+
+        expect(_.has(table[0], 'Age')).toBeTruthy();
+        expect(table[0].Dog).toEqual('Dog');
+        expect(table[0].Race).toEqual('Race');
+        expect(table[0].Age).toEqual('Age');
+        expect(table[1].Dog).toEqual('Donald');
+        expect(table[1].Race).toEqual('Bobtail');
+        expect(table[1].Age).toEqual('2');
+    });
+
+    it('Converting a table with no content', async function() {
+        const converted = await tabletojson.convert(html, {
+            id: ['table14']
+        });
+        expect(converted).toBeDefined();
+        expect(Array.isArray(converted)).toBeTruthy();
+        expect(converted.length).toBe(0);
     });
 
     it('Options: converting an html page with no tables', async function() {
