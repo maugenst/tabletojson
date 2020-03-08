@@ -13,11 +13,11 @@ describe('TableToJSON Remote', function() {
             res.status(200).json({name: 'john'});
         });
 
-        app.listen(80);
+        app.listen(1080);
     });
 
     test('Get table from locally mocked server returning a json object', async function() {
-        await expect(tabletojson.convertUrl('http://localhost/user')).rejects.toThrow(
+        await expect(tabletojson.convertUrl('http://localhost:1080/user')).rejects.toThrow(
             /Tabletojson can just handle text/
         );
     });
@@ -25,7 +25,7 @@ describe('TableToJSON Remote', function() {
     test('Get table from locally mocked server returning a json object passing just a callback method', async function() {
         await expect(
             tabletojson.convertUrl(
-                'http://localhost/user',
+                'http://localhost:1080/user',
                 () => {}
             )
         ).rejects.toThrow(/Tabletojson can just handle text/);
@@ -34,7 +34,7 @@ describe('TableToJSON Remote', function() {
     test('Get table from locally mocked server returning a json object passing in an object and a callback method', async function() {
         await expect(
             tabletojson.convertUrl(
-                'http://localhost/user',
+                'http://localhost:1080/user',
                 {
                     useFirstRowForHeadings: true
                 },
@@ -44,7 +44,7 @@ describe('TableToJSON Remote', function() {
     });
 
     test('Get table from locally mocked server returning an image', async function() {
-        await expect(tabletojson.convertUrl('http://localhost/lorem.png')).rejects.toThrow(
+        await expect(tabletojson.convertUrl('http://localhost:1080/lorem.png')).rejects.toThrow(
             /Tabletojson can just handle text/
         );
     });
