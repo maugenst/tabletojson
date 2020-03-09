@@ -54,9 +54,11 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "test": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "prepare": "npm run lint & npm run build",
     "build": "tsc -p ./tsconfig.json",
-    "lint": "tslint -c ./tslint.json && tsc -p ./tsconfig.json"
+    "lint": "tslint -c ./tslint.json lib/*",
+    "prebuild": "npm run lint",
+    "prepare": "npm run build",
+    "pretest": "npm run lint",
+    "test": "jest --coverage && coveralls.js < ./coverage/lcov.info"
   }
 }
