@@ -21,6 +21,11 @@ As of version 2.0 tabletojson is completely written in typescript.
 !!! ATTENTION !!!: Incompatible API change in version 2.0.0 since request.js got
 deprecated. More information [here](#options)...  
 
+## Conversion from version 1.+ to 2.x
+
+* Require must be changed from ``const tabletojson = require('../lib/tabletojson');`` to ``const tabletojson = require('../lib/tabletojson').Tabletojson;``
+* Replace request options by got options. More information [here](#options)...
+
 ## Basic usage
 
 Install via npm
@@ -34,7 +39,7 @@ npm install tabletojson
 ```javascript
 'use strict';
 
-const tabletojson = require('tabletojson');
+const tabletojson = require('tabletojson').Tabletojson;
 
 tabletojson.convertUrl(
     'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes',
@@ -52,7 +57,7 @@ Have a look in the examples.
 // example-6.js
 'use strict';
 
-const tabletojson = require('../lib/tabletojson');
+const tabletojson = require('../lib/tabletojson').Tabletojson;
 const fs = require('fs');
 const path = require('path');
 
@@ -570,7 +575,7 @@ pass the HTML of them as a string).
 
 ```javascript
 // Convert an HTML blob into an array of all the tables on the page
-var tabletojson = require('tabletojson');
+var tabletojson = require('tabletojson').Tabletojson;
 var tablesAsJson = tabletojson.convert(html);
 var firstTableAsJson = tablesAsJson[0];
 var secondTableAsJson = tablesAsJson[1];
@@ -579,7 +584,7 @@ var secondTableAsJson = tablesAsJson[1];
 
 ```javascript
 // Fetch a URL and parse all it's tables into JSON, using a callback
-var tabletojson = require('tabletojson');
+var tabletojson = require('tabletojson').Tabletojson;
 var url = 'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes';
 tabletojson.convertUrl(url, function(tablesAsJson) {
   var listofSovereignStates = tablesAsJson[0];
@@ -588,7 +593,7 @@ tabletojson.convertUrl(url, function(tablesAsJson) {
 
 ```javascript
 // Fetch a URL and parse all it's tables into JSON, using promises
-var tabletojson = require('tabletojson');
+var tabletojson = require('tabletojson').Tabletojson;
 var url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
 tabletojson.convertUrl(url)
 .then(function(tablesAsJson) {
@@ -599,7 +604,7 @@ tabletojson.convertUrl(url)
 
 ```javascript
 // Fetch a table from Wikipedia and combine with json2csv to convert to CSV
-var tabletojson = require('tabletojson');
+var tabletojson = require('tabletojson').Tabletojson;
 var json2csv = require('json2csv');
 var url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
 tabletojson.convertUrl(url)

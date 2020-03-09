@@ -1,5 +1,4 @@
 export {Tabletojson} from './lib/Tabletojson';
-export {Tabletojson as tabletojson} from './lib/Tabletojson'; // for compatibility reasons only
 
 export type TableToJsonOptions = {
   useFirstRowForHeadings?: boolean; // Use the first row as header [default=false]
