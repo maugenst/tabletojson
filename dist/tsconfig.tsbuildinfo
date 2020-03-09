@@ -170,8 +170,8 @@
         "signature": "5c771dbfab3a478efd78f456aa5fb48b90d562f5a7fca1501565b19a4c41b122"
       },
       "../node_modules/tslib/tslib.d.ts": {
-        "version": "f8b74c9a174eea1dced9aea206143ff452e5c6d446e8dfa5da836471d11c2a6f",
-        "signature": "f8b74c9a174eea1dced9aea206143ff452e5c6d446e8dfa5da836471d11c2a6f"
+        "version": "4984b48a97160eac5282ffeae690315420a626de83ccf6045c36d934c5c957c0",
+        "signature": "4984b48a97160eac5282ffeae690315420a626de83ccf6045c36d934c5c957c0"
       },
       "../node_modules/@types/node/globals.d.ts": {
         "version": "facd846e52d080629af96d24241b95fdf1472bf77a9f5c447f6b7f7214142d5e",
@@ -385,71 +385,71 @@
         "version": "10510a2c7d7c10c39cc186e5b36fd95af6151a2402fd8dc99445786614cf72cf",
         "signature": "10510a2c7d7c10c39cc186e5b36fd95af6151a2402fd8dc99445786614cf72cf"
       },
-      "../node_modules/type-fest/source/basic.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/basic.d.ts": {
         "version": "fda9e5c2afd0920ead6baed40f164229ec8f93188b5c8df196594a54bb8fb5e3",
         "signature": "fda9e5c2afd0920ead6baed40f164229ec8f93188b5c8df196594a54bb8fb5e3"
       },
-      "../node_modules/type-fest/source/except.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/except.d.ts": {
         "version": "c58be3e560989a877531d3ff7c9e5db41c5dd9282480ccf197abfcc708a95b8d",
         "signature": "c58be3e560989a877531d3ff7c9e5db41c5dd9282480ccf197abfcc708a95b8d"
       },
-      "../node_modules/type-fest/source/mutable.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/mutable.d.ts": {
         "version": "91f23ddc3971b1c8938c638fb55601a339483953e1eb800675fa5b5e8113db72",
         "signature": "91f23ddc3971b1c8938c638fb55601a339483953e1eb800675fa5b5e8113db72"
       },
-      "../node_modules/type-fest/source/merge.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/merge.d.ts": {
         "version": "50d22844db90a0dcd359afeb59dd1e9a384d977b4b363c880b4e65047237a29e",
         "signature": "50d22844db90a0dcd359afeb59dd1e9a384d977b4b363c880b4e65047237a29e"
       },
-      "../node_modules/type-fest/source/merge-exclusive.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/merge-exclusive.d.ts": {
         "version": "d33782b82eea0ee17b99ca563bd19b38259a3aaf096d306ceaf59cd4422629be",
         "signature": "d33782b82eea0ee17b99ca563bd19b38259a3aaf096d306ceaf59cd4422629be"
       },
-      "../node_modules/type-fest/source/require-at-least-one.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/require-at-least-one.d.ts": {
         "version": "7f7f1420c69806e268ab7820cbe31a2dcb2f836f28b3d09132a2a95b4a454b80",
         "signature": "7f7f1420c69806e268ab7820cbe31a2dcb2f836f28b3d09132a2a95b4a454b80"
       },
-      "../node_modules/type-fest/source/require-exactly-one.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/require-exactly-one.d.ts": {
         "version": "f9ecf72f3842ae35faf3aa122a9c87a486446cb9084601695f9e6a2cdf0d3e4b",
         "signature": "f9ecf72f3842ae35faf3aa122a9c87a486446cb9084601695f9e6a2cdf0d3e4b"
       },
-      "../node_modules/type-fest/source/partial-deep.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/partial-deep.d.ts": {
         "version": "61046f12c3cfafd353d2d03febc96b441c1a0e3bb82a5a88de78cc1be9e10520",
         "signature": "61046f12c3cfafd353d2d03febc96b441c1a0e3bb82a5a88de78cc1be9e10520"
       },
-      "../node_modules/type-fest/source/readonly-deep.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/readonly-deep.d.ts": {
         "version": "f4e7f5824ac7b35539efc3bef36b3e6be89603b88224cb5c0ad3526a454fc895",
         "signature": "f4e7f5824ac7b35539efc3bef36b3e6be89603b88224cb5c0ad3526a454fc895"
       },
-      "../node_modules/type-fest/source/literal-union.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/literal-union.d.ts": {
         "version": "091af8276fbc70609a00e296840bd284a2fe29df282f0e8dae2de9f0a706685f",
         "signature": "091af8276fbc70609a00e296840bd284a2fe29df282f0e8dae2de9f0a706685f"
       },
-      "../node_modules/type-fest/source/promisable.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/promisable.d.ts": {
         "version": "537aff717746703d2157ec563b5de4f6393ce9f69a84ae62b49e9b6c80b6e587",
         "signature": "537aff717746703d2157ec563b5de4f6393ce9f69a84ae62b49e9b6c80b6e587"
       },
-      "../node_modules/type-fest/source/opaque.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/opaque.d.ts": {
         "version": "d4220a16027ddf0cc7d105d80cbb01f5070ca7ddd8b2d007cfb024b27e22b912",
         "signature": "d4220a16027ddf0cc7d105d80cbb01f5070ca7ddd8b2d007cfb024b27e22b912"
       },
-      "../node_modules/type-fest/source/set-optional.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/set-optional.d.ts": {
         "version": "5d007514c3876ecc7326b898d1738eed7b77d6a3611d73f5c99fe37801dd48e6",
         "signature": "5d007514c3876ecc7326b898d1738eed7b77d6a3611d73f5c99fe37801dd48e6"
       },
-      "../node_modules/type-fest/source/set-required.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/set-required.d.ts": {
         "version": "85dff77bf599bd57135b34169d8f80914bbcdb52dfa9fb5fa2204b366363d519",
         "signature": "85dff77bf599bd57135b34169d8f80914bbcdb52dfa9fb5fa2204b366363d519"
       },
-      "../node_modules/type-fest/source/package-json.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/package-json.d.ts": {
         "version": "3af910f7ac7e7b9dce041b3f1d07426cb14519f6371869e478522bbe69643a4c",
         "signature": "3af910f7ac7e7b9dce041b3f1d07426cb14519f6371869e478522bbe69643a4c"
       },
-      "../node_modules/type-fest/source/tsconfig-json.d.ts": {
+      "../node_modules/got/node_modules/type-fest/source/tsconfig-json.d.ts": {
         "version": "8e358d80ac052e9f4e5cc16d06c946628834b47718a4bd101ef2087603b8e5c7",
         "signature": "8e358d80ac052e9f4e5cc16d06c946628834b47718a4bd101ef2087603b8e5c7"
       },
-      "../node_modules/type-fest/index.d.ts": {
+      "../node_modules/got/node_modules/type-fest/index.d.ts": {
         "version": "9164dfd85eba6d2f7acd3f6abb6e800bcc9e2c3f0221abcb2d69ee7dda1b307d",
         "signature": "9164dfd85eba6d2f7acd3f6abb6e800bcc9e2c3f0221abcb2d69ee7dda1b307d"
       },
@@ -490,8 +490,8 @@
         "signature": "c75281a8e5904be2702b5d3c3a0e6f51e1e87e96ffae864a1611c5a47f140f9d"
       },
       "../lib/Tabletojson.ts": {
-        "version": "1b2b8fc358a3792fbe997c0d90da206d2ecce491dc9f7f339582cd4c60ad9084",
-        "signature": "9662fe6d69447debfdb1b2ff3791441422cc1b25ca28f1b821e115fff9b94469"
+        "version": "a97d1ec03bc4b0cf8b985ad5b12e87fcc24a93eb2bbe8fe51a481afe4679c11c",
+        "signature": "4dc5995b3beedabd8ea6ee5ad46b37b38af50669429190030efcde9eb00eee6c"
       },
       "../node_modules/@types/lodash/ts3.1/common/common.d.ts": {
         "version": "4025cf62742c5bb3d383c8a62342481622c87e3397ea5e7b7baab18b9efd5798",
@@ -545,31 +545,31 @@
         "version": "bbf144d4354e2aaa6439f32761f3ee798cc68d1600adab6e2a596f25269f106d",
         "signature": "bbf144d4354e2aaa6439f32761f3ee798cc68d1600adab6e2a596f25269f106d"
       },
-      "../node_modules/jest-diff/build/cleanupSemantic.d.ts": {
+      "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts": {
         "version": "9a605b7e5de905b5e67ef1dfc7fb6956275ee3f1744ded5fd314ee8b8befe7d0",
         "signature": "9a605b7e5de905b5e67ef1dfc7fb6956275ee3f1744ded5fd314ee8b8befe7d0"
       },
-      "../node_modules/jest-diff/build/types.d.ts": {
+      "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts": {
         "version": "f343673792be9436af98016a143ee1eb3dfdac69b19a128721d92f468934f449",
         "signature": "f343673792be9436af98016a143ee1eb3dfdac69b19a128721d92f468934f449"
       },
-      "../node_modules/jest-diff/build/diffLines.d.ts": {
+      "../node_modules/@types/jest/node_modules/jest-diff/build/diffLines.d.ts": {
         "version": "8c7776698b78f177cfdead7414cac977c6d84f134e89bbedfea4caecd04b0491",
         "signature": "8c7776698b78f177cfdead7414cac977c6d84f134e89bbedfea4caecd04b0491"
       },
-      "../node_modules/jest-diff/build/printDiffs.d.ts": {
+      "../node_modules/@types/jest/node_modules/jest-diff/build/printDiffs.d.ts": {
         "version": "4f71cbe0899e77e2e0b471ae3191bf3dc443585b69f97e0a01a5d1755c9669cd",
         "signature": "4f71cbe0899e77e2e0b471ae3191bf3dc443585b69f97e0a01a5d1755c9669cd"
       },
-      "../node_modules/jest-diff/build/index.d.ts": {
+      "../node_modules/@types/jest/node_modules/jest-diff/build/index.d.ts": {
         "version": "36ac719aa6fed99efd288f993b2ca637873827fd25d99875b39307b937148e06",
         "signature": "36ac719aa6fed99efd288f993b2ca637873827fd25d99875b39307b937148e06"
       },
-      "../node_modules/pretty-format/build/types.d.ts": {
+      "../node_modules/@types/jest/node_modules/pretty-format/build/types.d.ts": {
         "version": "6ed4f0568165065f03426b1333999c5b9f528d92936eee0ba432537b7cd9a88e",
         "signature": "6ed4f0568165065f03426b1333999c5b9f528d92936eee0ba432537b7cd9a88e"
       },
-      "../node_modules/pretty-format/build/index.d.ts": {
+      "../node_modules/@types/jest/node_modules/pretty-format/build/index.d.ts": {
         "version": "faa1eda9eb6c80210343ea752d64ba06ae0d14f670676ab069ec7047c4f96512",
         "signature": "faa1eda9eb6c80210343ea752d64ba06ae0d14f670676ab069ec7047c4f96512"
       },
@@ -662,8 +662,8 @@
         "signature": "9e951ec338c4232d611552a1be7b4ecec79a8c2307a893ce39701316fe2374bd"
       },
       "../node_modules/@types/istanbul-lib-report/index.d.ts": {
-        "version": "7eb06594824ada538b1d8b48c3925a83e7db792f47a081a62cf3e5c4e23cf0ee",
-        "signature": "7eb06594824ada538b1d8b48c3925a83e7db792f47a081a62cf3e5c4e23cf0ee"
+        "version": "70c61ff569aabdf2b36220da6c06caaa27e45cd7acac81a1966ab4ee2eadc4f2",
+        "signature": "70c61ff569aabdf2b36220da6c06caaa27e45cd7acac81a1966ab4ee2eadc4f2"
       },
       "../node_modules/@types/istanbul-reports/index.d.ts": {
         "version": "93b59bc67329d5add033e3198583c39aa939cef891e6a2b763e0bea2b514ea9b",
@@ -690,8 +690,8 @@
         "signature": "fdfbe321c556c39a2ecf791d537b999591d0849e971dd938d88f460fea0186f6"
       },
       "../node_modules/@types/yargs/index.d.ts": {
-        "version": "2893564a05d3bbe2a4d812dfd5ad3d7a6981a754283b695272d6ead03f638b67",
-        "signature": "2893564a05d3bbe2a4d812dfd5ad3d7a6981a754283b695272d6ead03f638b67"
+        "version": "989ea8e89ef2d6a07a1872fcee14be6b9e1920b04f19a4ab149d673f89af67e6",
+        "signature": "989ea8e89ef2d6a07a1872fcee14be6b9e1920b04f19a4ab149d673f89af67e6"
       }
     },
     "options": {
@@ -1403,125 +1403,125 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/basic.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/basic.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/except.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/except.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/mutable.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/mutable.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/merge.d.ts": [
-        "../node_modules/type-fest/source/except.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/merge.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/except.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/merge-exclusive.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/merge-exclusive.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/require-at-least-one.d.ts": [
-        "../node_modules/type-fest/source/except.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/require-at-least-one.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/except.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/require-exactly-one.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/require-exactly-one.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/partial-deep.d.ts": [
-        "../node_modules/type-fest/source/basic.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/partial-deep.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/basic.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/readonly-deep.d.ts": [
-        "../node_modules/type-fest/source/basic.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/readonly-deep.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/basic.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/literal-union.d.ts": [
-        "../node_modules/type-fest/source/basic.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/literal-union.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/basic.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/promisable.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/promisable.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/opaque.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/opaque.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/set-optional.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/set-optional.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/set-required.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/set-required.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/package-json.d.ts": [
-        "../node_modules/type-fest/index.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/package-json.d.ts": [
+        "../node_modules/got/node_modules/type-fest/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/tsconfig-json.d.ts": [
+      "../node_modules/got/node_modules/type-fest/source/tsconfig-json.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/index.d.ts": [
-        "../node_modules/type-fest/source/basic.d.ts",
-        "../node_modules/type-fest/source/except.d.ts",
-        "../node_modules/type-fest/source/mutable.d.ts",
-        "../node_modules/type-fest/source/merge.d.ts",
-        "../node_modules/type-fest/source/merge-exclusive.d.ts",
-        "../node_modules/type-fest/source/require-at-least-one.d.ts",
-        "../node_modules/type-fest/source/require-exactly-one.d.ts",
-        "../node_modules/type-fest/source/partial-deep.d.ts",
-        "../node_modules/type-fest/source/readonly-deep.d.ts",
-        "../node_modules/type-fest/source/literal-union.d.ts",
-        "../node_modules/type-fest/source/promisable.d.ts",
-        "../node_modules/type-fest/source/opaque.d.ts",
-        "../node_modules/type-fest/source/set-optional.d.ts",
-        "../node_modules/type-fest/source/set-required.d.ts",
-        "../node_modules/type-fest/source/package-json.d.ts",
-        "../node_modules/type-fest/source/tsconfig-json.d.ts",
+      "../node_modules/got/node_modules/type-fest/index.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/basic.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/except.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/mutable.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/merge.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/merge-exclusive.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/require-at-least-one.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/require-exactly-one.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/partial-deep.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/readonly-deep.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/literal-union.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/promisable.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/opaque.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/set-optional.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/set-required.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/package-json.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/tsconfig-json.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -1554,7 +1554,7 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../node_modules/got/dist/source/create.d.ts": [
-        "../node_modules/type-fest/index.d.ts",
+        "../node_modules/got/node_modules/type-fest/index.d.ts",
         "../node_modules/got/dist/source/as-stream.d.ts",
         "../node_modules/got/dist/source/errors.d.ts",
         "../node_modules/got/dist/source/types.d.ts",
@@ -1590,7 +1590,7 @@
         "../node_modules/@types/node/stream.d.ts",
         "../node_modules/@szmarczak/http-timer/dist/source/index.d.ts",
         "../node_modules/cacheable-lookup/index.d.ts",
-        "../node_modules/type-fest/index.d.ts",
+        "../node_modules/got/node_modules/type-fest/index.d.ts",
         "../node_modules/got/dist/source/create.d.ts",
         "../node_modules/got/dist/source/errors.d.ts",
         "../node_modules/got/dist/source/known-hook-events.d.ts",
@@ -1862,60 +1862,60 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/jest-diff/build/cleanupSemantic.d.ts": [
+      "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/jest-diff/build/types.d.ts": [
+      "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/jest-diff/build/diffLines.d.ts": [
-        "../node_modules/jest-diff/build/cleanupSemantic.d.ts",
-        "../node_modules/jest-diff/build/types.d.ts",
+      "../node_modules/@types/jest/node_modules/jest-diff/build/diffLines.d.ts": [
+        "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/jest-diff/build/printDiffs.d.ts": [
-        "../node_modules/jest-diff/build/cleanupSemantic.d.ts",
-        "../node_modules/jest-diff/build/types.d.ts",
+      "../node_modules/@types/jest/node_modules/jest-diff/build/printDiffs.d.ts": [
+        "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/jest-diff/build/index.d.ts": [
-        "../node_modules/jest-diff/build/cleanupSemantic.d.ts",
-        "../node_modules/jest-diff/build/diffLines.d.ts",
-        "../node_modules/jest-diff/build/printDiffs.d.ts",
-        "../node_modules/jest-diff/build/types.d.ts",
+      "../node_modules/@types/jest/node_modules/jest-diff/build/index.d.ts": [
+        "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/diffLines.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/printDiffs.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/pretty-format/build/types.d.ts": [
+      "../node_modules/@types/jest/node_modules/pretty-format/build/types.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/pretty-format/build/index.d.ts": [
-        "../node_modules/pretty-format/build/types.d.ts",
+      "../node_modules/@types/jest/node_modules/pretty-format/build/index.d.ts": [
+        "../node_modules/@types/jest/node_modules/pretty-format/build/types.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../node_modules/@types/jest/index.d.ts": [
-        "../node_modules/jest-diff/build/index.d.ts",
-        "../node_modules/pretty-format/build/index.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/index.d.ts",
+        "../node_modules/@types/jest/node_modules/pretty-format/build/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -2828,130 +2828,6 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/type-fest/source/basic.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/except.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/mutable.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/merge.d.ts": [
-        "../node_modules/type-fest/source/except.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/merge-exclusive.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/require-at-least-one.d.ts": [
-        "../node_modules/type-fest/source/except.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/require-exactly-one.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/partial-deep.d.ts": [
-        "../node_modules/type-fest/source/basic.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/readonly-deep.d.ts": [
-        "../node_modules/type-fest/source/basic.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/literal-union.d.ts": [
-        "../node_modules/type-fest/source/basic.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/promisable.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/opaque.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/set-optional.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/set-required.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/package-json.d.ts": [
-        "../node_modules/type-fest/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/source/tsconfig-json.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/type-fest/index.d.ts": [
-        "../node_modules/type-fest/source/basic.d.ts",
-        "../node_modules/type-fest/source/except.d.ts",
-        "../node_modules/type-fest/source/mutable.d.ts",
-        "../node_modules/type-fest/source/merge.d.ts",
-        "../node_modules/type-fest/source/merge-exclusive.d.ts",
-        "../node_modules/type-fest/source/require-at-least-one.d.ts",
-        "../node_modules/type-fest/source/require-exactly-one.d.ts",
-        "../node_modules/type-fest/source/partial-deep.d.ts",
-        "../node_modules/type-fest/source/readonly-deep.d.ts",
-        "../node_modules/type-fest/source/literal-union.d.ts",
-        "../node_modules/type-fest/source/promisable.d.ts",
-        "../node_modules/type-fest/source/opaque.d.ts",
-        "../node_modules/type-fest/source/set-optional.d.ts",
-        "../node_modules/type-fest/source/set-required.d.ts",
-        "../node_modules/type-fest/source/package-json.d.ts",
-        "../node_modules/type-fest/source/tsconfig-json.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../node_modules/got/dist/source/as-stream.d.ts": [
         "../node_modules/@types/node/stream.d.ts",
         "../node_modules/got/dist/source/types.d.ts",
@@ -3277,57 +3153,6 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/jest-diff/build/cleanupSemantic.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/jest-diff/build/types.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/jest-diff/build/diffLines.d.ts": [
-        "../node_modules/jest-diff/build/cleanupSemantic.d.ts",
-        "../node_modules/jest-diff/build/types.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/jest-diff/build/printDiffs.d.ts": [
-        "../node_modules/jest-diff/build/cleanupSemantic.d.ts",
-        "../node_modules/jest-diff/build/types.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/jest-diff/build/index.d.ts": [
-        "../node_modules/jest-diff/build/cleanupSemantic.d.ts",
-        "../node_modules/jest-diff/build/diffLines.d.ts",
-        "../node_modules/jest-diff/build/printDiffs.d.ts",
-        "../node_modules/jest-diff/build/types.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/pretty-format/build/types.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/pretty-format/build/index.d.ts": [
-        "../node_modules/pretty-format/build/types.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../node_modules/@types/jest/index.d.ts": [
         "../node_modules/jest-diff/build/index.d.ts",
         "../node_modules/pretty-format/build/index.d.ts",
@@ -3537,6 +3362,181 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/basic.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/except.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/index.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/basic.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/except.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/mutable.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/merge.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/merge-exclusive.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/require-at-least-one.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/require-exactly-one.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/partial-deep.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/readonly-deep.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/literal-union.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/promisable.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/opaque.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/set-optional.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/set-required.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/package-json.d.ts",
+        "../node_modules/got/node_modules/type-fest/source/tsconfig-json.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/package-json.d.ts": [
+        "../node_modules/got/node_modules/type-fest/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/require-at-least-one.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/except.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/merge.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/except.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/mutable.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/merge-exclusive.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/require-exactly-one.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/partial-deep.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/basic.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/readonly-deep.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/basic.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/literal-union.d.ts": [
+        "../node_modules/got/node_modules/type-fest/source/basic.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/promisable.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/opaque.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/set-optional.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/set-required.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/got/node_modules/type-fest/source/tsconfig-json.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/jest/node_modules/jest-diff/build/index.d.ts": [
+        "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/diffLines.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/printDiffs.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/jest/node_modules/jest-diff/build/printDiffs.d.ts": [
+        "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/jest/node_modules/jest-diff/build/diffLines.d.ts": [
+        "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/jest/node_modules/pretty-format/build/types.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/jest/node_modules/pretty-format/build/index.d.ts": [
+        "../node_modules/@types/jest/node_modules/pretty-format/build/types.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -3583,6 +3583,7 @@
       "../node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "../node_modules/typescript/lib/lib.es2018.full.d.ts",
       "../node_modules/tslib/tslib.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/basic.d.ts",
       "../node_modules/@types/node/globals.d.ts",
       "../node_modules/@types/node/assert.d.ts",
       "../node_modules/@types/node/async_hooks.d.ts",
@@ -3636,23 +3637,22 @@
       "../node_modules/p-cancelable/index.d.ts",
       "../node_modules/@szmarczak/http-timer/dist/source/index.d.ts",
       "../node_modules/cacheable-lookup/index.d.ts",
-      "../node_modules/type-fest/source/basic.d.ts",
-      "../node_modules/type-fest/source/except.d.ts",
-      "../node_modules/type-fest/source/mutable.d.ts",
-      "../node_modules/type-fest/source/merge.d.ts",
-      "../node_modules/type-fest/source/merge-exclusive.d.ts",
-      "../node_modules/type-fest/source/require-at-least-one.d.ts",
-      "../node_modules/type-fest/source/require-exactly-one.d.ts",
-      "../node_modules/type-fest/source/partial-deep.d.ts",
-      "../node_modules/type-fest/source/readonly-deep.d.ts",
-      "../node_modules/type-fest/source/literal-union.d.ts",
-      "../node_modules/type-fest/source/promisable.d.ts",
-      "../node_modules/type-fest/source/opaque.d.ts",
-      "../node_modules/type-fest/source/set-optional.d.ts",
-      "../node_modules/type-fest/source/set-required.d.ts",
-      "../node_modules/type-fest/source/package-json.d.ts",
-      "../node_modules/type-fest/source/tsconfig-json.d.ts",
-      "../node_modules/type-fest/index.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/except.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/mutable.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/merge.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/merge-exclusive.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/require-at-least-one.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/require-exactly-one.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/partial-deep.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/readonly-deep.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/literal-union.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/promisable.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/opaque.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/set-optional.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/set-required.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/package-json.d.ts",
+      "../node_modules/got/node_modules/type-fest/source/tsconfig-json.d.ts",
+      "../node_modules/got/node_modules/type-fest/index.d.ts",
       "../node_modules/got/dist/source/as-stream.d.ts",
       "../node_modules/got/dist/source/utils/timed-out.d.ts",
       "../node_modules/got/dist/source/errors.d.ts",
@@ -3661,6 +3661,8 @@
       "../node_modules/got/dist/source/utils/options-to-url.d.ts",
       "../node_modules/got/dist/source/types.d.ts",
       "../node_modules/got/dist/source/index.d.ts",
+      "../index.ts",
+      "../lib/Tabletojson.ts",
       "../node_modules/@types/lodash/ts3.1/common/common.d.ts",
       "../node_modules/@types/lodash/ts3.1/common/array.d.ts",
       "../node_modules/@types/lodash/ts3.1/common/collection.d.ts",
@@ -3674,13 +3676,13 @@
       "../node_modules/@types/lodash/ts3.1/common/string.d.ts",
       "../node_modules/@types/lodash/ts3.1/common/util.d.ts",
       "../node_modules/@types/lodash/ts3.1/index.d.ts",
-      "../node_modules/jest-diff/build/cleanupSemantic.d.ts",
-      "../node_modules/jest-diff/build/types.d.ts",
-      "../node_modules/jest-diff/build/diffLines.d.ts",
-      "../node_modules/jest-diff/build/printDiffs.d.ts",
-      "../node_modules/jest-diff/build/index.d.ts",
-      "../node_modules/pretty-format/build/types.d.ts",
-      "../node_modules/pretty-format/build/index.d.ts",
+      "../node_modules/@types/jest/node_modules/jest-diff/build/cleanupSemantic.d.ts",
+      "../node_modules/@types/jest/node_modules/jest-diff/build/types.d.ts",
+      "../node_modules/@types/jest/node_modules/jest-diff/build/diffLines.d.ts",
+      "../node_modules/@types/jest/node_modules/jest-diff/build/printDiffs.d.ts",
+      "../node_modules/@types/jest/node_modules/jest-diff/build/index.d.ts",
+      "../node_modules/@types/jest/node_modules/pretty-format/build/types.d.ts",
+      "../node_modules/@types/jest/node_modules/pretty-format/build/index.d.ts",
       "../node_modules/@types/jest/index.d.ts",
       "../node_modules/jest-extended/types/index.d.ts",
       "../node_modules/@types/range-parser/index.d.ts",
@@ -3690,6 +3692,8 @@
       "../node_modules/@types/connect/index.d.ts",
       "../node_modules/@types/body-parser/index.d.ts",
       "../node_modules/@types/express/index.d.ts",
+      "../test/tabletojson-remote.test.ts",
+      "../test/tabletojsonLocal.test.ts",
       "../node_modules/@babel/types/lib/index.d.ts",
       "../node_modules/@types/babel__generator/index.d.ts",
       "../node_modules/@types/babel__traverse/index.d.ts",
@@ -3708,11 +3712,7 @@
       "../node_modules/@types/superagent/index.d.ts",
       "../node_modules/@types/supertest/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
-      "../node_modules/@types/yargs/index.d.ts",
-      "../lib/Tabletojson.ts",
-      "../test/tabletojsonLocal.test.ts",
-      "../test/tabletojson-remote.test.ts",
-      "../index.ts"
+      "../node_modules/@types/yargs/index.d.ts"
     ]
   },
   "version": "3.8.3"
