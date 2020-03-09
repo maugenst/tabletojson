@@ -29,9 +29,6 @@
     "got": "^10.6.0",
     "tunnel": "0.0.6"
   },
-  "engines": {
-    "node": "*"
-  },
   "license": "ISC",
   "devDependencies": {
     "@types/cheerio": "^0.22.16",
