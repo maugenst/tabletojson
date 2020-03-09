@@ -17,8 +17,7 @@
     "csv"
   ],
   "engines": {
-    "node": ">=10.0.0",
-    "npm": ">=6.0.0"
+    "node": "*"
   },
   "repository": {
     "type": "git",
@@ -28,9 +27,6 @@
     "cheerio": "^1.0.0-rc.3",
     "got": "^10.6.0",
     "tunnel": "0.0.6"
-  },
-  "engines": {
-    "node": "*"
   },
   "license": "ISC",
   "devDependencies": {
@@ -50,6 +46,7 @@
     "jest": "^25.1.0",
     "jest-extended": "^0.11.5",
     "lodash": "^4.17.15",
+    "nock": "^12.0.2",
     "prettier": "^1.19.1",
     "ts-jest": "^25.2.1",
     "tslint": "^6.0.0",

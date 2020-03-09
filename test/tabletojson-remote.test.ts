@@ -1,52 +1,37 @@
 import * as _ from 'lodash';
 import 'jest-extended';
 import {Tabletojson as tabletojson} from '../lib/Tabletojson';
-import * as express from 'express';
-import * as core from 'express-serve-static-core';
-const app: core.Express = express();
+import * as nock from 'nock';
 
 describe('TableToJSON Remote', function() {
-    beforeAll(() => {
-        app.use(express.static(__dirname));
-
-        app.get('/user', (_req, res) => {
-            res.status(200).json({name: 'john'});
-        });
-
-        app.listen(1080);
+    beforeEach(function() {
+        nock('https://api.github.com')
+            .get('/user')
+            .reply(200, {username: 'John'});
     });
 
     test('Get table from locally mocked server returning a json object', async function() {
-        await expect(tabletojson.convertUrl('http://localhost:1080/user')).rejects.toThrow(
+        await expect(tabletojson.convertUrl('https://api.github.com/user')).rejects.toThrow(
             /Tabletojson can just handle text/
         );
     });
 
     test('Get table from locally mocked server returning a json object passing just a callback method', async function() {
-        await expect(
-            tabletojson.convertUrl(
-                'http://localhost:1080/user',
-                () => {}
-            )
-        ).rejects.toThrow(/Tabletojson can just handle text/);
+        await expect(tabletojson.convertUrl('https://api.github.com/user', () => {})).rejects.toThrow(
+            /Tabletojson can just handle text/
+        );
     });
 
     test('Get table from locally mocked server returning a json object passing in an object and a callback method', async function() {
         await expect(
             tabletojson.convertUrl(
-                'http://localhost:1080/user',
+                'https://api.github.com/user',
                 {
                     useFirstRowForHeadings: true
                 },
                 () => {}
             )
         ).rejects.toThrow(/Tabletojson can just handle text/);
-    });
-
-    test('Get table from locally mocked server returning an image', async function() {
-        await expect(tabletojson.convertUrl('http://localhost:1080/lorem.png')).rejects.toThrow(
-            /Tabletojson can just handle text/
-        );
     });
 
     test('Get table from Wikipedia using callBack function', async function() {
