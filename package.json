@@ -7,7 +7,7 @@
   "name": "tabletojson",
   "description": "Converts HTML tables to JSON objects",
   "version": "2.0.2",
-  "main": "./dist/lib/Tabletojson.js",
+  "main": "./dist/index.js",
   "keywords": [
     "table2json",
     "html",
