@@ -11,21 +11,21 @@ describe('TableToJSON Remote', function () {
         app.get('/user', (_req, res) => {
             res.status(200).json({ name: 'john' });
         });
-        app.listen(80);
+        app.listen(1080);
     });
     test('Get table from locally mocked server returning a json object', async function () {
-        await expect(Tabletojson_1.Tabletojson.convertUrl('http://localhost/user')).rejects.toThrow(/Tabletojson can just handle text/);
+        await expect(Tabletojson_1.Tabletojson.convertUrl('http://localhost:1080/user')).rejects.toThrow(/Tabletojson can just handle text/);
     });
     test('Get table from locally mocked server returning a json object passing just a callback method', async function () {
-        await expect(Tabletojson_1.Tabletojson.convertUrl('http://localhost/user', () => { })).rejects.toThrow(/Tabletojson can just handle text/);
+        await expect(Tabletojson_1.Tabletojson.convertUrl('http://localhost:1080/user', () => { })).rejects.toThrow(/Tabletojson can just handle text/);
     });
     test('Get table from locally mocked server returning a json object passing in an object and a callback method', async function () {
-        await expect(Tabletojson_1.Tabletojson.convertUrl('http://localhost/user', {
+        await expect(Tabletojson_1.Tabletojson.convertUrl('http://localhost:1080/user', {
             useFirstRowForHeadings: true
         }, () => { })).rejects.toThrow(/Tabletojson can just handle text/);
     });
     test('Get table from locally mocked server returning an image', async function () {
-        await expect(Tabletojson_1.Tabletojson.convertUrl('http://localhost/lorem.png')).rejects.toThrow(/Tabletojson can just handle text/);
+        await expect(Tabletojson_1.Tabletojson.convertUrl('http://localhost:1080/lorem.png')).rejects.toThrow(/Tabletojson can just handle text/);
     });
     test('Get table from Wikipedia using callBack function', async function () {
         await Tabletojson_1.Tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', converted => {
