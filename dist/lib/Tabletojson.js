@@ -42,7 +42,7 @@ class Tabletojson {
             options.stripHtmlFromCells = false;
         }
         const jsonResponse = [];
-        let suffix = undefined;
+        let suffix;
         const $ = cheerio.load(html);
         let additionalSelectors = options.containsClasses ? `.${options.containsClasses.join('.')}` : '';
         additionalSelectors = options.id ? `${additionalSelectors}#${options.id}` : '';
@@ -55,7 +55,7 @@ class Tabletojson {
                 trs = $(trs[0]);
             }
             let headingsCounter = 0;
-            trs.each(function (_i, row) {
+            trs.each(function (_, row) {
                 const cells = options.useFirstRowForHeadings ? $(row).find('td, th') : $(row).find('th');
                 cells.each(function (j, cell) {
                     if (options.onlyColumns && !options.onlyColumns.includes(j))
@@ -141,7 +141,7 @@ class Tabletojson {
                             ? cheerioCellHtml.trim()
                             : '';
                     setColumn(j, content);
-                    const value = cheerioCellRowspan ? parseInt(cheerioCellRowspan) - 1 : 0;
+                    const value = cheerioCellRowspan ? parseInt(cheerioCellRowspan, 10) - 1 : 0;
                     if (value > 0)
                         nextrowspans[j] = { content, value };
                 });

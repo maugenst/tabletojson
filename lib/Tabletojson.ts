@@ -49,7 +49,7 @@ export class Tabletojson {
         }
 
         const jsonResponse: any[] = [];
-        let suffix = undefined;
+        let suffix;
 
         const $ = cheerio.load(html);
 
@@ -71,7 +71,7 @@ export class Tabletojson {
             }
             let headingsCounter: number = 0;
             // Use headings for objects key evaluation
-            trs.each(function(_i, row) {
+            trs.each(function(_, row) {
                 const cells: Cheerio = options.useFirstRowForHeadings ? $(row).find('td, th') : $(row).find('th');
                 cells.each(function(j, cell) {
                     if (options.onlyColumns && !options.onlyColumns.includes(j)) return;
@@ -168,7 +168,7 @@ export class Tabletojson {
                         setColumn(j, content);
 
                         // Check rowspan
-                        const value: number = cheerioCellRowspan ? parseInt(cheerioCellRowspan) - 1 : 0;
+                        const value: number = cheerioCellRowspan ? parseInt(cheerioCellRowspan, 10) - 1 : 0;
                         if (value > 0) nextrowspans[j] = {content, value};
                     });
 
@@ -217,15 +217,6 @@ export class Tabletojson {
      * @param callbackFunction Callback function to be called when the conversion finished
      * @return {Promise<*>} Promise containing the result
      */
-
-    static async convertUrl(url: string, callbackFunctionOrOptions?: CallbackFunction): Promise<any>;
-    static async convertUrl(url: string, callbackFunctionOrOptions?: TableToJsonOptions): Promise<any>;
-    static async convertUrl(
-        url: string,
-        callbackFunctionOrOptions: TableToJsonOptions,
-        callbackFunction: CallbackFunction
-    ): Promise<any>;
-
     static async convertUrl(
         url: string,
         callbackFunctionOrOptions?: TableToJsonOptions | CallbackFunction,
