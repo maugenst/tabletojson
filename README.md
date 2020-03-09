@@ -23,7 +23,9 @@ deprecated. More information [here](#options)...
 
 ## Conversion from version 1.+ to 2.x
 
-* Require must be changed from ``const tabletojson = require('../lib/tabletojson');`` to ``const tabletojson = require('../lib/tabletojson').Tabletojson;``
+* Require must be changed from ``const tabletojson = require('../lib/tabletojson');`` to either 
+``const tabletojson = require('../lib/tabletojson').Tabletojson;`` or
+``const {Tabletojson: tabletojson} = require('../lib/tabletojson');``
 * Replace request options by got options. More information [here](#options)...
 
 ## Basic usage
