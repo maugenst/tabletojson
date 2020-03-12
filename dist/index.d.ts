@@ -1,5 +1,4 @@
 export { Tabletojson } from './lib/Tabletojson';
-export { Tabletojson as tabletojson } from './lib/Tabletojson';
 export declare type TableToJsonOptions = {
     useFirstRowForHeadings?: boolean;
     stripHtmlFromHeadings?: boolean;

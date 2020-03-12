@@ -1,4 +1,4 @@
-var tabletojson = require('./lib/tabletojson');
+const {Tabletojson: tabletojson} = require('../dist');
 
 tabletojson.convertUrl(
     'https://www.timeanddate.com/holidays/ireland/2017',

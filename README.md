@@ -59,7 +59,7 @@ Have a look in the examples.
 // example-6.js
 'use strict';
 
-const tabletojson = require('../lib/tabletojson').Tabletojson;
+const {Tabletojson: tabletojson} = require('../dist');
 const fs = require('fs');
 const path = require('path');
 

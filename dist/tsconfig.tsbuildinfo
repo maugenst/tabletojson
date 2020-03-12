@@ -486,8 +486,8 @@
         "signature": "8a530b2ccfe8125b8e3bd7c450b0f7be55f21a396319be78fbeb6314236b7c15"
       },
       "../index.ts": {
-        "version": "940c1f40717cc9e198b53a129959f9a483914b6f3f5a0fa5cf0cde479cf4e391",
-        "signature": "c75281a8e5904be2702b5d3c3a0e6f51e1e87e96ffae864a1611c5a47f140f9d"
+        "version": "97ef107539eb665ececf30ea5a70bd0b489d95698d5e933cfc94fd9f65679727",
+        "signature": "551d624a27e3ccede1832e2a7c1c43ee2243f052192b8f8e9fc734eb6b0d6b3d"
       },
       "../lib/tabletojson.ts": {
         "version": "a97d1ec03bc4b0cf8b985ad5b12e87fcc24a93eb2bbe8fe51a481afe4679c11c",
@@ -3375,6 +3375,15 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../node_modules/nock/types/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/querystring.d.ts",
+        "../node_modules/@types/node/url.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../node_modules/@babel/types/lib/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3570,15 +3579,6 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/nock/types/index.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/http.d.ts",
-        "../node_modules/@types/node/querystring.d.ts",
-        "../node_modules/@types/node/url.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../../node_modules/@types/bluebird/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -3635,10 +3635,6 @@
       "../node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts",
       "../node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "../node_modules/typescript/lib/lib.es2018.full.d.ts",
-      "../node_modules/nock/types/index.d.ts",
-      "../test/tabletojson-remote.test.ts",
-      "../../node_modules/@types/bluebird/index.d.ts",
-      "../../node_modules/@types/intro.js/index.d.ts",
       "../node_modules/tslib/tslib.d.ts",
       "../node_modules/@types/node/globals.d.ts",
       "../node_modules/@types/node/assert.d.ts",
@@ -3718,8 +3714,6 @@
       "../node_modules/got/dist/source/utils/options-to-url.d.ts",
       "../node_modules/got/dist/source/types.d.ts",
       "../node_modules/got/dist/source/index.d.ts",
-      "../index.ts",
-      "../lib/tabletojson.ts",
       "../node_modules/@types/lodash/ts3.1/common/common.d.ts",
       "../node_modules/@types/lodash/ts3.1/common/array.d.ts",
       "../node_modules/@types/lodash/ts3.1/common/collection.d.ts",
@@ -3742,7 +3736,7 @@
       "../node_modules/@types/jest/node_modules/pretty-format/build/index.d.ts",
       "../node_modules/@types/jest/index.d.ts",
       "../node_modules/jest-extended/types/index.d.ts",
-      "../test/tabletojsonlocal.test.ts",
+      "../node_modules/nock/types/index.d.ts",
       "../node_modules/@babel/types/lib/index.d.ts",
       "../node_modules/@types/babel__generator/index.d.ts",
       "../node_modules/@types/babel__traverse/index.d.ts",
@@ -3768,7 +3762,13 @@
       "../node_modules/@types/superagent/index.d.ts",
       "../node_modules/@types/supertest/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
-      "../node_modules/@types/yargs/index.d.ts"
+      "../node_modules/@types/yargs/index.d.ts",
+      "../../node_modules/@types/bluebird/index.d.ts",
+      "../../node_modules/@types/intro.js/index.d.ts",
+      "../index.ts",
+      "../lib/tabletojson.ts",
+      "../test/tabletojson-remote.test.ts",
+      "../test/tabletojsonlocal.test.ts"
     ]
   },
   "version": "3.8.3"

@@ -1,6 +1,6 @@
 'use strict';
 
-const tabletojson = require('../lib/tabletojson');
+const {Tabletojson: tabletojson} = require('../dist');
 const fs = require('fs');
 const path = require('path');
 

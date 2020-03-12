@@ -6,7 +6,7 @@
   },
   "name": "tabletojson",
   "description": "Converts HTML tables to JSON objects",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "main": "./dist/index.js",
   "keywords": [
     "table2json",
@@ -45,6 +45,7 @@
     "express": "^4.17.1",
     "jest": "^25.1.0",
     "jest-extended": "^0.11.5",
+    "json2csv": "^4.5.4",
     "lodash": "^4.17.15",
     "nock": "^12.0.2",
     "prettier": "^1.19.1",
