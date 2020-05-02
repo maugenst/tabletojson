@@ -26,7 +26,8 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "got": "^10.7.0",
-    "tunnel": "0.0.6"
+    "tunnel": "0.0.6",
+    "snyk": "^1.316.1"
   },
   "license": "ISC",
   "devDependencies": {
@@ -58,8 +59,10 @@
     "build": "tsc -p ./tsconfig.json",
     "lint": "tslint -c ./tslint.json lib/*",
     "prebuild": "npm run lint",
-    "prepare": "npm run build",
+    "prepare": "npm run snyk-protect && npm run build",
     "pretest": "npm run lint",
-    "test": "jest --coverage && coveralls < ./coverage/lcov.info"
-  }
+    "test": "jest --coverage && coveralls < ./coverage/lcov.info",
+    "snyk-protect": "snyk protect"
+  },
+  "snyk": true
 }
