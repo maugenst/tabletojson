@@ -27,7 +27,7 @@
     "cheerio": "^1.0.0-rc.3",
     "got": "^10.7.0",
     "tunnel": "0.0.6",
-    "snyk": "^1.316.1"
+    "snyk": "^1.425.4"
   },
   "license": "ISC",
   "devDependencies": {
