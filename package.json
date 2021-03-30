@@ -6,7 +6,7 @@
   },
   "name": "tabletojson",
   "description": "Converts HTML tables to JSON objects",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "main": "./dist/index.js",
   "keywords": [
     "table2json",
@@ -25,9 +25,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "got": "^10.7.0",
-    "tunnel": "0.0.6",
-    "snyk": "^1.316.1"
+    "got": "^10.7.0"
   },
   "license": "ISC",
   "devDependencies": {
@@ -47,7 +45,7 @@
     "jest": "^25.2.7",
     "jest-extended": "^0.11.5",
     "json2csv": "^4.5.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "nock": "^12.0.3",
     "prettier": "^1.19.1",
     "ts-jest": "^25.3.1",
@@ -59,10 +57,7 @@
     "build": "tsc -p ./tsconfig.json",
     "lint": "tslint -c ./tslint.json lib/*",
     "prebuild": "npm run lint",
-    "prepare": "npm run snyk-protect && npm run build",
     "pretest": "npm run lint",
-    "test": "jest --coverage && coveralls < ./coverage/lcov.info",
-    "snyk-protect": "snyk protect"
-  },
-  "snyk": true
+    "test": "jest --coverage && coveralls < ./coverage/lcov.info"
+  }
 }
