@@ -1,6 +1,7 @@
 import * as cheerio from 'cheerio';
 import got from 'got';
 import {CallbackFunction, TableToJsonOptions} from '../index';
+import Cheerio = cheerio.Cheerio;
 
 export class Tabletojson {
     static convert(
@@ -71,9 +72,9 @@ export class Tabletojson {
             }
             let headingsCounter: number = 0;
             // Use headings for objects key evaluation
-            trs.each(function(_, row) {
+            trs.each((_index: number, row: cheerio.Element) => {
                 const cells: Cheerio = options.useFirstRowForHeadings ? $(row).find('td, th') : $(row).find('th');
-                cells.each(function(j, cell) {
+                cells.each((j: number, cell: cheerio.Element) => {
                     if (options.onlyColumns && !options.onlyColumns.includes(j)) return;
                     if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(j)) return;
                     let value: string = '';
@@ -111,7 +112,7 @@ export class Tabletojson {
                 .each(function(i, row) {
                     const rowAsJson: any = {};
 
-                    function setColumn(j: number, content: any) {
+                    function setColumn(j: number, content: string) {
                         if (columnHeadings[j] && !options.forceIndexAsNumber) {
                             rowAsJson[columnHeadings[j]] = content;
                         } else {
@@ -120,17 +121,17 @@ export class Tabletojson {
                     }
 
                     // Add content from rowspans
-                    rowspans.forEach((rowspan, index) => {
+                    rowspans.forEach((rowspan: any, index: number) => {
                         if (!rowspan) return;
 
                         setColumn(index, rowspan.content);
 
                         rowspan.value--;
                     });
-                    const nextrowspans = [...rowspans];
+                    const nextrowspans: any[] = [...rowspans];
 
                     const cells: Cheerio = options.useFirstRowForHeadings ? $(row).find('td, th') : $(row).find('td');
-                    cells.each(function(j, cell) {
+                    cells.each((j: number, cell: cheerio.Element) => {
                         // ignoreHiddenRows
                         if (options.ignoreHiddenRows) {
                             const style: string | undefined = $(row).attr('style');
@@ -173,7 +174,7 @@ export class Tabletojson {
                     });
 
                     rowspans = nextrowspans;
-                    rowspans.forEach((rowspan, index) => {
+                    rowspans.forEach((rowspan: any, index: number) => {
                         if (rowspan && rowspan.value === 0) rowspans[index] = null;
                     });
 

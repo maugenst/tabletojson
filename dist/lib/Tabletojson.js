@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Tabletojson = void 0;
 const cheerio = require("cheerio");
 const got_1 = require("got");
 class Tabletojson {
@@ -55,9 +56,9 @@ class Tabletojson {
                 trs = $(trs[0]);
             }
             let headingsCounter = 0;
-            trs.each(function (_, row) {
+            trs.each((_index, row) => {
                 const cells = options.useFirstRowForHeadings ? $(row).find('td, th') : $(row).find('th');
-                cells.each(function (j, cell) {
+                cells.each((j, cell) => {
                     if (options.onlyColumns && !options.onlyColumns.includes(j))
                         return;
                     if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(j))
@@ -108,7 +109,7 @@ class Tabletojson {
                 });
                 const nextrowspans = [...rowspans];
                 const cells = options.useFirstRowForHeadings ? $(row).find('td, th') : $(row).find('td');
-                cells.each(function (j, cell) {
+                cells.each((j, cell) => {
                     if (options.ignoreHiddenRows) {
                         const style = $(row).attr('style');
                         if (style) {
