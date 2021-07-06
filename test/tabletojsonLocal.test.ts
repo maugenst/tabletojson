@@ -3,21 +3,21 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as _ from 'lodash';
-import {Tabletojson as tabletojson} from "../lib/Tabletojson";
+import {Tabletojson as tabletojson} from '../lib/Tabletojson';
 
-describe('TableToJSON Local', function() {
+describe('TableToJSON Local', function () {
     let html = '';
     let noTables = '';
 
     beforeAll(() => {
-        html = fs.readFileSync(path.resolve(__dirname, 'tables.html'), {encoding: 'UTF-8'});
-        noTables = fs.readFileSync(path.resolve(__dirname, 'notables.html'), {encoding: 'UTF-8'});
+        html = fs.readFileSync(path.resolve(__dirname, 'tables.html'), 'utf8');
+        noTables = fs.readFileSync(path.resolve(__dirname, 'notables.html'), 'utf8');
     });
 
-    it('Options: Strip HTML from header AND from body', async function() {
+    it('Options: Strip HTML from header AND from body', async function () {
         const converted = await tabletojson.convert(html, {
             stripHtmlFromHeadings: true,
-            stripHtmlFromCells: true
+            stripHtmlFromCells: true,
         });
         expect(converted).toBeDefined();
 
@@ -27,9 +27,9 @@ describe('TableToJSON Local', function() {
         expect(firstTable[0].Age).toBe('2');
     });
 
-    it('Options: Strip HTML from header AND from body using stripHtml-shortcut ', async function() {
+    it('Options: Strip HTML from header AND from body using stripHtml-shortcut ', async function () {
         const converted = await tabletojson.convert(html, {
-            stripHtml: true
+            stripHtml: true,
         });
         expect(converted).toBeDefined();
 
@@ -39,10 +39,10 @@ describe('TableToJSON Local', function() {
         expect(firstTable[0].Age).toBe('2');
     });
 
-    it('Options: Strip HTML from header but not from body', async function() {
+    it('Options: Strip HTML from header but not from body', async function () {
         const converted = await tabletojson.convert(html, {
             stripHtmlFromHeadings: true,
-            stripHtmlFromCells: false
+            stripHtmlFromCells: false,
         });
         expect(converted).toBeDefined();
 
@@ -52,10 +52,10 @@ describe('TableToJSON Local', function() {
         expect(firstTable[0].Age).toBe('<i>2</i>');
     });
 
-    it('Options: Strip HTML from body but not from header', async function() {
+    it('Options: Strip HTML from body but not from header', async function () {
         const converted = await tabletojson.convert(html, {
             stripHtmlFromHeadings: false,
-            stripHtmlFromCells: true
+            stripHtmlFromCells: true,
         });
         expect(converted).toBeDefined();
 
@@ -66,7 +66,7 @@ describe('TableToJSON Local', function() {
     });
 
     // ADDED TO FIX: https://github.com/maugenst/tabletojson/issues/15
-    it('Double Header Entry: handle double header entries in different tables', async function() {
+    it('Double Header Entry: handle double header entries in different tables', async function () {
         const converted = await tabletojson.convert(html);
         expect(converted).toBeDefined();
 
@@ -77,7 +77,7 @@ describe('TableToJSON Local', function() {
         expect(_.has(secondTable[0], 'Age')).toBeTruthy();
     });
 
-    it('Double Header Entry: handle double header entries', async function() {
+    it('Double Header Entry: handle double header entries', async function () {
         const converted = await tabletojson.convert(html);
         expect(converted).toBeDefined();
 
@@ -87,7 +87,7 @@ describe('TableToJSON Local', function() {
         expect(_.has(firstTable[0], 'isDumb_2')).toBeTruthy();
     });
 
-    it('Directly local html content: Table with header', async function() {
+    it('Directly local html content: Table with header', async function () {
         const converted = await tabletojson.convert(html);
         expect(converted).toBeDefined();
 
@@ -98,9 +98,9 @@ describe('TableToJSON Local', function() {
         expect(_.has(firstTable[0], 'Age')).toBeTruthy();
     });
 
-    it('Do not strip HTML from header', async function() {
+    it('Do not strip HTML from header', async function () {
         const converted = await tabletojson.convert(html, {
-            stripHtml: false
+            stripHtml: false,
         });
         expect(converted).toBeDefined();
 
@@ -111,7 +111,7 @@ describe('TableToJSON Local', function() {
         expect(_.has(firstTable[0], '<b>Age</b>')).toBeTruthy();
     });
 
-    it('Directly passing html content: Table without header', async function() {
+    it('Directly passing html content: Table without header', async function () {
         const converted = await tabletojson.convert(html);
         expect(converted).toBeDefined();
 
@@ -126,7 +126,7 @@ describe('TableToJSON Local', function() {
     });
 
     // ADDED TO FIX: https://github.com/maugenst/tabletojson/issues/14
-    it('Empty header: to be converted into their column count and not to the underline field name', async function() {
+    it('Empty header: to be converted into their column count and not to the underline field name', async function () {
         const converted = await tabletojson.convert(html);
         expect(converted).toBeDefined();
 
@@ -139,9 +139,9 @@ describe('TableToJSON Local', function() {
     });
 
     // ADDED TO FIX: https://github.com/maugenst/tabletojson/pull/18
-    it('Double Header Entry: countDuplicateHeadings:false', async function() {
+    it('Double Header Entry: countDuplicateHeadings:false', async function () {
         const converted = await tabletojson.convert(html, {
-            countDuplicateHeadings: false
+            countDuplicateHeadings: false,
         });
         expect(converted).toBeDefined();
 
@@ -163,9 +163,9 @@ describe('TableToJSON Local', function() {
     });
 
     // ADDED TO FIX: https://github.com/maugenst/tabletojson/pull/18
-    it('Double Header Entry: countDuplicateHeadings:true', async function() {
+    it('Double Header Entry: countDuplicateHeadings:true', async function () {
         const converted = await tabletojson.convert(html, {
-            countDuplicateHeadings: true
+            countDuplicateHeadings: true,
         });
         expect(converted).toBeDefined();
 
@@ -191,9 +191,9 @@ describe('TableToJSON Local', function() {
     });
 
     // FEATURE 'ignoreColumns'
-    it('Option: ignoreColumns: [2, 3]', async function() {
+    it('Option: ignoreColumns: [2, 3]', async function () {
         const converted = await tabletojson.convert(html, {
-            ignoreColumns: [2, 3]
+            ignoreColumns: [2, 3],
         });
         expect(converted).toBeDefined();
 
@@ -228,10 +228,10 @@ describe('TableToJSON Local', function() {
     });
 
     // FEATURE 'onlyColumns'
-    it('Option: onlyColumns: [0, 4]', async function() {
+    it('Option: onlyColumns: [0, 4]', async function () {
         const converted = await tabletojson.convert(html, {
             onlyColumns: [0, 4],
-            ignoreColumns: [2, 4]
+            ignoreColumns: [2, 4],
         });
         expect(converted).toBeDefined();
 
@@ -263,9 +263,9 @@ describe('TableToJSON Local', function() {
     });
 
     // FEATURE 'ignoreHiddenRows:true'
-    it('Option: ignoreHiddenRows:true', async function() {
+    it('Option: ignoreHiddenRows:true', async function () {
         const converted = await tabletojson.convert(html, {
-            ignoreHiddenRows: true
+            ignoreHiddenRows: true,
         });
         expect(converted).toBeDefined();
 
@@ -281,9 +281,9 @@ describe('TableToJSON Local', function() {
     });
 
     // FEATURE 'ignoreHiddenRows:false'
-    it('Option: ignoreHiddenRows:false', async function() {
+    it('Option: ignoreHiddenRows:false', async function () {
         const converted = await tabletojson.convert(html, {
-            ignoreHiddenRows: false
+            ignoreHiddenRows: false,
         });
         expect(converted).toBeDefined();
 
@@ -299,9 +299,9 @@ describe('TableToJSON Local', function() {
     });
 
     // FEATURE 'headings: ['A', 'B', 'C', 'D', 'E']'
-    it('Option: headings: ["A","B","C","D","E"]', async function() {
+    it('Option: headings: ["A","B","C","D","E"]', async function () {
         const converted = await tabletojson.convert(html, {
-            headings: ['A', 'B', 'C', 'D', 'E']
+            headings: ['A', 'B', 'C', 'D', 'E'],
         });
         expect(converted).toBeDefined();
 
@@ -317,9 +317,9 @@ describe('TableToJSON Local', function() {
     });
 
     // FEATURE 'headings: ['A', 'B', 'C']'
-    it('Option: headings: ["A","B","C"]', async function() {
+    it('Option: headings: ["A","B","C"]', async function () {
         const converted = await tabletojson.convert(html, {
-            headings: ['A', 'B', 'C']
+            headings: ['A', 'B', 'C'],
         });
         expect(converted).toBeDefined();
 
@@ -341,9 +341,9 @@ describe('TableToJSON Local', function() {
      * | Bill |     3 |     92 |   M |  31 |
      */
     // FEATURE 'headings: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']'
-    it('Option: headings: ["A","B","C","E","E","F","G","H","I"]', async function() {
+    it('Option: headings: ["A","B","C","E","E","F","G","H","I"]', async function () {
         const converted = await tabletojson.convert(html, {
-            headings: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+            headings: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
         });
         expect(converted).toBeDefined();
 
@@ -382,10 +382,10 @@ describe('TableToJSON Local', function() {
      * | Bill |     3 |     92 |   M |  31 |
      */
     // FEATURE 'headings: ['A', 'B', 'C'] && ignoreColumns: [1, 2]'
-    it('Option: headings: ["A","B","C"] && ignoreColumns: [1, 2]', async function() {
+    it('Option: headings: ["A","B","C"] && ignoreColumns: [1, 2]', async function () {
         const converted = await tabletojson.convert(html, {
             headings: ['A', 'B', 'C'],
-            ignoreColumns: [1, 2]
+            ignoreColumns: [1, 2],
         });
         expect(converted).toBeDefined();
 
@@ -419,11 +419,11 @@ describe('TableToJSON Local', function() {
      * | Bill |     3 |     92 |   M |  31 |
      */
     // FEATURE 'headings: ['A', 'B', 'C'] && ignoreColumns: [1, 2] && onlyColumns: [0, 4]'
-    it('Option: headings: ["A","B","C"] && ignoreColumns: [1, 2] && onlyColumns: [0, 4]', async function() {
+    it('Option: headings: ["A","B","C"] && ignoreColumns: [1, 2] && onlyColumns: [0, 4]', async function () {
         const converted = await tabletojson.convert(html, {
             headings: ['A', 'B', 'C'],
             ignoreColumns: [1, 2],
-            onlyColumns: [0, 4]
+            onlyColumns: [0, 4],
         });
         expect(converted).toBeDefined();
 
@@ -454,11 +454,11 @@ describe('TableToJSON Local', function() {
      * | Bill |     3 |     92 |   M |  31 |
      */
     // FEATURE 'headings: ['A'] && ignoreColumns: [1, 2] && onlyColumns: [0, 4]'
-    it('Option: headings: ["A"] && ignoreColumns: [1, 2] && onlyColumns: [0, 4]', async function() {
+    it('Option: headings: ["A"] && ignoreColumns: [1, 2] && onlyColumns: [0, 4]', async function () {
         const converted = await tabletojson.convert(html, {
             headings: ['A'],
             ignoreColumns: [1, 2],
-            onlyColumns: [0, 4]
+            onlyColumns: [0, 4],
         });
         expect(converted).toBeDefined();
 
@@ -480,7 +480,7 @@ describe('TableToJSON Local', function() {
     });
 
     // FIX/TEST: https://github.com/maugenst/tabletojson/issues/19
-    it('Test to check conversion and handling of Kanji, Hiragana, Katakana and latin texts', async function() {
+    it('Test to check conversion and handling of Kanji, Hiragana, Katakana and latin texts', async function () {
         const converted = await tabletojson.convert(html);
         expect(converted).toBeDefined();
 
@@ -492,15 +492,15 @@ describe('TableToJSON Local', function() {
         expect(_.has(table[0], 'Rōmaji')).toBeTruthy();
         expect(_.has(table[0], 'English')).toBeTruthy();
 
-        expect(table[0]['Kanji']).toEqual('私');
-        expect(table[0]['Hiragana']).toEqual('わたし');
-        expect(table[0]['Katakana']).toEqual('ワタシ');
-        expect(table[0]['Rōmaji']).toEqual('watashi');
-        expect(table[0]['English']).toEqual('I, me');
+        expect(table[0].Kanji).toEqual('私');
+        expect(table[0].Hiragana).toEqual('わたし');
+        expect(table[0].Katakana).toEqual('ワタシ');
+        expect(table[0].Rōmaji).toEqual('watashi');
+        expect(table[0].English).toEqual('I, me');
     });
 
     // ENHANCEMENT: https://github.com/maugenst/tabletojson/issues/30
-    it('limit results to only get a configurable amount of rows', async function() {
+    it('limit results to only get a configurable amount of rows', async function () {
         let converted = await tabletojson.convert(html);
         expect(converted).toBeDefined();
 
@@ -509,7 +509,7 @@ describe('TableToJSON Local', function() {
         expect(table.length).toBe(200);
 
         converted = await tabletojson.convert(html, {
-            limitrows: 5
+            limitrows: 5,
         });
 
         expect(converted).toBeDefined();
@@ -525,9 +525,9 @@ describe('TableToJSON Local', function() {
     // | Marry  | Steve |  12 |
     // |        |   Tom |   3 |
 
-    it('Rowspan usage leads to correct object representation', async function() {
+    it('Rowspan usage leads to correct object representation', async function () {
         const converted = await tabletojson.convert(html, {
-            id: ['table11']
+            id: ['table11'],
         });
         expect(converted).toBeDefined();
         expect(converted.length).toBe(1);
@@ -555,9 +555,9 @@ describe('TableToJSON Local', function() {
     // |        | Peter |  17 |
     // +--------+-------+-----+
 
-    it('Complex rowspan usage leads to correct object representation', async function() {
+    it('Complex rowspan usage leads to correct object representation', async function () {
         const converted = await tabletojson.convert(html, {
-            id: ['table12']
+            id: ['table12'],
         });
         expect(converted).toBeDefined();
         expect(converted.length).toBe(1);
@@ -584,9 +584,9 @@ describe('TableToJSON Local', function() {
         expect(table[4].Age).toBe('17');
     });
 
-    it('Options: containsClasses', async function() {
+    it('Options: containsClasses', async function () {
         const converted = await tabletojson.convert(html, {
-            containsClasses: ['table']
+            containsClasses: ['table'],
         });
         expect(converted).toBeDefined();
 
@@ -596,9 +596,9 @@ describe('TableToJSON Local', function() {
         expect(firstTable[0].Age).toBe('2');
     });
 
-    it('Options: byId', async function() {
+    it('Options: byId', async function () {
         const converted = await tabletojson.convert(html, {
-            id: ['table9']
+            id: ['table9'],
         });
         expect(converted).toBeDefined();
         expect(converted.length).toBe(1);
@@ -609,10 +609,10 @@ describe('TableToJSON Local', function() {
         expect(table[0].Age).toBe('2');
     });
 
-    it('Options: useFirstRowForHeadings', async function() {
+    it('Options: useFirstRowForHeadings', async function () {
         const converted = await tabletojson.convert(html, {
             id: ['table13'],
-            useFirstRowForHeadings: true
+            useFirstRowForHeadings: true,
         });
         expect(converted).toBeDefined();
         expect(converted.length).toBe(1);
@@ -628,19 +628,18 @@ describe('TableToJSON Local', function() {
         expect(table[1].Age).toEqual('2');
     });
 
-    it('Converting a table with no content', async function() {
+    it('Converting a table with no content', async function () {
         const converted = await tabletojson.convert(html, {
-            id: ['table14']
+            id: ['table14'],
         });
         expect(converted).toBeDefined();
         expect(Array.isArray(converted)).toBeTruthy();
         expect(converted.length).toBe(0);
     });
 
-    it('Options: converting an html page with no tables', async function() {
+    it('Options: converting an html page with no tables', async function () {
         const converted = await tabletojson.convert(noTables);
         expect(converted).toBeDefined();
         expect(converted.length).toBe(0);
     });
-
 });

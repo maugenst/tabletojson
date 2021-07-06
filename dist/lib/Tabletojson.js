@@ -17,7 +17,7 @@ class Tabletojson {
         headings: null,
         containsClasses: null,
         id: null,
-        limitrows: null
+        limitrows: null,
     }) {
         options = Object.assign({
             useFirstRowForHeadings: false,
@@ -32,7 +32,7 @@ class Tabletojson {
             headings: null,
             containsClasses: null,
             id: null,
-            limitrows: null
+            limitrows: null,
         }, options);
         if (options.stripHtml === true) {
             options.stripHtmlFromHeadings = true;
@@ -57,7 +57,9 @@ class Tabletojson {
             }
             let headingsCounter = 0;
             trs.each((_index, row) => {
-                const cells = options.useFirstRowForHeadings ? $(row).find('td, th') : $(row).find('th');
+                const cells = options.useFirstRowForHeadings
+                    ? $(row).find('td, th')
+                    : $(row).find('th');
                 cells.each((j, cell) => {
                     if (options.onlyColumns && !options.onlyColumns.includes(j))
                         return;
@@ -108,7 +110,9 @@ class Tabletojson {
                     rowspan.value--;
                 });
                 const nextrowspans = [...rowspans];
-                const cells = options.useFirstRowForHeadings ? $(row).find('td, th') : $(row).find('td');
+                const cells = options.useFirstRowForHeadings
+                    ? $(row).find('td, th')
+                    : $(row).find('td');
                 cells.each((j, cell) => {
                     if (options.ignoreHiddenRows) {
                         const style = $(row).attr('style');

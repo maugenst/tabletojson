@@ -8,13 +8,13 @@ describe('TableToJSON Local', function () {
     let html = '';
     let noTables = '';
     beforeAll(() => {
-        html = fs.readFileSync(path.resolve(__dirname, 'tables.html'), { encoding: 'UTF-8' });
-        noTables = fs.readFileSync(path.resolve(__dirname, 'notables.html'), { encoding: 'UTF-8' });
+        html = fs.readFileSync(path.resolve(__dirname, 'tables.html'), 'utf8');
+        noTables = fs.readFileSync(path.resolve(__dirname, 'notables.html'), 'utf8');
     });
     it('Options: Strip HTML from header AND from body', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
             stripHtmlFromHeadings: true,
-            stripHtmlFromCells: true
+            stripHtmlFromCells: true,
         });
         expect(converted).toBeDefined();
         const firstTable = converted[0];
@@ -23,7 +23,7 @@ describe('TableToJSON Local', function () {
     });
     it('Options: Strip HTML from header AND from body using stripHtml-shortcut ', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            stripHtml: true
+            stripHtml: true,
         });
         expect(converted).toBeDefined();
         const firstTable = converted[0];
@@ -33,7 +33,7 @@ describe('TableToJSON Local', function () {
     it('Options: Strip HTML from header but not from body', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
             stripHtmlFromHeadings: true,
-            stripHtmlFromCells: false
+            stripHtmlFromCells: false,
         });
         expect(converted).toBeDefined();
         const firstTable = converted[0];
@@ -43,7 +43,7 @@ describe('TableToJSON Local', function () {
     it('Options: Strip HTML from body but not from header', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
             stripHtmlFromHeadings: false,
-            stripHtmlFromCells: true
+            stripHtmlFromCells: true,
         });
         expect(converted).toBeDefined();
         const firstTable = converted[0];
@@ -75,7 +75,7 @@ describe('TableToJSON Local', function () {
     });
     it('Do not strip HTML from header', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            stripHtml: false
+            stripHtml: false,
         });
         expect(converted).toBeDefined();
         const firstTable = converted[0];
@@ -106,7 +106,7 @@ describe('TableToJSON Local', function () {
     });
     it('Double Header Entry: countDuplicateHeadings:false', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            countDuplicateHeadings: false
+            countDuplicateHeadings: false,
         });
         expect(converted).toBeDefined();
         const table = converted[4];
@@ -125,7 +125,7 @@ describe('TableToJSON Local', function () {
     });
     it('Double Header Entry: countDuplicateHeadings:true', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            countDuplicateHeadings: true
+            countDuplicateHeadings: true,
         });
         expect(converted).toBeDefined();
         const table = converted[4];
@@ -148,7 +148,7 @@ describe('TableToJSON Local', function () {
     });
     it('Option: ignoreColumns: [2, 3]', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            ignoreColumns: [2, 3]
+            ignoreColumns: [2, 3],
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -180,7 +180,7 @@ describe('TableToJSON Local', function () {
     it('Option: onlyColumns: [0, 4]', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
             onlyColumns: [0, 4],
-            ignoreColumns: [2, 4]
+            ignoreColumns: [2, 4],
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -208,7 +208,7 @@ describe('TableToJSON Local', function () {
     });
     it('Option: ignoreHiddenRows:true', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            ignoreHiddenRows: true
+            ignoreHiddenRows: true,
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -221,7 +221,7 @@ describe('TableToJSON Local', function () {
     });
     it('Option: ignoreHiddenRows:false', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            ignoreHiddenRows: false
+            ignoreHiddenRows: false,
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -234,7 +234,7 @@ describe('TableToJSON Local', function () {
     });
     it('Option: headings: ["A","B","C","D","E"]', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            headings: ['A', 'B', 'C', 'D', 'E']
+            headings: ['A', 'B', 'C', 'D', 'E'],
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -247,7 +247,7 @@ describe('TableToJSON Local', function () {
     });
     it('Option: headings: ["A","B","C"]', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            headings: ['A', 'B', 'C']
+            headings: ['A', 'B', 'C'],
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -260,7 +260,7 @@ describe('TableToJSON Local', function () {
     });
     it('Option: headings: ["A","B","C","E","E","F","G","H","I"]', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            headings: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+            headings: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -289,7 +289,7 @@ describe('TableToJSON Local', function () {
     it('Option: headings: ["A","B","C"] && ignoreColumns: [1, 2]', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
             headings: ['A', 'B', 'C'],
-            ignoreColumns: [1, 2]
+            ignoreColumns: [1, 2],
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -313,7 +313,7 @@ describe('TableToJSON Local', function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
             headings: ['A', 'B', 'C'],
             ignoreColumns: [1, 2],
-            onlyColumns: [0, 4]
+            onlyColumns: [0, 4],
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -334,7 +334,7 @@ describe('TableToJSON Local', function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
             headings: ['A'],
             ignoreColumns: [1, 2],
-            onlyColumns: [0, 4]
+            onlyColumns: [0, 4],
         });
         expect(converted).toBeDefined();
         const table = converted[5];
@@ -357,11 +357,11 @@ describe('TableToJSON Local', function () {
         expect(_.has(table[0], 'Katakana')).toBeTruthy();
         expect(_.has(table[0], 'Rōmaji')).toBeTruthy();
         expect(_.has(table[0], 'English')).toBeTruthy();
-        expect(table[0]['Kanji']).toEqual('私');
-        expect(table[0]['Hiragana']).toEqual('わたし');
-        expect(table[0]['Katakana']).toEqual('ワタシ');
-        expect(table[0]['Rōmaji']).toEqual('watashi');
-        expect(table[0]['English']).toEqual('I, me');
+        expect(table[0].Kanji).toEqual('私');
+        expect(table[0].Hiragana).toEqual('わたし');
+        expect(table[0].Katakana).toEqual('ワタシ');
+        expect(table[0].Rōmaji).toEqual('watashi');
+        expect(table[0].English).toEqual('I, me');
     });
     it('limit results to only get a configurable amount of rows', async function () {
         let converted = await Tabletojson_1.Tabletojson.convert(html);
@@ -369,7 +369,7 @@ describe('TableToJSON Local', function () {
         let table = converted[9];
         expect(table.length).toBe(200);
         converted = await Tabletojson_1.Tabletojson.convert(html, {
-            limitrows: 5
+            limitrows: 5,
         });
         expect(converted).toBeDefined();
         table = converted[9];
@@ -377,7 +377,7 @@ describe('TableToJSON Local', function () {
     });
     it('Rowspan usage leads to correct object representation', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            id: ['table11']
+            id: ['table11'],
         });
         expect(converted).toBeDefined();
         expect(converted.length).toBe(1);
@@ -390,7 +390,7 @@ describe('TableToJSON Local', function () {
     });
     it('Complex rowspan usage leads to correct object representation', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            id: ['table12']
+            id: ['table12'],
         });
         expect(converted).toBeDefined();
         expect(converted.length).toBe(1);
@@ -415,7 +415,7 @@ describe('TableToJSON Local', function () {
     });
     it('Options: containsClasses', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            containsClasses: ['table']
+            containsClasses: ['table'],
         });
         expect(converted).toBeDefined();
         const firstTable = converted[0];
@@ -424,7 +424,7 @@ describe('TableToJSON Local', function () {
     });
     it('Options: byId', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            id: ['table9']
+            id: ['table9'],
         });
         expect(converted).toBeDefined();
         expect(converted.length).toBe(1);
@@ -435,7 +435,7 @@ describe('TableToJSON Local', function () {
     it('Options: useFirstRowForHeadings', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
             id: ['table13'],
-            useFirstRowForHeadings: true
+            useFirstRowForHeadings: true,
         });
         expect(converted).toBeDefined();
         expect(converted.length).toBe(1);
@@ -450,7 +450,7 @@ describe('TableToJSON Local', function () {
     });
     it('Converting a table with no content', async function () {
         const converted = await Tabletojson_1.Tabletojson.convert(html, {
-            id: ['table14']
+            id: ['table14'],
         });
         expect(converted).toBeDefined();
         expect(Array.isArray(converted)).toBeTruthy();
