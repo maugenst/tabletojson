@@ -11,6 +11,7 @@ class Tabletojson {
         stripHtml: null,
         forceIndexAsNumber: false,
         countDuplicateHeadings: true,
+        longDuplicateHeadings: false,
         ignoreColumns: null,
         onlyColumns: null,
         ignoreHiddenRows: true,
@@ -26,6 +27,7 @@ class Tabletojson {
             stripHtml: null,
             forceIndexAsNumber: false,
             countDuplicateHeadings: true,
+            longDuplicateHeadings: false,
             ignoreColumns: null,
             onlyColumns: null,
             ignoreHiddenRows: true,
@@ -51,6 +53,7 @@ class Tabletojson {
             const tableAsJson = [];
             const alreadySeen = {};
             const columnHeadings = [];
+            const duplicateHeadings = [];
             let trs = $(table).find('tr');
             if (options.useFirstRowForHeadings) {
                 trs = $(trs[0]);
@@ -84,6 +87,11 @@ class Tabletojson {
                         suffix = ++alreadySeen[value];
                         columnHeadings[j] = value !== '' ? `${value}_${suffix}` : `${j}`;
                     }
+                    else if (seen && options.longDuplicateHeadings) {
+                        alreadySeen[value] = 1;
+                        columnHeadings[j] = value;
+                        duplicateHeadings.push(value);
+                    }
                     else {
                         alreadySeen[value] = 1;
                         columnHeadings[j] = value;
@@ -95,6 +103,7 @@ class Tabletojson {
                 .find('tr')
                 .each(function (i, row) {
                 const rowAsJson = {};
+                duplicateHeadings.map((c) => (rowAsJson[c] = []));
                 function setColumn(j, content) {
                     if (columnHeadings[j] && !options.forceIndexAsNumber) {
                         rowAsJson[columnHeadings[j]] = content;
@@ -155,8 +164,18 @@ class Tabletojson {
                     if (rowspan && rowspan.value === 0)
                         rowspans[index] = null;
                 });
-                if (JSON.stringify(rowAsJson) !== '{}')
+                if (JSON.stringify(rowAsJson) !== '{}' && duplicateHeadings.length > 0) {
+                    for (let j = 0; j < rowAsJson[duplicateHeadings[0]].length; j++) {
+                        const longRow = { ...rowAsJson };
+                        duplicateHeadings.map((col) => {
+                            longRow[col] = rowAsJson[col][j];
+                        });
+                        tableAsJson.push(rowAsJson);
+                    }
+                }
+                else if (JSON.stringify(rowAsJson) !== '{}') {
                     tableAsJson.push(rowAsJson);
+                }
                 if (options.limitrows && i === options.limitrows) {
                     return false;
                 }
@@ -180,7 +199,7 @@ class Tabletojson {
             options = callbackFunctionOrOptions;
             gotOptions = options.got || {};
             callback = callbackFunction;
-            const result = await got_1.default(url, gotOptions);
+            const result = await (0, got_1.default)(url, gotOptions);
             const resultMimetype = result.headers['content-type'];
             if (resultMimetype && !resultMimetype.includes('text/')) {
                 throw new Error('Tabletojson can just handle text/** mimetypes');
@@ -189,7 +208,7 @@ class Tabletojson {
         }
         else if (typeof callbackFunctionOrOptions === 'function') {
             callback = callbackFunctionOrOptions;
-            const result = await got_1.default(url);
+            const result = await (0, got_1.default)(url);
             const resultMimetype = result.headers['content-type'];
             if (resultMimetype && !resultMimetype.includes('text/')) {
                 throw new Error('Tabletojson can just handle text/** mimetypes');
@@ -200,7 +219,7 @@ class Tabletojson {
             options = callbackFunctionOrOptions || {};
             gotOptions = options.got || {};
             gotOptions.resolveBodyOnly = true;
-            const result = await got_1.default(url);
+            const result = await (0, got_1.default)(url);
             const resultMimetype = result.headers['content-type'];
             if (resultMimetype && !resultMimetype.includes('text/')) {
                 throw new Error('Tabletojson can just handle text/** mimetypes');

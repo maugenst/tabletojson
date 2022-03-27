@@ -6,6 +6,7 @@ export declare type TableToJsonOptions = {
     stripHtml?: boolean | null;
     forceIndexAsNumber?: boolean;
     countDuplicateHeadings?: boolean;
+    longDuplicateHeadings?: boolean;
     ignoreColumns?: number[] | null;
     onlyColumns?: number[] | null;
     ignoreHiddenRows?: boolean;

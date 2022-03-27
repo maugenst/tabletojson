@@ -12,6 +12,7 @@ export class Tabletojson {
             stripHtml: null,
             forceIndexAsNumber: false,
             countDuplicateHeadings: true,
+            longDuplicateHeadings: false,
             ignoreColumns: null,
             onlyColumns: null,
             ignoreHiddenRows: true,
@@ -29,6 +30,7 @@ export class Tabletojson {
                 stripHtml: null,
                 forceIndexAsNumber: false,
                 countDuplicateHeadings: true,
+                longDuplicateHeadings: false,
                 ignoreColumns: null,
                 onlyColumns: null,
                 ignoreHiddenRows: true,
@@ -63,6 +65,7 @@ export class Tabletojson {
             // @fixme Doesn't support vertical column headings.
             // @todo Try to support badly formated tables.
             const columnHeadings: string[] = [];
+            const duplicateHeadings: string[] = [];
 
             let trs: cheerio.Cheerio = $(table).find('tr');
 
@@ -98,6 +101,10 @@ export class Tabletojson {
                     if (seen && options.countDuplicateHeadings) {
                         suffix = ++alreadySeen[value];
                         columnHeadings[j] = value !== '' ? `${value}_${suffix}` : `${j}`;
+                    } else if (seen && options.longDuplicateHeadings) {
+                        alreadySeen[value] = 1;
+                        columnHeadings[j] = value;
+                        duplicateHeadings.push(value);
                     } else {
                         alreadySeen[value] = 1;
                         columnHeadings[j] = value;
@@ -112,6 +119,7 @@ export class Tabletojson {
                 .find('tr')
                 .each(function (i, row) {
                     const rowAsJson: any = {};
+                    duplicateHeadings.map((c) => (rowAsJson[c] = []));
 
                     function setColumn(j: number, content: string) {
                         if (columnHeadings[j] && !options.forceIndexAsNumber) {
@@ -181,8 +189,18 @@ export class Tabletojson {
                         if (rowspan && rowspan.value === 0) rowspans[index] = null;
                     });
 
-                    // Skip blank rows
-                    if (JSON.stringify(rowAsJson) !== '{}') tableAsJson.push(rowAsJson);
+                    // Skip blank rows and lengthen if longDuplicateHeadings
+                    if (JSON.stringify(rowAsJson) !== '{}' && duplicateHeadings.length > 0) {
+                        for (let j = 0; j < rowAsJson[duplicateHeadings[0]].length; j++) {
+                            const longRow = {...rowAsJson};
+                            duplicateHeadings.map((col) => {
+                                longRow[col] = rowAsJson[col][j];
+                            });
+                            tableAsJson.push(rowAsJson);
+                        }
+                    } else if (JSON.stringify(rowAsJson) !== '{}') {
+                        tableAsJson.push(rowAsJson);
+                    }
 
                     if (options.limitrows && i === options.limitrows) {
                         return false;

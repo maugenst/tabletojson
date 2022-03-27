@@ -7,6 +7,7 @@ export type TableToJsonOptions = {
     stripHtml?: boolean | null, // Strip off HTML [default=null] if set true stripHtmlFromHeadings and stripHtmlFromCells will also be true
     forceIndexAsNumber?: boolean, // Force the index to be used as number [default=false]
     countDuplicateHeadings?: boolean, // If given a _<NUMBER> will be added to the duplicate key [default=false]
+    longDuplicateHeadings?: boolean, // If given and there's duplicate column names the table will be converted into long format splitting the duplicate keys [default=false]
     ignoreColumns?: number[] | null, // {Array} Array of column indices to ignored [default=null]
     onlyColumns?: number[] | null, // {Array} Array of column indices to be used. Overrides ignoreColumn [default=null]
     ignoreHiddenRows?: boolean, // Ignoring hidden rows [default=true]
