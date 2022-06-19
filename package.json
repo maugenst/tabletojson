@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
-    "got": "^11.8.2"
+    "got": "^11.8.5"
   },
   "license": "ISC",
   "devDependencies": {
