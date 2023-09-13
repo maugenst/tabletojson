@@ -5,7 +5,7 @@
 
 [![CircleCI](https://circleci.com/gh/maugenst/tabletojson.svg?style=shield)](https://circleci.com/gh/maugenst/tabletojson)
 [![Coverage Status](https://coveralls.io/repos/github/maugenst/tabletojson/badge.svg?branch=master)](https://coveralls.io/github/maugenst/tabletojson?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/maugenst/tabletojson/badge.svg)]
+[![Known Vulnerabilities](https://snyk.io/test/github/maugenst/tabletojson/badge.svg)](https://snyk.io/test/github/maugenst/tabletojson)
 
 Tabletojson attempts to convert local or remote HTML tables into JSON with a very low footprint. 
 Can be passed the markup for a single table as a string, a fragment of HTML or
