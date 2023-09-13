@@ -26,7 +26,7 @@ As of version 2.0 tabletojson is completely written in typescript.
 * Require must be changed from ``const tabletojson = require('../lib/tabletojson');`` to either 
 ``const tabletojson = require('../lib/tabletojson').Tabletojson;`` or
 ``const {Tabletojson: tabletojson} = require('../lib/tabletojson');``
-* Replace request options by got options. More information [here](#options)...
+* Replace request options by fetch options. More information [here](#options)...
 
 ## Basic usage
 
@@ -215,16 +215,6 @@ it to false can make the results hard to parse), but if you do you can also set
 both at the same time by setting `stripHtml` to `false`.
 
 ## Options
-
-!!! ATTENTION !!! Since request is not actively supported we need to switch to a
-reliable request replacement and I decided to use got.
- 
-This is an incompatible change in version 2++ so keep this in mind and follow
-Sindre's [Migration Guide](https://github.com/sindresorhus/got/blob/master/documentation/migration-guides.md).
-
-For special features like using a proxy you should follow this instructions: 
-[Proxies](https://github.com/sindresorhus/got#proxies)
-
 
 ### fetchOptions (only `convertUrl`)
 
