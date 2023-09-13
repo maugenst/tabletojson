@@ -2,7 +2,8 @@
 
 [![NPM](https://nodei.co/npm/tabletojson.png)](https://nodei.co/npm/tabletojson)
 
-[![Build](https://travis-ci.org/maugenst/tabletojson.svg?branch=master)](https://travis-ci.org/maugenst/tabletojson.svg?branch=master)
+
+[![CircleCI](https://circleci.com/gh/maugenst/tabletojson.svg?style=shield)](https://circleci.com/gh/maugenst/tabletojson)
 [![Coverage Status](https://coveralls.io/repos/github/maugenst/tabletojson/badge.svg?branch=master)](https://coveralls.io/github/maugenst/tabletojson?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/maugenst/tabletojson/badge.svg)]
 
