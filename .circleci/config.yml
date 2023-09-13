@@ -1,0 +1,22 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.1.0
+  coveralls: coveralls/coveralls@2.2.0
+jobs:
+  buildAndTest:
+    # Reuse Docker container specification given by the node Orb
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run build
+      - run: npm test
+      - coveralls/upload:
+          flag_name: TableToJson Testing Coverage
+          verbose: true
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - buildAndTest

@@ -1,4 +1,4 @@
-export {Tabletojson} from './lib/Tabletojson';
+export {Tabletojson} from './Tabletojson';
 
 export type TableToJsonOptions = {
     useFirstRowForHeadings?: boolean, // Use the first row as header [default=false]
@@ -14,7 +14,7 @@ export type TableToJsonOptions = {
     headings?: string[] | null, // {Array} Array of Strings to be used as headings [default=null]
     containsClasses?: string[] | null, // {Array} Array of classes to find a specific table [default=null]
     limitrows?: number | null, // {Integer} Integer that limits the result of all rows to a given amount of data [default=null]
-    got?: any,
+    fetchOptions?: RequestInit,
 };
 
 export type CallbackFunction = (conversionResult: any) => any;

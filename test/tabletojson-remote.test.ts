@@ -1,7 +1,7 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 import 'jest-extended';
 import {Tabletojson as tabletojson} from '../lib/Tabletojson';
-import * as nock from 'nock';
+import nock from 'nock';
 
 describe('TableToJSON Remote', function () {
     beforeEach(function () {
@@ -10,14 +10,14 @@ describe('TableToJSON Remote', function () {
 
     test('Get table from locally mocked server returning a json object', async function () {
         await expect(tabletojson.convertUrl('https://api.github.com/user')).rejects.toThrow(
-            /Tabletojson can just handle text/
+            /Tabletojson can just handle text/,
         );
     });
 
     test('Get table from locally mocked server returning a json object passing just a callback method', async function () {
         // tslint:disable-next-line:no-empty
         await expect(tabletojson.convertUrl('https://api.github.com/user', () => {})).rejects.toThrow(
-            /Tabletojson can just handle text/
+            /Tabletojson can just handle text/,
         );
     });
 
@@ -29,26 +29,26 @@ describe('TableToJSON Remote', function () {
                     useFirstRowForHeadings: true,
                 },
                 // tslint:disable-next-line:no-empty
-                () => {}
-            )
+                () => {},
+            ),
         ).rejects.toThrow(/Tabletojson can just handle text/);
     });
 
     test('Get table from Wikipedia using callBack function', async function () {
         await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', (converted) => {
-            const mainTable = converted[1];
-            expect(mainTable[0]).toHaveProperty('Language family');
+            const mainTable = converted[0];
+            expect(mainTable[0]).toHaveProperty('ISO language name');
             expect(mainTable instanceof Array).toBeTruthy();
-            expect(mainTable[0]).toHaveProperty('Language family');
+            expect(mainTable[0]).toHaveProperty('ISO language name');
         });
     });
 
     test('Get table from Wikipedia using callBack function without options', async function () {
         await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', (converted) => {
             expect(converted).toBeDefined();
-            const mainTable = converted[1];
+            const mainTable = converted[0];
             expect(mainTable instanceof Array).toBeTruthy();
-            expect(mainTable[0]).toHaveProperty('Language family');
+            expect(mainTable[0]).toHaveProperty('ISO language name');
         });
     });
 
@@ -56,9 +56,9 @@ describe('TableToJSON Remote', function () {
         const converted = await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes');
 
         expect(converted).toBeDefined();
-        const mainTable = converted[1];
+        const mainTable = converted[0];
         expect(mainTable instanceof Array).toBeTruthy();
-        expect(mainTable[0]).toHaveProperty('Language family');
+        expect(mainTable[0]).toHaveProperty('ISO language name');
     });
 
     test('Get table from w3schools.com and use first row as heading', async function () {
@@ -91,7 +91,7 @@ describe('TableToJSON Remote', function () {
             {
                 useFirstRowForHeadings: true,
             },
-            callbackFunction
+            callbackFunction,
         );
     });
 
@@ -108,18 +108,18 @@ describe('TableToJSON Remote', function () {
         expect(_.has(table[0], 'Hiragana')).toBeTruthy();
         expect(_.has(table[0], 'Katakana')).toBeTruthy();
         expect(_.has(table[0], 'Rōmaji')).toBeTruthy();
-        expect(_.has(table[0], 'English')).toBeTruthy();
+        expect(_.has(table[0], 'English translation')).toBeTruthy();
 
         expect(table[0].Kanji).toEqual('私');
         expect(table[0].Hiragana).toEqual('わたし');
         expect(table[0].Katakana).toEqual('ワタシ');
         expect(table[0].Rōmaji).toEqual('watashi');
-        expect(table[0].English).toEqual('I, me');
+        expect(table[0]['English translation']).toEqual('I, me');
     });
 
     test('Try to get a table from a nonexisting domain', async function () {
         tabletojson.convertUrl('https://www.klhsfljkag.com/ydasdadad/adsaakhjg/jahsgajhvas.html').catch((e) => {
-            expect(e.message).toContain('getaddrinfo ENOTFOUND www.klhsfljkag.com');
+            expect(e.message).toContain('fetch failed');
         });
     });
 });

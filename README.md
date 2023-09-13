@@ -1,13 +1,12 @@
-# Table to JSON
-
-Attempts to convert HTML tables into JSON.
+# Tabletojson: Converting Table to JSON objects made easy
 
 [![NPM](https://nodei.co/npm/tabletojson.png)](https://nodei.co/npm/tabletojson)
 
 [![Build](https://travis-ci.org/maugenst/tabletojson.svg?branch=master)](https://travis-ci.org/maugenst/tabletojson.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/maugenst/tabletojson/badge.svg?branch=master)](https://coveralls.io/github/maugenst/tabletojson?branch=master)
-[![Dependencies](https://david-dm.org/maugenst/tabletojson.svg)](https://david-dm.org/maugenst/tabletojson)
+[![Known Vulnerabilities](https://snyk.io/test/github/maugenst/tabletojson/badge.svg)]
 
+Tabletojson attempts to convert local or remote HTML tables into JSON with a very low footprint. 
 Can be passed the markup for a single table as a string, a fragment of HTML or
 an entire page or just a URL (with an optional callback function; promises also
 supported).
@@ -17,8 +16,9 @@ table found on the page (in same the order they were found in the HTML).
 
 As of version 2.0 tabletojson is completely written in typescript.
 
-!!! ATTENTION !!!: Incompatible API change in version 2.0.0 since request.js got
-deprecated. More information [here](#options)...  
+## Incompatible changes
+* Version 2 on request.js is not used anymore
+* Version >=2.1.0 got is not used anymore and got replaced by node internal fetch. more information [here](#options)...
 
 ## Conversion from version 1.+ to 2.x
 
@@ -225,24 +225,21 @@ For special features like using a proxy you should follow this instructions:
 [Proxies](https://github.com/sindresorhus/got#proxies)
 
 
-### got (only `convertUrl`)
+### fetchOptions (only `convertUrl`)
 
-We are using got to fetch remoter HTML pages. So if you need to get data from a 
-remote server you can call `tabletojson.convertUrl` and pass any
-got-options (proxy, headers,...) by adding a got object to the options
-passed to `convertUrl`. for more information on how to configure request please
-have a look at
-[Proxies](https://github.com/sindresorhus/got#proxies)
+Tabletojson is using fetch api which is available in node from version 17.5.0 onwards to fetch remote HTML pages. See
+[mdn web docs on fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for more information. The usage of
+Tabletojson should now be the same in node as in browsers.
+So if you need to get data from a remote server you can call `tabletojson.convertUrl` and pass any
+fetch-options (proxy, headers,...) by adding a RequestInit object to the options
+passed to `convertUrl`. For more information on how to configure request please
+have a look at [Browser Syntax](https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax) or [Node fetch](https://nodejs.org/en/blog/announcements/v18-release-announce#fetch-experimental)
 
 ``` javascript
 tabletojson.convertUrl('https://www.timeanddate.com/holidays/ireland/2017', {
     useFirstRowForHeadings: true,
-    got: {
-        agent: tunnel.httpOverHttp({
-            proxy: {
-                host: 'proxy:8080'
-            }
-        })
+    fetchOptions: {
+        ...
     }
 });
 ```

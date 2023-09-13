@@ -1,6 +1,5 @@
 import * as cheerio from 'cheerio';
-import got from 'got';
-import {CallbackFunction, TableToJsonOptions} from '../index';
+import {CallbackFunction, TableToJsonOptions} from './index';
 
 export class Tabletojson {
     static convert(
@@ -19,7 +18,7 @@ export class Tabletojson {
             containsClasses: null,
             id: null,
             limitrows: null,
-        }
+        },
     ): any[] {
         options = Object.assign(
             {
@@ -37,7 +36,7 @@ export class Tabletojson {
                 id: null,
                 limitrows: null,
             },
-            options
+            options,
         );
 
         if (options.stripHtml === true) {
@@ -224,11 +223,11 @@ export class Tabletojson {
     static async convertUrl(
         url: string,
         callbackFunctionOrOptions?: TableToJsonOptions | CallbackFunction,
-        callbackFunction?: CallbackFunction
+        callbackFunction?: CallbackFunction,
     ): Promise<any> {
         let options: TableToJsonOptions;
         let callback = null;
-        let gotOptions: any;
+        let fetchOptions: RequestInit;
 
         if (
             callbackFunction &&
@@ -239,40 +238,39 @@ export class Tabletojson {
             options = callbackFunctionOrOptions;
             // If you need to pass in options for request (proxy)
             // add them to callbackFunctionOrOptions.request
-            gotOptions = options.got || {};
+            fetchOptions = options.fetchOptions || {};
             callback = callbackFunction;
 
             // Use a callback (if passed)
-            const result = await got(url, gotOptions);
-            const resultMimetype = result.headers['content-type'];
+            const result = await fetch(url, fetchOptions);
+            const resultMimetype = result.headers.get('content-type');
             if (resultMimetype && !resultMimetype.includes('text/')) {
                 throw new Error('Tabletojson can just handle text/** mimetypes');
             }
-            return callback.call(this, Tabletojson.convert(result.body, options));
+            return callback.call(this, Tabletojson.convert(await result.text(), options));
         } else if (typeof callbackFunctionOrOptions === 'function') {
             // If only callback passed, invoke with no options
             callback = callbackFunctionOrOptions;
 
             // Use a callback (if passed)
-            const result = await got(url);
-            const resultMimetype = result.headers['content-type'];
+            const result = await fetch(url);
+            const resultMimetype = result.headers.get('content-type');
             if (resultMimetype && !resultMimetype.includes('text/')) {
                 throw new Error('Tabletojson can just handle text/** mimetypes');
             }
-            return callback.call(this, Tabletojson.convert(result.body));
+            return callback.call(this, Tabletojson.convert(await result.text()));
         } else {
             // If neither argument is callback, return a promise
             options = callbackFunctionOrOptions || {};
             // If you need to pass in options for request (proxy)
             // add them to callbackFunctionOrOptions.request
-            gotOptions = options.got || {};
-            gotOptions.resolveBodyOnly = true;
-            const result = await got(url);
-            const resultMimetype = result.headers['content-type'];
+            fetchOptions = options.fetchOptions || {};
+            const result = await fetch(url);
+            const resultMimetype = result.headers.get('content-type');
             if (resultMimetype && !resultMimetype.includes('text/')) {
                 throw new Error('Tabletojson can just handle text/** mimetypes');
             }
-            return Tabletojson.convert(result.body, options);
+            return Tabletojson.convert(await result.text(), options);
         }
     }
 }
