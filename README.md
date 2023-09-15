@@ -13,20 +13,32 @@ an entire page or just a URL (with an optional callback function; promises also
 supported).
 
 The response is always an array. Every array entry in the response represents a
-table found on the page (in same the order they were found in the HTML).
+table found on the page (in same the order they were found in HTML).
 
 As of version 2.0 tabletojson is completely written in typescript.
 
 ## Incompatible changes
 * Version 2 on request.js is not used anymore
 * Version >=2.1.0 got is not used anymore and got replaced by node internal fetch. more information [here](#options)...
+* Switched from commonjs to module system. Bumped version to 3.0.0  
 
-## Conversion from version 1.+ to 2.x
+### Conversion from version 1.+ to 2.x
 
 * Require must be changed from ``const tabletojson = require('../lib/tabletojson');`` to either 
 ``const tabletojson = require('../lib/tabletojson').Tabletojson;`` or
 ``const {Tabletojson: tabletojson} = require('../lib/tabletojson');``
 * Replace request options by fetch options. More information [here](#options)...
+
+### Conversion from version 2.0.1 to 3.x
+
+* Tabletojson now uses esm. Use ``import {Tabletojson as tabletojson} from 'tabletojson';`` or ``import {tabletojson} from 'tabletojson';``
+* Added lowercase import ``import {tabletojson} from 'tabletojson';``
+* If you are using Node 18 execute examples by calling:
+```sh
+npm run build:examples
+cd dist/examples
+node --experimental-vm-modules --experimental-specifier-resolution=node example-1.js --prefix=dist/examples
+```
 
 ## Basic usage
 
@@ -38,34 +50,27 @@ npm install tabletojson
 
 ### Remote (`convertUrl`)
 
-```javascript
-'use strict';
-
-const tabletojson = require('tabletojson').Tabletojson;
-
-tabletojson.convertUrl(
-    'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes',
-    function(tablesAsJson) {
-        console.log(tablesAsJson[1]);
-    }
-);
+```typescript
+// example-1.ts
+import {tabletojson} from 'tabletojson';
+tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', function (tablesAsJson) {
+    console.log(tablesAsJson[1]);
+});
 ```
 
 ### Local (`convert`)
 
 Have a look in the examples.
 
-```javascript
-// example-6.js
-'use strict';
-
-const {Tabletojson: tabletojson} = require('../dist');
-const fs = require('fs');
-const path = require('path');
-
-const html = fs.readFileSync(path.resolve(__dirname, '../test/tables.html'), {encoding: 'UTF-8'});
+```typescript
+// example-6.ts
+import {tabletojson} from 'tabletojson';
+import * as fs from 'fs';
+import * as path from 'path';
+const html = fs.readFileSync(path.resolve(process.cwd(), '../../test/tables.html'), {
+  encoding: 'utf-8',
+});
 const converted = tabletojson.convert(html);
-
 console.log(converted);
 ```
 
@@ -560,92 +565,79 @@ You might want to use it with a module like 'cheerio' if you want to parse
 specific tables identified by id or class (i.e. select them with cheerio and
 pass the HTML of them as a string).
 
-## Example usage
+## Example usages
 
-```javascript
-// Convert an HTML blob into an array of all the tables on the page
-var tabletojson = require('tabletojson').Tabletojson;
-var tablesAsJson = tabletojson.convert(html);
-var firstTableAsJson = tablesAsJson[0];
-var secondTableAsJson = tablesAsJson[1];
+```typescript
+// Convert an HTML text into an array of all the tables on the page
+import {tabletojson} from 'tabletojson';
+const tablesAsJson = tabletojson.convert(html);
+const firstTableAsJson = tablesAsJson[0];
+const secondTableAsJson = tablesAsJson[1];
 ...
 ```
 
-```javascript
+```typescript
 // Fetch a URL and parse all it's tables into JSON, using a callback
-var tabletojson = require('tabletojson').Tabletojson;
-var url = 'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes';
-tabletojson.convertUrl(url, function(tablesAsJson) {
-  var listofSovereignStates = tablesAsJson[0];
+import {tabletojson} from 'tabletojson';
+tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', function (tablesAsJson) {
+  console.log(tablesAsJson[1]);
 });
 ```
 
-```javascript
+```typescript
 // Fetch a URL and parse all it's tables into JSON, using promises
-var tabletojson = require('tabletojson').Tabletojson;
-var url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
+import {tabletojson} from 'tabletojson';
+const url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
 tabletojson.convertUrl(url)
 .then(function(tablesAsJson) {
-  var standardAndPoorRatings = tablesAsJson[1];
-  var fitchRatings = tablesAsJson[2];
+  const standardAndPoorRatings = tablesAsJson[1];
+  const fitchRatings = tablesAsJson[2];
 });
 ```
 
-```javascript
+```typescript
 // Fetch a table from Wikipedia and combine with json2csv to convert to CSV
-var tabletojson = require('tabletojson').Tabletojson;
-var json2csv = require('json2csv');
-var url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
-tabletojson.convertUrl(url)
-.then(function(tablesAsJson) {
-  var standardAndPoorCreditRatings = tablesAsJson[1];
-  json2csv({ data: standardAndPoorCreditRatings,
-             fields: [ 'Country', 'Outlook']
-           }, function(err, csv) {
-            console.log(csv);
-            /* Example output
-              "Country","Outlook"
-              "Abu Dhabi, UAE","Stable"
-              "Albania","Stable"
-              "Andorra","Negative"
-              "Angola","Stable"
-              "Argentina","Negative"
-              "Aruba","Stable"
-              "Australia","Stable"
-              "Austria","Negative"
-              "Azerbaijan","Positive"
-              ...
-            */
-          });
+import {tabletojson} from 'tabletojson';
+import {Parser} from 'json2csv';
+const url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
+tabletojson.convertUrl(url).then(function (tablesAsJson) {
+  const fitchRatings = tablesAsJson[2];
+  const json2csvParser = new Parser({
+    fields: ['Country/Region', 'Outlook'],
+  });
+  const csv = json2csvParser.parse(fitchRatings);
+  console.log(csv);
+  /* Example output
+        "Country/Region","Outlook"
+        "Abu Dhabi, UAE","Stable"
+        "Albania","Stable"
+        "Andorra","Negative"
+        "Angola","Stable"
+        "Argentina","Negative"
+        "Aruba","Stable"
+        "Australia","Stable"
+        "Austria","Negative"
+        "Azerbaijan","Positive"
+        ...
+      */
 });
 ```
 
-## Issues
+## Limitations
 
-Right now the table needs to be "well formatted" to be convertable. Tables in
-tables with not be processed.
-
-```html
-<thead>
-    <tr>
-        <th>Header</th>
-    <tr>
-</thead>
-```
+* Tables needs to be "well formatted" to be convertable.
+* Tables in tables are not processed.
 
 ## Contributing
 
-Improvements, fixes and suggestions for better written modules that other people
-have created are welcome, as are bug reports against specific tables it is
-unable to handle.
+Improvements, fixes and suggestions are welcome.
 
-You can find basic tests in the test folder. I implemented the most straight
-forward way in using the library. Nonetheless there are some edge cases that
+You can find basic tests in the test folder. The library has been implemented 
+to be used straight forward way. Nonetheless there are some edge cases that
 need to be tested and I would like to ask for support here. Feel free to fork
 and create PRs here. Every bit of help is appreciated.
 
-To get also an insight you can use Iain's examples located in the example folder
-included with this project that shows usage and would be a good start.
+For more usage examples have a look in the examples folder that shows usage and would be a good start.
 
 If you submit a pull request, please add an example for your use case, so I can
 understand what you want it to do (as I want to get around to writing tests for
