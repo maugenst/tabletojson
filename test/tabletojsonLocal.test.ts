@@ -3,7 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import {tabletojson} from '../lib';
+import {tabletojson} from '../lib/index.js';
 
 describe('TableToJSON Local', function () {
     let html = '';

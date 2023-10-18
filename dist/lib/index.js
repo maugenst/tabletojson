@@ -1,3 +1,3 @@
-export { Tabletojson, Tabletojson as tabletojson } from './Tabletojson';
+export { Tabletojson, Tabletojson as tabletojson } from './Tabletojson.js';
 
 //# sourceMappingURL=index.js.map

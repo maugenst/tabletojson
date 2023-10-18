@@ -10,5 +10,8 @@
     "silent": true,
     "bail": true,
     "testTimeout": 3000000,
-    "rootDir": "./"
+    "rootDir": "./",
+    "moduleNameMapper": {
+        "^(\\.{1,2}/.*)\\.js$": "$1"
+    }
 }

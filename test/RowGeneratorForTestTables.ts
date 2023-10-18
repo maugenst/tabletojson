@@ -215,7 +215,7 @@ class RowGeneratorForTestTables {
         'Elicia Milne',
         'Bronte Pickett',
     ];
-    index(min, max) {
+    index(min: number, max: number) {
         return Math.round(Math.random() * (max - min)) + min;
     }
 

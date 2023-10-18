@@ -1,4 +1,4 @@
-export {Tabletojson, Tabletojson as tabletojson} from './Tabletojson';
+export {Tabletojson, Tabletojson as tabletojson} from './Tabletojson.js';
 
 export type TableToJsonOptions = {
     useFirstRowForHeadings?: boolean, // Use the first row as header [default=false]
