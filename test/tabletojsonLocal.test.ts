@@ -3,7 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import {tabletojson} from '../lib';
+import {tabletojson, TableToJsonOptions} from '../lib/Tabletojson';
 
 describe('TableToJSON Local', function () {
     let html = '';
@@ -12,6 +12,40 @@ describe('TableToJSON Local', function () {
     beforeAll(() => {
         html = fs.readFileSync(path.resolve(process.cwd(), 'test/tables.html'), 'utf8');
         noTables = fs.readFileSync(path.resolve(process.cwd(), 'test/notables.html'), 'utf8');
+    });
+
+    it('Exports TableToJsonOptions', async function () {
+        const options: TableToJsonOptions = {
+            useFirstRowForHeadings: true,
+            stripHtmlFromHeadings: true,
+            stripHtmlFromCells: true,
+            stripHtml: true,
+            forceIndexAsNumber: true,
+            countDuplicateHeadings: true,
+            ignoreColumns: [1, 2, 3],
+            onlyColumns: [1, 2, 3],
+            ignoreHiddenRows: true,
+            id: ['a', 'b'],
+            headings: ['a', 'b'],
+            containsClasses: ['a', 'b'],
+            limitrows: 4,
+            fetchOptions: undefined,
+        };
+
+        expect(_.has(options, 'useFirstRowForHeadings ')).toBeDefined();
+        expect(_.has(options, 'stripHtmlFromHeadings')).toBeDefined();
+        expect(_.has(options, 'stripHtmlFromCells')).toBeDefined();
+        expect(_.has(options, 'stripHtml')).toBeDefined();
+        expect(_.has(options, 'forceIndexAsNumber')).toBeDefined();
+        expect(_.has(options, 'countDuplicateHeadings ')).toBeDefined();
+        expect(_.has(options, 'ignoreColumns')).toBeDefined();
+        expect(_.has(options, 'onlyColumns')).toBeDefined();
+        expect(_.has(options, 'ignoreHiddenRows')).toBeDefined();
+        expect(_.has(options, 'id')).toBeDefined();
+        expect(_.has(options, 'headings')).toBeDefined();
+        expect(_.has(options, 'containsClasses')).toBeDefined();
+        expect(_.has(options, 'limitrows')).toBeDefined();
+        expect(_.has(options, 'fetchOptions')).toBeDefined();
     });
 
     it('Options: Strip HTML from header AND from body', async function () {

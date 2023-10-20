@@ -1,5 +1,23 @@
 import * as cheerio from 'cheerio';
-import {CallbackFunction, TableToJsonOptions} from './index';
+
+export type TableToJsonOptions = {
+    useFirstRowForHeadings?: boolean; // Use the first row as header [default=false]
+    stripHtmlFromHeadings?: boolean; // Strip all HTML from headings [default=true]
+    stripHtmlFromCells?: boolean; // Strip HTML from cells [default=true]
+    stripHtml?: boolean | null; // Strip off HTML [default=null] if set true stripHtmlFromHeadings and stripHtmlFromCells will also be true
+    forceIndexAsNumber?: boolean; // Force the index to be used as number [default=false]
+    countDuplicateHeadings?: boolean; // If given a _<NUMBER> will be added to the duplicate key [default=false]
+    ignoreColumns?: number[] | null; // {Array} Array of column indices to ignored [default=null]
+    onlyColumns?: number[] | null; // {Array} Array of column indices to be used. Overrides ignoreColumn [default=null]
+    ignoreHiddenRows?: boolean; // Ignoring hidden rows [default=true]
+    id?: string[] | null; // string of an id [default=null]
+    headings?: string[] | null; // {Array} Array of Strings to be used as headings [default=null]
+    containsClasses?: string[] | null; // {Array} Array of classes to find a specific table [default=null]
+    limitrows?: number | null; // {Integer} Integer that limits the result of all rows to a given amount of data [default=null]
+    fetchOptions?: RequestInit;
+};
+
+export type CallbackFunction = (conversionResult: any) => any;
 
 export class Tabletojson {
     static convert(
@@ -226,7 +244,6 @@ export class Tabletojson {
         callbackFunction?: CallbackFunction,
     ): Promise<any> {
         let options: TableToJsonOptions;
-        let callback = null;
         let fetchOptions: RequestInit;
 
         if (
@@ -239,7 +256,6 @@ export class Tabletojson {
             // If you need to pass in options for request (proxy)
             // add them to callbackFunctionOrOptions.request
             fetchOptions = options.fetchOptions || {};
-            callback = callbackFunction;
 
             // Use a callback (if passed)
             const result = await fetch(url, fetchOptions);
@@ -247,18 +263,15 @@ export class Tabletojson {
             if (resultMimetype && !resultMimetype.includes('text/')) {
                 throw new Error('Tabletojson can just handle text/** mimetypes');
             }
-            return callback.call(this, Tabletojson.convert(await result.text(), options));
+            return callbackFunction.call(this, Tabletojson.convert(await result.text(), options));
         } else if (typeof callbackFunctionOrOptions === 'function') {
-            // If only callback passed, invoke with no options
-            callback = callbackFunctionOrOptions;
-
             // Use a callback (if passed)
             const result = await fetch(url);
             const resultMimetype = result.headers.get('content-type');
             if (resultMimetype && !resultMimetype.includes('text/')) {
                 throw new Error('Tabletojson can just handle text/** mimetypes');
             }
-            return callback.call(this, Tabletojson.convert(await result.text()));
+            return callbackFunctionOrOptions.call(this, Tabletojson.convert(await result.text()));
         } else {
             // If neither argument is callback, return a promise
             options = callbackFunctionOrOptions || {};
@@ -274,3 +287,4 @@ export class Tabletojson {
         }
     }
 }
+export {Tabletojson as tabletojson};

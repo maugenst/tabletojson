@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import 'jest-extended';
-import {tabletojson} from '../lib';
+import {tabletojson} from '../lib/Tabletojson';
 import nock from 'nock';
 
 describe('TableToJSON Remote', function () {

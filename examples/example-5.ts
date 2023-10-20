@@ -1,4 +1,4 @@
-import {tabletojson} from '../lib';
+import {tabletojson} from '../lib/Tabletojson';
 import {Parser} from 'json2csv';
 const url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
 tabletojson.convertUrl(url).then(function (tablesAsJson) {

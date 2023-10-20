@@ -1,8 +1,10 @@
 
 {
-    "name": "Tabletojson",
     "transform": {
-        "^.+\\.(ts|tsx)$": "@swc/jest"
+        "^.+\\.(ts|tsx)$": ["ts-jest", {
+            "diagnostics": false,
+            "useESM": true
+        }]
     },
     "extensionsToTreatAsEsm": [".ts", ".tsx"],
     "testRegex": "/.+test\\.ts",

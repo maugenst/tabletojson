@@ -1,31 +1,32 @@
 {
-    "rootDir": "lib",
-    "include": [
-        "lib/**/*",
-        "lib/index.ts",
-        "test/**/*"
-    ],
-    "exclude": ["node_modules"],
-    "compilerOptions": {
-        "outDir": "./dist",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "incremental": true,
-        "target": "es2018",
-        "sourceMap": true,
-        "declaration": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "removeComments": true,
-        "pretty": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "strictPropertyInitialization": false,
-        "newLine": "LF",
-        "strict": true,
-        "importHelpers": true,
-        "allowSyntheticDefaultImports": true,
-        "forceConsistentCasingInFileNames": true,
-        "skipLibCheck": true
-    }
+  "compilerOptions": {
+    "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types", "./@types"],
+    "moduleResolution": "node",
+    "incremental": true,
+    "sourceMap": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "removeComments": true,
+    "pretty": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictPropertyInitialization": false,
+    "newLine": "LF",
+    "noImplicitAny": false,
+    "strict": true,
+    "importHelpers": false,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "node_modules",
+    "examples",
+    "test",
+    "dist"
+  ]
 }
