@@ -5,10 +5,10 @@
     "url": "https://github.com/maugenst"
   },
   "name": "tabletojson",
-  "version": "4.0.0",
-  "description": "Converts local and remote HTML tables into JSON objects",
+  "version": "4.0.1",
+  "description": "Convert HTML tables to JSON objects",
   "main": "dist/lib/cjs/Tabletojson.js",
-  "typings": "@typings/Tabletojson.d.ts",
+  "types": "./@typings/Tabletojson.d.ts",
   "module": "dist/lib/mjs/Tabletojson.js",
   "typeRoots": [
     "./@typings",
@@ -22,8 +22,14 @@
     "@typings"
   ],
   "exports": {
-    "import": "./dist/lib/mjs/Tabletojson.js",
-    "require": "./dist/lib/cjs/Tabletojson.js"
+    "import": {
+      "types": "./@typings/Tabletojson.d.ts",
+      "default": "./dist/lib/mjs/Tabletojson.js"
+    },
+    "require": {
+      "types": "./@typings/Tabletojson.d.ts",
+      "default": "./dist/lib/cjs/Tabletojson.js"
+    }
   },
   "keywords": [
     "table2json",

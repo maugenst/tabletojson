@@ -21,7 +21,7 @@ As of version 2.0 tabletojson is completely written in typescript.
 * Version 2 on request.js is not used anymore
 * Version >=2.1.0 got is not used anymore and got replaced by node internal fetch. more information [here](#options)...
 * Switched from commonjs to module system. Bumped version to 3.0.0  
-* Switched to provide a "hybrid" library to cope with the needs of both esm and commonjs. Bumped version to 4.0.0.
+* Providing a "hybrid" library to cope with the needs of both esm and commonjs. Bumped version to 4.0.1.
 
 ### Conversion from version 1.+ to 2.x
 
@@ -47,6 +47,24 @@ Install via npm
 
 ```sh
 npm install tabletojson
+```
+
+### esm
+
+```typescript
+import {tabletojson} from 'tabletojson';
+tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', function (tablesAsJson) {
+  console.log(tablesAsJson[1]);
+});
+```
+
+### commonjs
+
+```javascript
+const {tabletojson} = require('tabletojson');
+tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', function (tablesAsJson) {
+  console.log(tablesAsJson[1]);
+});
 ```
 
 ### Remote (`convertUrl`)
