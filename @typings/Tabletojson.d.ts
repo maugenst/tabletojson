@@ -1,5 +1,11 @@
+export type HeaderRows = {
+    from?: number;
+    to: number;
+    concatWith: string;
+};
 export type TableToJsonOptions = {
     useFirstRowForHeadings?: boolean;
+    headers?: HeaderRows;
     stripHtmlFromHeadings?: boolean;
     stripHtmlFromCells?: boolean;
     stripHtml?: boolean | null;

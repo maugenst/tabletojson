@@ -22,6 +22,7 @@ As of version 2.0 tabletojson is completely written in typescript.
 * Version >=2.1.0 got is not used anymore and got replaced by node internal fetch. more information [here](#options)...
 * Switched from commonjs to module system. Bumped version to 3.0.0  
 * Providing a "hybrid" library to cope with the needs of both esm and commonjs. Bumped version to 4.0.1.
+* Adding support for complex headings as key in the output json object. Bumped version to 4.1.0. 
 
 ### Conversion from version 1.+ to 2.x
 
@@ -238,6 +239,223 @@ You probably don't need to set `stripHtmlFromHeadings` to `false` (and setting
 it to false can make the results hard to parse), but if you do you can also set
 both at the same time by setting `stripHtml` to `false`.
 
+### Tables with complex headers
+
+Use the following rows as keys in the output json object. The values are flattened and concatenated the values with 'concatWith' [default=undefined]
+
+Input:
+
+<table id="table15" class="table" border="1">
+    <tbody>
+    <tr>
+        <td rowspan="3">Industry</td>
+        <td colspan="3">Operating income</td>
+        <td colspan="3">Operating costs</td>
+        <td colspan="3">Total profit</td>
+    </tr>
+    <tr>
+        <td colspan="2">amount (billion)</td>
+        <td rowspan="2">Year-over-year growth (%)</td>
+        <td colspan="2">amount (billion)</td>
+        <td rowspan="2">Year-over-year growth (%)</td>
+        <td colspan="2">amount (billion)</td>
+        <td rowspan="2">Year-over-year growth (%)</td>
+    </tr>
+    <tr>
+        <td>$</td>
+        <td>€<sup>*</sup></td>
+        <td>$</td>
+        <td>€<sup>*</sup></td>
+        <td>$</td>
+        <td>€<sup>*</sup></td>
+    </tr>
+    <tr>
+        <td>total</td>
+        <td>843280,70</td>
+        <td>758952,63</td>
+        <td>-0,30</td>
+        <td>718255,00</td>
+        <td>646429,50</td>
+        <td>0,20</td>
+        <td>46558,20</td>
+        <td>41902,38</td>
+        <td>-11,70</td>
+    </tr>
+    <tr>
+        <td>Coal mining and washing industry</td>
+        <td>22937,30</td>
+        <td>20643,57</td>
+        <td>-13,90</td>
+        <td>14653,70</td>
+        <td>13188,33</td>
+        <td>-7,50</td>
+        <td>5236,90</td>
+        <td>4713,21</td>
+        <td>-26,30</td>
+    </tr>
+    <tr>
+        <td>Oil and gas extraction</td>
+        <td>7605,10</td>
+        <td>6844,59</td>
+        <td>-9,60</td>
+        <td>3863,60</td>
+        <td>3477,24</td>
+        <td>0,10</td>
+        <td>2592,70</td>
+        <td>2333,43</td>
+        <td>-10,80</td>
+    </tr>
+    <tr>
+        <td>Ferrous metal mining and dressing industry</td>
+        <td>3010,70</td>
+        <td>2709,63</td>
+        <td>-4,40</td>
+        <td>2369,10</td>
+        <td>2132,19</td>
+        <td>-4,10</td>
+        <td>326,60</td>
+        <td>293,94</td>
+        <td>-23,80</td>
+    </tr>
+    <tr>
+        <td>Non-ferrous metal mining and dressing industry</td>
+        <td>2180,90</td>
+        <td>1962,81</td>
+        <td>-0,30</td>
+        <td>1394,30</td>
+        <td>1254,87</td>
+        <td>-2,50</td>
+        <td>512,10</td>
+        <td>460,89</td>
+        <td>4,00</td>
+    </tr>
+    <tr>
+        <td>Non-metallic ore mining and dressing industry</td>
+        <td>2244,70</td>
+        <td>2020,23</td>
+        <td>-5,70</td>
+        <td>1612,00</td>
+        <td>1450,80</td>
+        <td>-5,70</td>
+        <td>236,10</td>
+        <td>212,49</td>
+        <td>-7,00</td>
+    </tr>
+    <tr>
+        <td>Mining professional and ancillary activities</td>
+        <td>1537,30</td>
+        <td>1383,57</td>
+        <td>12,70</td>
+        <td>1453,70</td>
+        <td>1308,33</td>
+        <td>11,80</td>
+        <td>2,60</td>
+        <td>2,34</td>
+        <td>-77,00</td>
+    </tr>
+    <tr>
+        <td colspan="10">
+            Note: Some indicators in this table have a situation where the total is not equal to the sum of the sub-items, which is due to rounding of the data and has not been mechanically adjusted.<br>
+            <sup>*</sup> Conversion rate: 1$=0,9€
+        </td>
+    </tr>
+</table>
+
+Output:
+
+```json
+[
+    {
+        "Industry": "total",
+        "Operating income amount (billion) $": "843280,70",
+        "Operating income amount (billion) €*": "758952,63",
+        "Operating income Year-over-year growth (%)": "-0,30",
+        "Operating costs amount (billion) $": "718255,00",
+        "Operating costs amount (billion) €*": "646429,50",
+        "Operating costs Year-over-year growth (%)": "0,20",
+        "Total profit amount (billion) $": "46558,20",
+        "Total profit amount (billion) €*": "41902,38",
+        "Total profit Year-over-year growth (%)": "-11,70"
+    },
+    {
+        "Industry": "Coal mining and washing industry",
+        "Operating income amount (billion) $": "22937,30",
+        "Operating income amount (billion) €*": "20643,57",
+        "Operating income Year-over-year growth (%)": "-13,90",
+        "Operating costs amount (billion) $": "14653,70",
+        "Operating costs amount (billion) €*": "13188,33",
+        "Operating costs Year-over-year growth (%)": "-7,50",
+        "Total profit amount (billion) $": "5236,90",
+        "Total profit amount (billion) €*": "4713,21",
+        "Total profit Year-over-year growth (%)": "-26,30"
+    },
+    {
+        "Industry": "Oil and gas extraction",
+        "Operating income amount (billion) $": "7605,10",
+        "Operating income amount (billion) €*": "6844,59",
+        "Operating income Year-over-year growth (%)": "-9,60",
+        "Operating costs amount (billion) $": "3863,60",
+        "Operating costs amount (billion) €*": "3477,24",
+        "Operating costs Year-over-year growth (%)": "0,10",
+        "Total profit amount (billion) $": "2592,70",
+        "Total profit amount (billion) €*": "2333,43",
+        "Total profit Year-over-year growth (%)": "-10,80"
+    },
+    {
+        "Industry": "Ferrous metal mining and dressing industry",
+        "Operating income amount (billion) $": "3010,70",
+        "Operating income amount (billion) €*": "2709,63",
+        "Operating income Year-over-year growth (%)": "-4,40",
+        "Operating costs amount (billion) $": "2369,10",
+        "Operating costs amount (billion) €*": "2132,19",
+        "Operating costs Year-over-year growth (%)": "-4,10",
+        "Total profit amount (billion) $": "326,60",
+        "Total profit amount (billion) €*": "293,94",
+        "Total profit Year-over-year growth (%)": "-23,80"
+    },
+    {
+        "Industry": "Non-ferrous metal mining and dressing industry",
+        "Operating income amount (billion) $": "2180,90",
+        "Operating income amount (billion) €*": "1962,81",
+        "Operating income Year-over-year growth (%)": "-0,30",
+        "Operating costs amount (billion) $": "1394,30",
+        "Operating costs amount (billion) €*": "1254,87",
+        "Operating costs Year-over-year growth (%)": "-2,50",
+        "Total profit amount (billion) $": "512,10",
+        "Total profit amount (billion) €*": "460,89",
+        "Total profit Year-over-year growth (%)": "4,00"
+    },
+    {
+        "Industry": "Non-metallic ore mining and dressing industry",
+        "Operating income amount (billion) $": "2244,70",
+        "Operating income amount (billion) €*": "2020,23",
+        "Operating income Year-over-year growth (%)": "-5,70",
+        "Operating costs amount (billion) $": "1612,00",
+        "Operating costs amount (billion) €*": "1450,80",
+        "Operating costs Year-over-year growth (%)": "-5,70",
+        "Total profit amount (billion) $": "236,10",
+        "Total profit amount (billion) €*": "212,49",
+        "Total profit Year-over-year growth (%)": "-7,00"
+    },
+    {
+        "Industry": "Mining professional and ancillary activities",
+        "Operating income amount (billion) $": "1537,30",
+        "Operating income amount (billion) €*": "1383,57",
+        "Operating income Year-over-year growth (%)": "12,70",
+        "Operating costs amount (billion) $": "1453,70",
+        "Operating costs amount (billion) €*": "1308,33",
+        "Operating costs Year-over-year growth (%)": "11,80",
+        "Total profit amount (billion) $": "2,60",
+        "Total profit amount (billion) €*": "2,34",
+        "Total profit Year-over-year growth (%)": "-77,00"
+    },
+    {
+        "Industry": "Note: Some indicators in this table have a situation where the total is not equal to the sum of the sub-items, which is due to rounding of the data and has not been mechanically adjusted.\n            * Conversion rate: 1$=0,9€"
+    }
+]
+```
+
+
 ## Options
 
 ### fetchOptions (only `convertUrl`)
@@ -258,6 +476,29 @@ tabletojson.convertUrl('https://www.timeanddate.com/holidays/ireland/2017', {
     }
 });
 ```
+
+### headers
+Define the rows to be used as keys in the output json object. The values will be concatenated with the given concatWith value. [default=undefined]
+``` javascript
+const html = fs.readFileSync(path.resolve(process.cwd(), '../test/tables.html'), {
+    encoding: 'utf-8',
+});
+const converted = tabletojson.convert(html, {
+    id: ['table15'],
+
+    // from (Optional) Start row [default=0]
+    // to End row
+    // concatWith Concatenate the values with this string
+
+    headers: {
+        to: 2,
+        concatWith: ' ',
+    },
+});
+console.log(JSON.stringify(converted, null, 2));
+```
+
+
 
 ### stripHtmlFromHeadings
 

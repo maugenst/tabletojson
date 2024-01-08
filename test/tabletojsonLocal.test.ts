@@ -676,4 +676,19 @@ describe('TableToJSON Local', function () {
         expect(converted).toBeDefined();
         expect(converted.length).toBe(0);
     });
+
+    it('Converting a multi-level header table', async function () {
+        const converted = tabletojson.convert(html, {
+            id: ['table15'],
+            headers: {
+                to: 2,
+                concatWith: ' ',
+            },
+        });
+        const table = converted[0];
+        expect(_.has(table[0], 'Industry')).toBeTruthy();
+        expect(table[0].Industry).toEqual('total');
+        expect(converted.length).toBe(1);
+        fs.writeFileSync('test/table15.json', JSON.stringify(table, null, 2));
+    });
 });

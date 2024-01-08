@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio';
 export class Tabletojson {
     static convert(html, options = {
         useFirstRowForHeadings: false,
+        headers: undefined,
         stripHtmlFromHeadings: true,
         stripHtmlFromCells: true,
         stripHtml: null,
@@ -17,6 +18,7 @@ export class Tabletojson {
     }) {
         options = Object.assign({
             useFirstRowForHeadings: false,
+            rowsForHeadings: undefined,
             stripHtmlFromHeadings: true,
             stripHtmlFromCells: true,
             stripHtml: null,
@@ -47,6 +49,64 @@ export class Tabletojson {
             const tableAsJson = [];
             const alreadySeen = {};
             const columnHeadings = [];
+            if (options.headers) {
+                const rows = [];
+                for (let i = options.headers.from || 0; i <= options.headers.to; i++) {
+                    rows.push(i);
+                }
+                let columnLength = 0;
+                const trs = $(table).find('tr');
+                trs.each((_index, row) => {
+                    const cells = $(row).find('td, th');
+                    columnLength = cells.length > columnLength ? cells.length : columnLength;
+                });
+                const createNew2DArray = (columns, ca_rows, defaultValue) => {
+                    return Array.from(Array(ca_rows), (_row) => Array.from(Array(columns), (_cell) => defaultValue));
+                };
+                const headings = createNew2DArray(columnLength, rows.length || 0, undefined);
+                rows.forEach((rowIndex, index) => {
+                    const cells = $(trs[rowIndex]).find('td, th');
+                    let currentColumn = headings[index].indexOf(undefined);
+                    cells.each((_j, cell) => {
+                        const cheerioCell = $(cell);
+                        const cheerioCellColspan = Number(cheerioCell.attr('colspan')).valueOf() || 1;
+                        const cheerioCellRowspan = Number(cheerioCell.attr('rowspan')).valueOf() || 1;
+                        const cellContent = cheerioCell.text().trim();
+                        for (let x = 0; x < cheerioCellColspan; x++) {
+                            if (headings[index][currentColumn] !== undefined) {
+                                currentColumn++;
+                            }
+                            headings[index][currentColumn] = cellContent;
+                            if (cheerioCellRowspan > 1) {
+                                for (let y = 1; y < cheerioCellRowspan; y++) {
+                                    headings[index + y][currentColumn] = '';
+                                }
+                            }
+                            currentColumn++;
+                        }
+                    });
+                });
+                const flatten2DArrayByColumns = (arr) => {
+                    if (arr.length === 0)
+                        return [];
+                    const numRows = arr.length;
+                    const numCols = arr[0].length;
+                    const flattened = new Array(numCols).fill('');
+                    for (let col = 0; col < numCols; col++) {
+                        let columnString = '';
+                        for (let row = 0; row < numRows; row++) {
+                            columnString += (row > 0 ? ' ' : '') + arr[row][col];
+                        }
+                        flattened[col] = columnString.trim();
+                    }
+                    return flattened;
+                };
+                const flatHeadings = flatten2DArrayByColumns(headings);
+                rows.sort((a, b) => b - a).forEach((rowToBeRemoved) => {
+                    $(`table${additionalSelectors} tr`).eq(rowToBeRemoved).remove();
+                });
+                $(table).prepend(`<thead><tr><th>${flatHeadings.join('</th><th>')}</th></tr></thead>`);
+            }
             let trs = $(table).find('tr');
             if (options.useFirstRowForHeadings) {
                 trs = $(trs[0]);

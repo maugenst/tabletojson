@@ -1,19 +1,52 @@
 import * as cheerio from 'cheerio';
 
+/**
+ * HeaderRows - defining the rows to be used as keys in the output json object
+ *  The values will be concatenated with the given concatWith value
+ *  Rowspans and colspans will be taken into account
+ * @property {number} from (Optional) Start row [default=0]
+ * @property {number} to End row
+ * @property {string} concatWith Concatenate the values with this string
+ */
+export type HeaderRows = {
+    from?: number;
+    to: number;
+    concatWith: string;
+};
+
+/**
+ * Options for TableToJson
+ * @property {boolean} useFirstRowForHeadings Use the first row as header [default=false]
+ * @property {HeaderRows} headers Use the following rows as keys in the output json object. The values are flattened and concatenated the values with 'concatWith' [default=undefined]
+ * @property {boolean} stripHtmlFromHeadings Strip all HTML from headings [default=true]
+ * @property {boolean} stripHtmlFromCells Strip HTML from cells [default=true]
+ * @property {boolean} stripHtml Strip off HTML [default=null] if set true stripHtmlFromHeadings and stripHtmlFromCells will also be true
+ * @property {boolean} forceIndexAsNumber Force the index to be used as number [default=false]
+ * @property {boolean} countDuplicateHeadings If given a _<NUMBER> will be added to the duplicate key [default=false]
+ * @property {number[]} ignoreColumns {Array} Array of column indices to ignored [default=null]
+ * @property {number[]} onlyColumns {Array} Array of column indices to be used. Overrides ignoreColumn [default=null]
+ * @property {boolean} ignoreHiddenRows Ignoring hidden rows [default=true]
+ * @property {string[]} headings {Array} Array of Strings to be used as headings [default=null]
+ * @property {string[]} containsClasses {Array} Array of classes to find a specific table [default=null]
+ * @property {string[]} id {Array} string of an id [default=null]
+ * @property {number} limitrows {Number} Number that limits the result of all rows to a given amount of data [default=null]
+ * @property {RequestInit} fetchOptions Options to be passed to request object
+ */
 export type TableToJsonOptions = {
-    useFirstRowForHeadings?: boolean; // Use the first row as header [default=false]
-    stripHtmlFromHeadings?: boolean; // Strip all HTML from headings [default=true]
-    stripHtmlFromCells?: boolean; // Strip HTML from cells [default=true]
-    stripHtml?: boolean | null; // Strip off HTML [default=null] if set true stripHtmlFromHeadings and stripHtmlFromCells will also be true
-    forceIndexAsNumber?: boolean; // Force the index to be used as number [default=false]
-    countDuplicateHeadings?: boolean; // If given a _<NUMBER> will be added to the duplicate key [default=false]
-    ignoreColumns?: number[] | null; // {Array} Array of column indices to ignored [default=null]
-    onlyColumns?: number[] | null; // {Array} Array of column indices to be used. Overrides ignoreColumn [default=null]
-    ignoreHiddenRows?: boolean; // Ignoring hidden rows [default=true]
-    id?: string[] | null; // string of an id [default=null]
-    headings?: string[] | null; // {Array} Array of Strings to be used as headings [default=null]
-    containsClasses?: string[] | null; // {Array} Array of classes to find a specific table [default=null]
-    limitrows?: number | null; // {Integer} Integer that limits the result of all rows to a given amount of data [default=null]
+    useFirstRowForHeadings?: boolean;
+    headers?: HeaderRows;
+    stripHtmlFromHeadings?: boolean;
+    stripHtmlFromCells?: boolean;
+    stripHtml?: boolean | null;
+    forceIndexAsNumber?: boolean;
+    countDuplicateHeadings?: boolean;
+    ignoreColumns?: number[] | null;
+    onlyColumns?: number[] | null;
+    ignoreHiddenRows?: boolean;
+    id?: string[] | null;
+    headings?: string[] | null;
+    containsClasses?: string[] | null;
+    limitrows?: number | null;
     fetchOptions?: RequestInit;
 };
 
@@ -24,6 +57,7 @@ export class Tabletojson {
         html: string,
         options: TableToJsonOptions = {
             useFirstRowForHeadings: false,
+            headers: undefined,
             stripHtmlFromHeadings: true,
             stripHtmlFromCells: true,
             stripHtml: null,
@@ -41,6 +75,7 @@ export class Tabletojson {
         options = Object.assign(
             {
                 useFirstRowForHeadings: false,
+                rowsForHeadings: undefined,
                 stripHtmlFromHeadings: true,
                 stripHtmlFromCells: true,
                 stripHtml: null,
@@ -81,6 +116,87 @@ export class Tabletojson {
             // @todo Try to support badly formated tables.
             const columnHeadings: string[] = [];
 
+            // To have the correct names of keys in the json result we need to first analyze the header rows
+            // flatten them, and concatenate the values
+            if (options.headers) {
+                const rows: number[] = [];
+                for (let i = options.headers.from || 0; i <= options.headers.to; i++) {
+                    rows.push(i);
+                }
+
+                // Analyze the table to find the amount of columns
+                let columnLength: number = 0;
+                // Get the amount of columns
+                const trs: cheerio.Cheerio = $(table).find('tr');
+                trs.each((_index: number, row: cheerio.Element) => {
+                    const cells: cheerio.Cheerio = $(row).find('td, th');
+                    columnLength = cells.length > columnLength ? cells.length : columnLength;
+                });
+
+                // Create a 2D array with the amount of columns and rows and fill it with the default value
+                const createNew2DArray = (columns: number, ca_rows: number, defaultValue: any) => {
+                    return Array.from(Array(ca_rows), (_row) => Array.from(Array(columns), (_cell) => defaultValue));
+                };
+                const headings: any[] = createNew2DArray(columnLength, rows.length || 0, undefined);
+
+                // Fill the 2D array with the values from the table while taking care of the colspan and rowspan
+                rows.forEach((rowIndex: number, index: number) => {
+                    const cells: cheerio.Cheerio = $(trs[rowIndex]).find('td, th');
+                    let currentColumn: number = headings[index].indexOf(undefined);
+                    cells.each((_j: number, cell: cheerio.Element) => {
+                        const cheerioCell: cheerio.Cheerio = $(cell);
+                        const cheerioCellColspan: number | undefined =
+                            Number(cheerioCell.attr('colspan')).valueOf() || 1;
+                        const cheerioCellRowspan: number | undefined =
+                            Number(cheerioCell.attr('rowspan')).valueOf() || 1;
+
+                        const cellContent: string = cheerioCell.text().trim();
+                        for (let x: number = 0; x < cheerioCellColspan; x++) {
+                            if (headings[index][currentColumn] !== undefined) {
+                                currentColumn++;
+                            }
+
+                            headings[index][currentColumn] = cellContent;
+                            if (cheerioCellRowspan > 1) {
+                                for (let y: number = 1; y < cheerioCellRowspan; y++) {
+                                    headings[index + y][currentColumn] = '';
+                                }
+                            }
+                            currentColumn++;
+                        }
+                    });
+                });
+
+                // Flatten the 2D array by columns and concatenate the values with the given concatWith value
+                const flatten2DArrayByColumns = (arr) => {
+                    // Ensure the array is not empty
+                    if (arr.length === 0) return [];
+
+                    const numRows = arr.length;
+                    const numCols = arr[0].length;
+                    const flattened: any[] = new Array(numCols).fill('');
+
+                    for (let col: number = 0; col < numCols; col++) {
+                        let columnString: string = '';
+                        for (let row: number = 0; row < numRows; row++) {
+                            columnString += (row > 0 ? ' ' : '') + arr[row][col];
+                        }
+                        flattened[col] = columnString.trim();
+                    }
+
+                    return flattened;
+                };
+
+                const flatHeadings = flatten2DArrayByColumns(headings);
+                // Remove the "old" rows from the table
+                rows.sort((a, b) => b - a).forEach((rowToBeRemoved: number) => {
+                    $(`table${additionalSelectors} tr`).eq(rowToBeRemoved).remove();
+                });
+                // Add the new header row to the table
+                $(table).prepend(`<thead><tr><th>${flatHeadings.join('</th><th>')}</th></tr></thead>`);
+            }
+
+            // Regular table work starts now
             let trs: cheerio.Cheerio = $(table).find('tr');
 
             if (options.useFirstRowForHeadings) {
@@ -107,8 +223,8 @@ export class Tabletojson {
                         value = options.stripHtmlFromHeadings
                             ? cheerioCellText.trim()
                             : cheerioCellHtml
-                            ? cheerioCellHtml.trim()
-                            : '';
+                              ? cheerioCellHtml.trim()
+                              : '';
                     }
 
                     const seen: any = alreadySeen[value];
@@ -183,8 +299,8 @@ export class Tabletojson {
                         const content: string = options.stripHtmlFromCells
                             ? cheerioCellText.trim()
                             : cheerioCellHtml
-                            ? cheerioCellHtml.trim()
-                            : '';
+                              ? cheerioCellHtml.trim()
+                              : '';
 
                         setColumn(j, content);
 
