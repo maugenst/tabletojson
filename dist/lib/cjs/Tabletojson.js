@@ -85,6 +85,8 @@ class Tabletojson {
             const alreadySeen = {};
             const columnHeadings = [];
             if (options.headers) {
+                if (options.headers.to === 0)
+                    return;
                 const rows = [];
                 for (let i = options.headers.from || 0; i <= options.headers.to; i++) {
                     rows.push(i);
@@ -98,7 +100,7 @@ class Tabletojson {
                 const createNew2DArray = (columns, ca_rows, defaultValue) => {
                     return Array.from(Array(ca_rows), (_row) => Array.from(Array(columns), (_cell) => defaultValue));
                 };
-                const headings = createNew2DArray(columnLength, rows.length || 0, undefined);
+                const headings = createNew2DArray(columnLength, rows.length, undefined);
                 rows.forEach((rowIndex, index) => {
                     const cells = $(trs[rowIndex]).find('td, th');
                     let currentColumn = headings[index].indexOf(undefined);
@@ -122,8 +124,6 @@ class Tabletojson {
                     });
                 });
                 const flatten2DArrayByColumns = (arr) => {
-                    if (arr.length === 0)
-                        return [];
                     const numRows = arr.length;
                     const numCols = arr[0].length;
                     const flattened = new Array(numCols).fill('');
@@ -140,7 +140,9 @@ class Tabletojson {
                 rows.sort((a, b) => b - a).forEach((rowToBeRemoved) => {
                     $(`table${additionalSelectors} tr`).eq(rowToBeRemoved).remove();
                 });
-                $(table).prepend(`<thead><tr><th>${flatHeadings.join('</th><th>')}</th></tr></thead>`);
+                if (flatHeadings.length > 0) {
+                    $(table).prepend(`<thead><tr><th>${flatHeadings.join('</th><th>')}</th></tr></thead>`);
+                }
             }
             let trs = $(table).find('tr');
             if (options.useFirstRowForHeadings) {

@@ -90,6 +90,6 @@
     "lint": "eslint . -c .eslintrc --ext .ts",
     "prepare": "npm run clean && npm run build && npm run lint",
     "prebuild": "npm run lint",
-    "test": "jest --coverage"
+    "test": "jest --coverage --"
   }
 }

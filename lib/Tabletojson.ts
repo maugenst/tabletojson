@@ -5,7 +5,7 @@ import * as cheerio from 'cheerio';
  *  The values will be concatenated with the given concatWith value
  *  Rowspans and colspans will be taken into account
  * @property {number} from (Optional) Start row [default=0]
- * @property {number} to End row
+ * @property {number} to End row, must be a value greater than 0
  * @property {string} concatWith Concatenate the values with this string
  */
 export type HeaderRows = {
@@ -119,6 +119,7 @@ export class Tabletojson {
             // To have the correct names of keys in the json result we need to first analyze the header rows
             // flatten them, and concatenate the values
             if (options.headers) {
+                if (options.headers.to === 0) return;
                 const rows: number[] = [];
                 for (let i = options.headers.from || 0; i <= options.headers.to; i++) {
                     rows.push(i);
@@ -137,7 +138,7 @@ export class Tabletojson {
                 const createNew2DArray = (columns: number, ca_rows: number, defaultValue: any) => {
                     return Array.from(Array(ca_rows), (_row) => Array.from(Array(columns), (_cell) => defaultValue));
                 };
-                const headings: any[] = createNew2DArray(columnLength, rows.length || 0, undefined);
+                const headings: any[] = createNew2DArray(columnLength, rows.length, undefined);
 
                 // Fill the 2D array with the values from the table while taking care of the colspan and rowspan
                 rows.forEach((rowIndex: number, index: number) => {
@@ -169,9 +170,6 @@ export class Tabletojson {
 
                 // Flatten the 2D array by columns and concatenate the values with the given concatWith value
                 const flatten2DArrayByColumns = (arr) => {
-                    // Ensure the array is not empty
-                    if (arr.length === 0) return [];
-
                     const numRows = arr.length;
                     const numCols = arr[0].length;
                     const flattened: any[] = new Array(numCols).fill('');
@@ -193,7 +191,9 @@ export class Tabletojson {
                     $(`table${additionalSelectors} tr`).eq(rowToBeRemoved).remove();
                 });
                 // Add the new header row to the table
-                $(table).prepend(`<thead><tr><th>${flatHeadings.join('</th><th>')}</th></tr></thead>`);
+                if (flatHeadings.length > 0) {
+                    $(table).prepend(`<thead><tr><th>${flatHeadings.join('</th><th>')}</th></tr></thead>`);
+                }
             }
 
             // Regular table work starts now
