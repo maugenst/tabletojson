@@ -52,6 +52,8 @@ export type TableToJsonOptions = {
 
 export type CallbackFunction = (conversionResult: any) => any;
 
+type RowSpan = {content: string; value: number} | null;
+
 export class Tabletojson {
     static convert(
         html: string,
@@ -238,7 +240,7 @@ export class Tabletojson {
                 });
             });
 
-            let rowspans: any[] = [];
+            let rowspans: RowSpan[] = [];
 
             // Fetch each row
             $(table)
@@ -255,14 +257,14 @@ export class Tabletojson {
                     }
 
                     // Add content from rowspans
-                    rowspans.forEach((rowspan: any, index: number) => {
+                    rowspans.forEach((rowspan, index) => {
                         if (!rowspan) return;
 
                         setColumn(index, rowspan.content);
 
                         rowspan.value--;
                     });
-                    const nextrowspans: any[] = [...rowspans];
+                    const nextrowspans = [...rowspans];
 
                     const cells: cheerio.Cheerio = options.useFirstRowForHeadings
                         ? $(row).find('td, th')
@@ -278,7 +280,7 @@ export class Tabletojson {
                         }
 
                         // Apply rowspans offsets
-                        let aux: number = j;
+                        let aux = j;
                         j = 0;
                         do {
                             while (rowspans[j]) j++;
@@ -310,7 +312,7 @@ export class Tabletojson {
                     });
 
                     rowspans = nextrowspans;
-                    rowspans.forEach((rowspan: any, index: number) => {
+                    rowspans.forEach((rowspan, index) => {
                         if (rowspan && rowspan.value === 0) rowspans[index] = null;
                     });
 
@@ -403,4 +405,5 @@ export class Tabletojson {
         }
     }
 }
+
 export {Tabletojson as tabletojson};
