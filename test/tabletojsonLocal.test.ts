@@ -618,7 +618,7 @@ describe('TableToJSON Local', function () {
         expect(table[4].Age).toBe('17');
     });
 
-    it.only('Complex rowspan usage leads to correct object representation', async function () {
+    it('Complex rowspan usage leads to correct object representation', async function () {
         const converted = tabletojson.convert(html, {
             id: ['table12-a'],
         });
@@ -627,8 +627,6 @@ describe('TableToJSON Local', function () {
         const table = converted[0];
 
         expect(table.length).toBe(6);
-
-        console.log(table);
 
         expect(table[0].Department).toBe('Engineering');
         expect(table[1].Department).toBe('Engineering');
