@@ -618,6 +618,52 @@ describe('TableToJSON Local', function () {
         expect(table[4].Age).toBe('17');
     });
 
+    it('Complex rowspan usage leads to correct object representation', async function () {
+        const converted = tabletojson.convert(html, {
+            id: ['table12-a'],
+        });
+        expect(converted).toBeDefined();
+        expect(converted.length).toBe(1);
+        const table = converted[0];
+
+        expect(table.length).toBe(6);
+
+        expect(table[0].Department).toBe('Engineering');
+        expect(table[1].Department).toBe('Engineering');
+        expect(table[2].Department).toBe('Engineering');
+        expect(table[3].Department).toBe('Engineering');
+        expect(table[4].Department).toBe('Social Science');
+        expect(table[5].Department).toBe('Social Science');
+
+        expect(table[0].Major).toBe('Computer Science');
+        expect(table[1].Major).toBe('Computer Science');
+        expect(table[2].Major).toBe('Computer Science');
+        expect(table[3].Major).toBe('Electrical Engineering');
+        expect(table[4].Major).toBe('Economics');
+        expect(table[5].Major).toBe('Economics');
+
+        expect(table[0].Class).toBe('CS101');
+        expect(table[1].Class).toBe('CS201');
+        expect(table[2].Class).toBe('CS303');
+        expect(table[3].Class).toBe('EE101');
+        expect(table[4].Class).toBe('EC101');
+        expect(table[5].Class).toBe('EC401');
+
+        expect(table[0].Instructor).toBe('Kim');
+        expect(table[1].Instructor).toBe('Garcia');
+        expect(table[2].Instructor).toBe('Garcia');
+        expect(table[3].Instructor).toBe('Müller');
+        expect(table[4].Instructor).toBe('Nguyen');
+        expect(table[5].Instructor).toBe('Smith');
+
+        expect(table[0].Credit).toBe('3');
+        expect(table[1].Credit).toBe('3');
+        expect(table[2].Credit).toBe('2');
+        expect(table[3].Credit).toBe('3');
+        expect(table[4].Credit).toBe('3');
+        expect(table[5].Credit).toBe('3');
+    });
+
     it('Options: containsClasses', async function () {
         const converted = tabletojson.convert(html, {
             containsClasses: ['table'],

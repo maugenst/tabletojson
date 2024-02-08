@@ -1390,6 +1390,53 @@
     </tbody>
 </table>
 
+<h2>Table #12-a: Table with extremely complex rowspans</h2>
+<table id="table12-a" class="table" border="1">
+    <thead>
+    <tr>
+        <th>Department</th>
+        <th>Major</th>
+        <th>Class</th>
+        <th>Instructor</th>
+        <th>Credit</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="4">Engineering</td>
+            <td rowspan="3">Computer Science</td>
+            <td>CS101</td>
+            <td>Kim</td>
+            <td rowspan="2">3</td>
+        </tr>
+        <tr>
+            <td>CS201</td>
+            <td rowspan="2">Garcia</td>
+        </tr>
+        <tr>
+            <td>CS303</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Electrical Engineering</td>
+            <td>EE101</td>
+            <td>Müller</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Social Science</td>
+            <td rowspan="2">Economics</td>
+            <td>EC101</td>
+            <td>Nguyen</td>
+            <td rowspan="2">3</td>
+        </tr>
+        <tr>
+            <td>EC401</td>
+            <td>Smith</td>
+        </tr>
+    </tbody>
+</table>
+
 <h2>Table #13: Table with no headers</h2>
 <table id="table13" class="table" border="1">
     <tbody>

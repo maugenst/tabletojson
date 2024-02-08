@@ -52,6 +52,8 @@ export type TableToJsonOptions = {
 
 export type CallbackFunction = (conversionResult: any) => any;
 
+type RowSpan = {content: string; value: number} | null;
+
 export class Tabletojson {
     static convert(
         html: string,
@@ -208,9 +210,10 @@ export class Tabletojson {
                 const cells: cheerio.Cheerio = options.useFirstRowForHeadings
                     ? $(row).find('td, th')
                     : $(row).find('th');
-                cells.each((j: number, cell: cheerio.Element) => {
-                    if (options.onlyColumns && !options.onlyColumns.includes(j)) return;
-                    if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(j)) return;
+                cells.each((cellIndex: number, cell: cheerio.Element) => {
+                    if (options.onlyColumns && !options.onlyColumns.includes(cellIndex)) return;
+                    if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(cellIndex))
+                        return;
                     let value: string = '';
 
                     if (options.headings) {
@@ -230,15 +233,15 @@ export class Tabletojson {
                     const seen: any = alreadySeen[value];
                     if (seen && options.countDuplicateHeadings) {
                         suffix = ++alreadySeen[value];
-                        columnHeadings[j] = value !== '' ? `${value}_${suffix}` : `${j}`;
+                        columnHeadings[cellIndex] = value !== '' ? `${value}_${suffix}` : `${cellIndex}`;
                     } else {
                         alreadySeen[value] = 1;
-                        columnHeadings[j] = value;
+                        columnHeadings[cellIndex] = value;
                     }
                 });
             });
 
-            let rowspans: any[] = [];
+            let rowspans: RowSpan[] = [];
 
             // Fetch each row
             $(table)
@@ -255,19 +258,19 @@ export class Tabletojson {
                     }
 
                     // Add content from rowspans
-                    rowspans.forEach((rowspan: any, index: number) => {
+                    rowspans.forEach((rowspan, index) => {
                         if (!rowspan) return;
 
                         setColumn(index, rowspan.content);
 
                         rowspan.value--;
                     });
-                    const nextrowspans: any[] = [...rowspans];
+                    const nextrowspans = [...rowspans];
 
                     const cells: cheerio.Cheerio = options.useFirstRowForHeadings
                         ? $(row).find('td, th')
                         : $(row).find('td');
-                    cells.each((j: number, cell: cheerio.Element) => {
+                    cells.each((cellIndex: number, cell: cheerio.Element) => {
                         // ignoreHiddenRows
                         if (options.ignoreHiddenRows) {
                             const style: string | undefined = $(row).attr('style');
@@ -278,18 +281,15 @@ export class Tabletojson {
                         }
 
                         // Apply rowspans offsets
-                        let aux: number = j;
-                        j = 0;
-                        do {
-                            while (rowspans[j]) j++;
-                            while (aux && !rowspans[j]) {
-                                j++;
-                                aux--;
-                            }
-                        } while (aux);
+                        const adjustedIndex = applyOffsets(cellIndex, rowspans);
 
-                        if (options.onlyColumns && !options.onlyColumns.includes(j)) return;
-                        if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(j)) return;
+                        if (options.onlyColumns && !options.onlyColumns.includes(adjustedIndex)) return;
+                        if (
+                            options.ignoreColumns &&
+                            !options.onlyColumns &&
+                            options.ignoreColumns.includes(adjustedIndex)
+                        )
+                            return;
 
                         const cheerioCell: cheerio.Cheerio = $(cell);
                         const cheerioCellText: string = cheerioCell.text();
@@ -302,15 +302,15 @@ export class Tabletojson {
                               ? cheerioCellHtml.trim()
                               : '';
 
-                        setColumn(j, content);
+                        setColumn(adjustedIndex, content);
 
                         // Check rowspan
                         const value: number = cheerioCellRowspan ? parseInt(cheerioCellRowspan, 10) - 1 : 0;
-                        if (value > 0) nextrowspans[j] = {content, value};
+                        if (value > 0) nextrowspans[adjustedIndex] = {content, value};
                     });
 
                     rowspans = nextrowspans;
-                    rowspans.forEach((rowspan: any, index: number) => {
+                    rowspans.forEach((rowspan, index) => {
                         if (rowspan && rowspan.value === 0) rowspans[index] = null;
                     });
 
@@ -403,4 +403,23 @@ export class Tabletojson {
         }
     }
 }
+
+const applyOffsets = (cellIndex: number, rowspans: RowSpan[]) => {
+    let nullCount = 0;
+
+    for (let i = 0; i < rowspans.length; i++) {
+        if (rowspans[i]) {
+            continue;
+        }
+
+        if (nullCount === cellIndex) {
+            return i;
+        }
+
+        nullCount++;
+    }
+
+    return cellIndex + rowspans.length - nullCount;
+};
+
 export {Tabletojson as tabletojson};
