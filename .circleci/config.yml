@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@5.1.0
-  coveralls: coveralls/coveralls@2.2.0
+  coverage-reporter: codacy/coverage-reporter@13.15.1
 jobs:
   buildAndTest:
     # Reuse Docker container specification given by the node Orb
@@ -11,9 +11,15 @@ jobs:
       - node/install-packages
       - run: npm run build
       - run: npm test
-      - coveralls/upload:
-          flag_name: TableToJson Testing Coverage
-          verbose: true
+  codacy-coverage-report:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout
+      - run: npm test
+      - coverage-reporter/send_report:
+          coverage-reports: report.xml,coverage.info
+          project-token: $CODACY_PROJECT_TOKEN
 
 workflows:
   version: 2
