@@ -2,10 +2,11 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.0
   coverage-reporter: codacy/coverage-reporter@13.15.1
+
 jobs:
   buildAndTest:
-    # Reuse Docker container specification given by the node Orb
-    executor: node/default
+    docker:
+      - image: cimg/node:lts
     steps:
       - checkout
       - node/install-packages
@@ -16,7 +17,7 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - coverage-reporter/send_report:
-          coverage-reports: coverage/lcov.info
+          coverage-reports: ./coverage/lcov.info
           project-token: $CODACY_PROJECT_TOKEN
 
 workflows:
