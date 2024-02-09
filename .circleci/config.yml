@@ -11,12 +11,7 @@ jobs:
       - node/install-packages
       - run: npm run build
       - run: npm test
-  codacy-coverage-report:
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
-      - checkout
-      - run: npm test
+      - run: java -version
       - coverage-reporter/send_report:
           coverage-reports: report.xml,coverage.info
           project-token: $CODACY_PROJECT_TOKEN
