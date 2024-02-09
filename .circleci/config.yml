@@ -12,10 +12,12 @@ jobs:
       - node/install-packages
       - run: npm run build
       - run: npm test
+      
   codacyCoverageReport:
     docker:
       - image: cimg/openjdk:lts
     steps:
+      - checkout
       - run:
           name: Check Java Version
           command: java -version
