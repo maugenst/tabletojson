@@ -18,9 +18,6 @@ jobs:
       - image: cimg/openjdk:lts
     steps:
       - checkout
-      - run:
-          name: Check Java Version
-          command: java -version
       - coverage-reporter/send_report:
           coverage-reports: ./coverage/lcov.info
           project-token: $CODACY_PROJECT_TOKEN
