@@ -9,9 +9,13 @@ jobs:
     steps:
       - checkout
       - node/install-packages
-      - run: npm run build
-      - run: npm test
-      - run: apt-get install -y openjdk-8
+      - run: |
+          npm run build
+          npm test
+          LATEST_VERSION="$(curl -Ls https://artifacts.codacy.com/bin/codacy-coverage-reporter/latest)"
+          curl -Ls -o codacy-coverage-reporter "https://artifacts.codacy.com/bin/codacy-coverage-reporter/${LATEST_VERSION}/codacy-coverage-reporter-linux"
+          chmod +x codacy-coverage-reporter
+          ./codacy-coverage-reporter ./coverage/lcov.info
 
 workflows:
   version: 2
