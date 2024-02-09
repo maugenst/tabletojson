@@ -12,7 +12,7 @@ jobs:
       - node/install-packages
       - run: npm run build
       - run: npm test
-  codacy-coverage-report:
+  codacyCoverageReport:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
@@ -25,6 +25,6 @@ workflows:
   build_and_test:
     jobs:
       - buildAndTest
-      - codacy-coverage-report:
+      - codacyCoverageReport:
           requires:
             - buildAndTest
