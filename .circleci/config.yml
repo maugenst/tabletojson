@@ -9,13 +9,13 @@ jobs:
     steps:
       - checkout
       - node/install-packages
-      - run: |
-          npm run build
-          npm test
-          LATEST_VERSION="$(curl -Ls https://artifacts.codacy.com/bin/codacy-coverage-reporter/latest)"
-          curl -Ls -o codacy-coverage-reporter "https://artifacts.codacy.com/bin/codacy-coverage-reporter/${LATEST_VERSION}/codacy-coverage-reporter-linux"
-          chmod +x codacy-coverage-reporter
-          ./codacy-coverage-reporter ./coverage/lcov.info
+      - run: npm run build
+      - run: npm test
+      - run: LATEST_VERSION="$(curl -Ls https://artifacts.codacy.com/bin/codacy-coverage-reporter/latest)"
+      - run: echo $LATEST_VERSION
+      - run: curl -Ls -o codacy-coverage-reporter "https://artifacts.codacy.com/bin/codacy-coverage-reporter/${LATEST_VERSION}/codacy-coverage-reporter-linux"
+      - run: chmod +x codacy-coverage-reporter
+      - run: codacy-coverage-reporter ./coverage/lcov.info
 
 workflows:
   version: 2
