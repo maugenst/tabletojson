@@ -7,6 +7,53 @@
 [![Coverage Status](https://coveralls.io/repos/github/maugenst/tabletojson/badge.svg?branch=master)](https://coveralls.io/github/maugenst/tabletojson?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/maugenst/tabletojson/badge.svg)](https://snyk.io/test/github/maugenst/tabletojson)
 
+Convert local or remote HTML embedded tables into JSON objects.
+
+# Table of Contents
+- [Introduction](#introduction)
+- [Incompatible changes](#incompatible-changes)
+    * [Conversion from version 1.+ to 2.x](#conversion-from-version-1-to-2x)
+    * [Conversion from version 2.0.1 to 3.x](#conversion-from-version-201-to-3x)
+- [Installation](#installation)
+- [Quickstart](#quickstart)
+    * [esm](#esm)
+    * [commonjs](#commonjs)
+    * [Remote (`convertUrl`)](#remote-converturl)
+    * [Local (`convert`)](#local-convert)
+- [Use case examples](#use-case-examples)
+    * [Duplicate column headings](#duplicate-column-headings)
+    * [Tables with rowspan](#tables-with-rowspan)
+    * [Tables with complex rowspan](#tables-with-complex-rowspan)
+    * [Tables with even more complex rowspans](#tables-with-even-more-complex-rowspans)
+    * [Tables with headings in the first column](#tables-with-headings-in-the-first-column)
+    * [Tables with HTML](#tables-with-html)
+    * [Tables with complex headers](#tables-with-complex-headers)
+- [Options](#options)
+    * [fetchOptions (only `convertUrl`)](#fetchoptions-only-converturl)
+    * [headers](#headers)
+    * [stripHtmlFromHeadings](#striphtmlfromheadings)
+    * [stripHtmlFromCells](#striphtmlfromcells)
+    * [forceIndexAsNumber](#forceindexasnumber)
+    * [countDuplicateHeadings](#countduplicateheadings)
+    * [ignoreColumns](#ignorecolumns)
+    * [onlyColumns](#onlycolumns)
+    * [ignoreHiddenRows](#ignorehiddenrows)
+    * [headings](#headings)
+    * [limitrows](#limitrows)
+        + [Huge Table (see test/tables.html)](#huge-table-see-testtableshtml)
+        + [Example output with limitrows: 5](#example-output-with-limitrows-5)
+    * [containsClasses](#containsclasses)
+- [Known issues and limitations](#known-issues-and-limitations)
+- [Usage](#usage)
+    * [Convert an HTML text into an array of all the tables on the page](#convert-an-html-text-into-an-array-of-all-the-tables-on-the-page)
+    * [Fetch a URL and parse all it's tables into JSON, using a callback](#fetch-a-url-and-parse-all-its-tables-into-json-using-a-callback)
+    * [Fetch a URL and parse all it's tables into JSON, using promises](#fetch-a-url-and-parse-all-its-tables-into-json-using-promises)
+    * [Fetch a table from Wikipedia and combine with json2csv to convert to CSV](#fetch-a-table-from-wikipedia-and-combine-with-json2csv-to-convert-to-csv)
+- [Contributing](#contributing)
+    * [Contributors](#contributors)
+
+## Introduction
+
 Tabletojson attempts to convert local or remote HTML tables into JSON with a very low footprint. 
 Can be passed the markup for a single table as a string, a fragment of HTML or
 an entire page or just a URL (with an optional callback function; promises also
@@ -42,13 +89,13 @@ cd dist/examples
 node --experimental-vm-modules --experimental-specifier-resolution=node example-1.js --prefix=dist/examples
 ```
 
-## Basic usage
-
-Install via npm
+## Installation
 
 ```sh
 npm install tabletojson
 ```
+
+## Quickstart
 
 ### esm
 
@@ -80,7 +127,7 @@ tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', 
 
 ### Local (`convert`)
 
-Have a look in the examples.
+More examples can be found in examples folder.
 
 ```typescript
 // example-6.ts
@@ -94,16 +141,18 @@ const converted = tabletojson.convert(html);
 console.log(converted);
 ```
 
+## Use case examples
+
 ### Duplicate column headings
 
-If there are duplicate column headings, subsequent headings are suffixed with a
+Tables with duplicate column headings, subsequent headings are suffixed with a
 count:
 
 PLACE | VALUE | PLACE | VALUE
 ------|-------|-------|------
   abc |     1 |   def |     2
 
-```js
+```json
 [{
   PLACE: 'abc', VALUE: '1',
   PLACE_2: 'def', VALUE_2: '2',
@@ -112,7 +161,7 @@ PLACE | VALUE | PLACE | VALUE
 
 ### Tables with rowspan
 
-Having tables with rowspan, the content of the spawned cell must be available in
+In tables with rowspan, the content of the spawned cell must be available in
 the respective object.
 
 <table id="table11" class="table" border="1">
@@ -140,7 +189,7 @@ the respective object.
     </tbody>
 </table>
 
-```js
+```json
 [{
   PARENT: 'Marry', CHILD: 'Tom', AGE, '3',
   PARENT: 'Marry', CHILD: 'Steve', AGE, '12',
@@ -150,7 +199,7 @@ the respective object.
 
 ### Tables with complex rowspan
 
-Having tables with complex rowspans, the content of the spawned cell must be available in the respective object.
+In tables with complex rowspans, the content of the spawned cell must be available in the respective object.
 
 <table id="table12" class="table" border="1">
     <thead>
@@ -184,7 +233,7 @@ Having tables with complex rowspans, the content of the spawned cell must be ava
     </tbody>
 </table>
 
-```js
+```json
 [{
   PARENT: 'Marry', CHILD: 'Sue', AGE, '15'
   PARENT: 'Marry', CHILD: 'Steve', AGE, '12',
@@ -192,6 +241,104 @@ Having tables with complex rowspans, the content of the spawned cell must be ava
   PARENT: 'Taylor', CHILD: 'Tom', AGE, '3',
   PARENT: 'Taylor', CHILD: 'Peter', AGE, '17'
 }]
+```
+
+### Tables with even more complex rowspans
+
+In tables with even more complex rowspans, the content of the spawned cell must be available in the respective object.
+
+<table id="table12-a" class="table" border="1">
+    <thead>
+    <tr>
+        <th>Department</th>
+        <th>Major</th>
+        <th>Class</th>
+        <th>Instructor</th>
+        <th>Credit</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="4">Engineering</td>
+            <td rowspan="3">Computer Science</td>
+            <td>CS101</td>
+            <td>Kim</td>
+            <td rowspan="2">3</td>
+        </tr>
+        <tr>
+            <td>CS201</td>
+            <td rowspan="2">Garcia</td>
+        </tr>
+        <tr>
+            <td>CS303</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Electrical Engineering</td>
+            <td>EE101</td>
+            <td>Müller</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Social Science</td>
+            <td rowspan="2">Economics</td>
+            <td>EC101</td>
+            <td>Nguyen</td>
+            <td rowspan="2">3</td>
+        </tr>
+        <tr>
+            <td>EC401</td>
+            <td>Smith</td>
+        </tr>
+    </tbody>
+</table>
+
+
+```json
+[
+    {
+        "Department": "Engineering",
+        "Major": "Computer Science",
+        "Class": "CS101",
+        "Instructor": "Kim",
+        "Credit": "3"
+    },
+    {
+        "Department": "Engineering",
+        "Major": "Computer Science",
+        "Credit": "3",
+        "Class": "CS201",
+        "Instructor": "Garcia"
+    },
+    {
+        "Department": "Engineering",
+        "Major": "Computer Science",
+        "Instructor": "Garcia",
+        "Class": "CS303",
+        "Credit": "2"
+    },
+    {
+        "Department": "Engineering",
+        "Major": "Electrical Engineering",
+        "Class": "EE101",
+        "Instructor": "Müller",
+        "Credit": "3"
+    },
+    {
+        "Department": "Social Science",
+        "Major": "Economics",
+        "Class": "EC101",
+        "Instructor": "Nguyen",
+        "Credit": "3"
+    },
+    {
+        "Department": "Social Science",
+        "Major": "Economics",
+        "Credit": "3",
+        "Class": "EC401",
+        "Instructor": "Smith"
+    }
+]
 ```
 
 ### Tables with headings in the first column
@@ -511,7 +658,7 @@ abc |            1
 dev |            2
 ```
 
-```js
+```json
 // Example output with stripHtmlFromHeadings:true
 [
     {
@@ -543,7 +690,7 @@ abc | <i>1</i>
 dev | <i>2</i>
 ```
 
-```js
+```json
 // Example output with stripHtmlFromHeadings:true
 [
     {
@@ -586,12 +733,12 @@ Instead of using column text (that sometime re-order the data), force an index a
 
 Default is `true`. If set to `false`, duplicate headings will not get a trailing
 number. The value of the field will be the last value found in the table row:
-
+```md
 PLACE | VALUE | PLACE | VALUE
 ------|-------|-------|------
   abc |     1 |   def |     2
   ghi |     3 |   jkl |     4
-
+```
 ```js
 // Example output with countDuplicateHeadings:false
 [
@@ -607,13 +754,13 @@ PLACE | VALUE | PLACE | VALUE
 ### ignoreColumns
 
 Array of indexes to be ignored, starting with 0. Default is 'null/undefined'.
-
+```md
  NAME | PLACE | WEIGHT | SEX | AGE
 ------|-------|--------|-----|----
  Mel  |     1 |     58 |   W |  23
  Tom  |     2 |     78 |   M |  54
  Bill |     3 |     92 |   M |  31
-
+```
 ```js
 // Example output with ignoreColumns: [2, 3]
 [
@@ -633,13 +780,13 @@ Array of indexes to be ignored, starting with 0. Default is 'null/undefined'.
 
 Array of indexes that are taken, starting with 0. Default is 'null/undefined'.
 If given, this option overrides ignoreColumns.
-
+```md
  NAME | PLACE | WEIGHT | SEX | AGE
 ------|-------|--------|-----|----
  Mel  |     1 |     58 |   W |  23
  Tom  |     2 |     78 |   M |  54
  Bill |     3 |     92 |   M |  31
-
+```
 ```js
 // Example output with onlyColumns: [0, 4]
 [
@@ -658,14 +805,14 @@ If given, this option overrides ignoreColumns.
 ### ignoreHiddenRows
 
 Indicates if hidden rows (display:none) are ignored. Default is true:
-
+```md
  NAME | PLACE | WEIGHT | SEX | AGE
 ------|-------|--------|-----|----
  Mel  |     1 |     58 |   W |  23
  Tom  |     2 |     78 |   M |  54
  Bill |     3 |     92 |   M |  31
 * Cat |     4 |      4 |   W |   2*
-
+```
 ```js
 // Example output with ignoreHiddenRows:true
 [
@@ -703,14 +850,14 @@ Array of Strings to be used as headings. Default is `null`/`undefined`.
 
 If more headings are given than columns exist the overcounting ones will be ignored. If less headings
 are given than existing values the overcounting values are ignored.
-
+```md
  NAME | PLACE | WEIGHT | SEX | AGE
 ------|-------|--------|-----|----
  Mel  |     1 |     58 |   W |  23
  Tom  |     2 |     78 |   M |  54
  Bill |     3 |     92 |   M |  31
 * Cat |     4 |      4 |   W |   2*
-
+```
 ```js
 // Example output with headings: ['A','B','C','D','E']
 [
@@ -769,7 +916,7 @@ Number of rows to which the resulting object should be limited to. Default is
 `null`/`undefined`.
 
 #### Huge Table (see test/tables.html)
-
+```md
 Roleplayer Number | Name            | Text to say
 ------------------|-----------------|------------
  0                | Raife Parkinson | re dolor in hendrerit in vulputate ve
@@ -783,7 +930,7 @@ Roleplayer Number | Name            | Text to say
 197               | Montana Delgado | lores et ea rebum. Stet clita kasd gu a
 198               | Myrtle Conley   | rebum. Stet clita kasd gubergren, no sea
 199               | Hanna Ellis     | kimata sanctus est Lorem ipsum dolor si
-
+```
 #### Example output with limitrows: 5
 
 ```js
@@ -811,41 +958,43 @@ Array of classes to find a specific table using this class. Default is `null`/
 
 ## Known issues and limitations
 
-This module only supports parsing basic tables with a simple horizontal set of
-`<th></th>` headings and corresponding `<td></td>` cells.
-
-It can give useless or weird results on tables that have complex structures
+* Tables needs to be "well formatted" to be convertable.
+* Tables in tables are not processed.
+* Only supports parsing basic tables with horizontal set of
+`<th></th>` headings and corresponding `<td></td>` cells, but also 
+taking care of rowspan and colspan. It can give useless or weird results 
+on tables that have complex structures
 (such as nested tables) or multiple headers (such as on both X and Y axis).
-
-You'll need to handle things like work out which tables to parse and (in most
-cases) clean up the data. You might want to combine it it with modules like
-json2csv or CsvToMarkdownTable.
-
-You might want to use it with a module like 'cheerio' if you want to parse
+* You'll need to handle tables to parse and (in most cases) clean up the data. 
+You might want to combine it with modules like json2csv or CsvToMarkdownTable.
+* You might want to use it with a module like 'cheerio' if you want to parse
 specific tables identified by id or class (i.e. select them with cheerio and
 pass the HTML of them as a string).
 
-## Example usages
+## Usage
 
+Find here a list of examples on how to use the library. More examples can be found in the examples folder or 
+in the test folder
+
+### Convert an HTML text into an array of all the tables on the page
 ```typescript
-// Convert an HTML text into an array of all the tables on the page
 import {tabletojson} from 'tabletojson';
 const tablesAsJson = tabletojson.convert(html);
 const firstTableAsJson = tablesAsJson[0];
 const secondTableAsJson = tablesAsJson[1];
-...
 ```
 
+### Fetch a URL and parse all it's tables into JSON, using a callback
 ```typescript
-// Fetch a URL and parse all it's tables into JSON, using a callback
 import {tabletojson} from 'tabletojson';
 tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', function (tablesAsJson) {
   console.log(tablesAsJson[1]);
 });
 ```
 
+### Fetch a URL and parse all it's tables into JSON, using promises
+
 ```typescript
-// Fetch a URL and parse all it's tables into JSON, using promises
 import {tabletojson} from 'tabletojson';
 const url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
 tabletojson.convertUrl(url)
@@ -854,9 +1003,8 @@ tabletojson.convertUrl(url)
   const fitchRatings = tablesAsJson[2];
 });
 ```
-
+### Fetch a table from Wikipedia and combine with json2csv to convert to CSV
 ```typescript
-// Fetch a table from Wikipedia and combine with json2csv to convert to CSV
 import {tabletojson} from 'tabletojson';
 import {Parser} from 'json2csv';
 const url = 'http://en.wikipedia.org/wiki/List_of_countries_by_credit_rating';
@@ -883,11 +1031,6 @@ tabletojson.convertUrl(url).then(function (tablesAsJson) {
 });
 ```
 
-## Limitations
-
-* Tables needs to be "well formatted" to be convertable.
-* Tables in tables are not processed.
-
 ## Contributing
 
 Improvements, fixes and suggestions are welcome.
@@ -903,21 +1046,18 @@ If you submit a pull request, please add an example for your use case, so I can
 understand what you want it to do (as I want to get around to writing tests for
 this and want to understand the sort of use cases people have).
 
-## Thanks
+### Contributors
 
-June 2018 - Very special thanks to the originator of the library, Iain Collins
-(@iaincollins). Without his investigation in website grasping and mastering
-cheerio this lib would have not been where it is right now. Also I would
-personally like to say "Thank you" for your trust in passing me the ownership.
-Marius (@maugenst)
-
-Additional thanks to
-
-* @roryok
+* Marius Augenstein (@maugenst)
+* Iain Collins (@iaincollins)
+* Rory O'Kelly (@roryok)
+* Nordes Ménard-Lamarre (@Nordes)
 * Max Thyen (@maxthyen)
 * Thor Jacobsen (@twjacobsen)
 * Michael Keller (@mhkeller)
 * Jesús Leganés-Combarro (@piranna)
 * João Otávio Ferreira Barbosa (@joaobarbosa)
-
-for improvements and bug fixes.
+* Stefano Fadda (@StefanoF)
+* Michael Telatynski (@t3chguy)
+* @mherzhoff
+* Dooho Hyung (@dooho-h)

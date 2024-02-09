@@ -589,7 +589,7 @@ describe('TableToJSON Local', function () {
     // |        | Peter |  17 |
     // +--------+-------+-----+
 
-    it('Complex rowspan usage leads to correct object representation', async function () {
+    it('Table #12 - Complex rowspan usage leads to correct object representation', async function () {
         const converted = tabletojson.convert(html, {
             id: ['table12'],
         });
@@ -606,11 +606,13 @@ describe('TableToJSON Local', function () {
         expect(table[2].Parent).toBe('Marry');
         expect(table[3].Parent).toBe('Taylor');
         expect(table[4].Parent).toBe('Taylor');
+
         expect(table[0].Child).toBe('Sue');
         expect(table[1].Child).toBe('Steve');
         expect(table[2].Child).toBe('Tom');
         expect(table[3].Child).toBe('Tom');
         expect(table[4].Child).toBe('Peter');
+
         expect(table[0].Age).toBe('15');
         expect(table[1].Age).toBe('12');
         expect(table[2].Age).toBe('3');
@@ -618,7 +620,7 @@ describe('TableToJSON Local', function () {
         expect(table[4].Age).toBe('17');
     });
 
-    it('Complex rowspan usage leads to correct object representation', async function () {
+    it('Table #12-a - Complex rowspan usage leads to correct object representation', async function () {
         const converted = tabletojson.convert(html, {
             id: ['table12-a'],
         });
@@ -627,6 +629,8 @@ describe('TableToJSON Local', function () {
         const table = converted[0];
 
         expect(table.length).toBe(6);
+
+        console.log(JSON.stringify(table));
 
         expect(table[0].Department).toBe('Engineering');
         expect(table[1].Department).toBe('Engineering');
@@ -662,6 +666,53 @@ describe('TableToJSON Local', function () {
         expect(table[3].Credit).toBe('3');
         expect(table[4].Credit).toBe('3');
         expect(table[5].Credit).toBe('3');
+    });
+
+    // Currently skipped as it is not yet implemented --> Code needs to be reviewed
+    it.skip('Table #12-b - Complex cells with rowspan AND colspan', async function () {
+        const converted = tabletojson.convert(html, {
+            id: ['table12-b'],
+        });
+        expect(converted).toBeDefined();
+        expect(converted.length).toBe(1);
+        const table = converted[0];
+
+        expect(table.length).toBe(6);
+
+        expect(table[0].Header1).toBe('Cell1');
+        expect(table[1].Header1).toBe('Cell1');
+        expect(table[2].Header1).toBe('Cell1');
+        expect(table[3].Header1).toBe('Cell1');
+        expect(table[4].Header1).toBe('Cell13');
+        expect(table[5].Header1).toBe('Cell15');
+
+        expect(table[0].Header2).toBe('Cell2');
+        expect(table[1].Header2).toBe('Cell2');
+        expect(table[2].Header2).toBe('Cell2');
+        expect(table[3].Header2).toBe('Cell10');
+        expect(table[4].Header2).toBe('Cell13');
+        expect(table[5].Header2).toBe('Cell16');
+
+        expect(table[0].Header3).toBe('Cell3');
+        expect(table[1].Header3).toBe('Cell6');
+        expect(table[2].Header3).toBe('Cell8');
+        expect(table[3].Header3).toBe('Cell11');
+        expect(table[4].Header3).toBe('Cell11');
+        expect(table[5].Header3).toBe('Cell11');
+
+        expect(table[0].Header4).toBe('Cell4');
+        expect(table[1].Header4).toBe('Cell7');
+        expect(table[2].Header4).toBe('Cell7');
+        expect(table[3].Header4).toBe('Cell11');
+        expect(table[4].Header4).toBe('Cell11');
+        expect(table[5].Header4).toBe('Cell11');
+
+        expect(table[0].Header5).toBe('Cell5');
+        expect(table[1].Header5).toBe('Cell5');
+        expect(table[2].Header5).toBe('Cell9');
+        expect(table[3].Header5).toBe('Cell12');
+        expect(table[4].Header5).toBe('Cell14');
+        expect(table[5].Header5).toBe('Cell14');
     });
 
     it('Options: containsClasses', async function () {

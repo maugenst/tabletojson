@@ -1390,7 +1390,7 @@
     </tbody>
 </table>
 
-<h2>Table #12-a: Table with extremely complex rowspans</h2>
+<h2>Table #12-a: Table with more complex rowspans</h2>
 <table id="table12-a" class="table" border="1">
     <thead>
     <tr>
@@ -1434,6 +1434,49 @@
             <td>EC401</td>
             <td>Smith</td>
         </tr>
+    </tbody>
+</table>
+
+<h2>Table #12-b: Table with complex row- AND colspans</h2>
+<table id="table12-b" class="table" border="1">
+    <thead>
+    <tr>
+        <th>Header1</th>
+        <th>Header2</th>
+        <th>Header3</th>
+        <th>Header4</th>
+        <th>Header5</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="4">Cell1</td>
+        <td rowspan="3">Cell2</td>
+        <td>Cell3</td>
+        <td>Cell4</td>
+        <td rowspan="2">Cell5</td>
+    </tr>
+    <tr>
+        <td>Cell6</td>
+        <td rowspan="2">Cell7</td>
+    </tr>
+    <tr>
+        <td>Cell8</td>
+        <td>Cell9</td>
+    </tr>
+    <tr>
+        <td>Cell10</td>
+        <td colspan="2" rowspan="3">Cell11</td>
+        <td>Cell12</td>
+    </tr>
+    <tr>
+        <td colspan="2">Cell13</td>
+        <td rowspan="2">Cell14</td>
+    </tr>
+    <tr>
+        <td>Cell15</td>
+        <td>Cell16</td>
+    </tr>
     </tbody>
 </table>
 

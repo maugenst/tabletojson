@@ -153,10 +153,10 @@ class Tabletojson {
                 const cells = options.useFirstRowForHeadings
                     ? $(row).find('td, th')
                     : $(row).find('th');
-                cells.each((j, cell) => {
-                    if (options.onlyColumns && !options.onlyColumns.includes(j))
+                cells.each((cellIndex, cell) => {
+                    if (options.onlyColumns && !options.onlyColumns.includes(cellIndex))
                         return;
-                    if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(j))
+                    if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(cellIndex))
                         return;
                     let value = '';
                     if (options.headings) {
@@ -175,11 +175,11 @@ class Tabletojson {
                     const seen = alreadySeen[value];
                     if (seen && options.countDuplicateHeadings) {
                         suffix = ++alreadySeen[value];
-                        columnHeadings[j] = value !== '' ? `${value}_${suffix}` : `${j}`;
+                        columnHeadings[cellIndex] = value !== '' ? `${value}_${suffix}` : `${cellIndex}`;
                     }
                     else {
                         alreadySeen[value] = 1;
-                        columnHeadings[j] = value;
+                        columnHeadings[cellIndex] = value;
                     }
                 });
             });
@@ -206,7 +206,7 @@ class Tabletojson {
                 const cells = options.useFirstRowForHeadings
                     ? $(row).find('td, th')
                     : $(row).find('td');
-                cells.each((j, cell) => {
+                cells.each((cellIndex, cell) => {
                     if (options.ignoreHiddenRows) {
                         const style = $(row).attr('style');
                         if (style) {
@@ -215,19 +215,12 @@ class Tabletojson {
                                 return;
                         }
                     }
-                    let aux = j;
-                    j = 0;
-                    do {
-                        while (rowspans[j])
-                            j++;
-                        while (aux && !rowspans[j]) {
-                            j++;
-                            aux--;
-                        }
-                    } while (aux);
-                    if (options.onlyColumns && !options.onlyColumns.includes(j))
+                    const adjustedIndex = applyOffsets(cellIndex, rowspans);
+                    if (options.onlyColumns && !options.onlyColumns.includes(adjustedIndex))
                         return;
-                    if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(j))
+                    if (options.ignoreColumns &&
+                        !options.onlyColumns &&
+                        options.ignoreColumns.includes(adjustedIndex))
                         return;
                     const cheerioCell = $(cell);
                     const cheerioCellText = cheerioCell.text();
@@ -238,10 +231,10 @@ class Tabletojson {
                         : cheerioCellHtml
                             ? cheerioCellHtml.trim()
                             : '';
-                    setColumn(j, content);
+                    setColumn(adjustedIndex, content);
                     const value = cheerioCellRowspan ? parseInt(cheerioCellRowspan, 10) - 1 : 0;
                     if (value > 0)
-                        nextrowspans[j] = { content, value };
+                        nextrowspans[adjustedIndex] = { content, value };
                 });
                 rowspans = nextrowspans;
                 rowspans.forEach((rowspan, index) => {
@@ -302,4 +295,17 @@ class Tabletojson {
 }
 exports.Tabletojson = Tabletojson;
 exports.tabletojson = Tabletojson;
+const applyOffsets = (cellIndex, rowspans) => {
+    let nullCount = 0;
+    for (let i = 0; i < rowspans.length; i++) {
+        if (rowspans[i]) {
+            continue;
+        }
+        if (nullCount === cellIndex) {
+            return i;
+        }
+        nullCount++;
+    }
+    return cellIndex + rowspans.length - nullCount;
+};
 //# sourceMappingURL=Tabletojson.js.map
