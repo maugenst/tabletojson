@@ -1,10 +1,8 @@
 # Tabletojson: Converting Table to JSON objects made easy
 
-[![NPM](https://nodei.co/npm/tabletojson.png)](https://nodei.co/npm/tabletojson)
-
-
 [![CircleCI](https://circleci.com/gh/maugenst/tabletojson.svg?style=shield)](https://circleci.com/gh/maugenst/tabletojson)
-[![Coverage Status](https://coveralls.io/repos/github/maugenst/tabletojson/badge.svg?branch=master)](https://coveralls.io/github/maugenst/tabletojson?branch=master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9e26dee5b7774ceea1b3f01dcaa51c41)](https://app.codacy.com/gh/maugenst/tabletojson/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/9e26dee5b7774ceea1b3f01dcaa51c41)](https://app.codacy.com/gh/maugenst/tabletojson/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 [![Known Vulnerabilities](https://snyk.io/test/github/maugenst/tabletojson/badge.svg)](https://snyk.io/test/github/maugenst/tabletojson)
 
 Convert local or remote HTML embedded tables into JSON objects.
