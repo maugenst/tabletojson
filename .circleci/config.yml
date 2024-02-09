@@ -6,7 +6,6 @@ jobs:
   buildAndTest:
     docker:
       - image: cimg/node:lts
-    working_directory: /tmp
     steps:
       - checkout
       - node/install-packages
