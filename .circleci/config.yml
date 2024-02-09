@@ -11,9 +11,8 @@ jobs:
       - node/install-packages
       - run: npm run build
       - run: npm test
-      - run: LATEST_VERSION="$(curl -Ls https://artifacts.codacy.com/bin/codacy-coverage-reporter/latest)"
-      - run: echo $LATEST_VERSION
-      - run: curl -Ls -o codacy-coverage-reporter "https://artifacts.codacy.com/bin/codacy-coverage-reporter/${LATEST_VERSION}/codacy-coverage-reporter-linux"
+      - run: curl -Ls -o codacy-coverage-reporter https://artifacts.codacy.com/bin/codacy-coverage-reporter/13.15.1/codacy-coverage-reporter-linux
+      - run: ls -ltra
       - run: chmod +x codacy-coverage-reporter
       - run: codacy-coverage-reporter ./coverage/lcov.info
 
