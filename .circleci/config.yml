@@ -13,8 +13,8 @@ jobs:
       - run: npm test
       - run: curl -Ls -o codacy-coverage-reporter https://artifacts.codacy.com/bin/codacy-coverage-reporter/13.15.1/codacy-coverage-reporter-linux
       - run: chmod +x codacy-coverage-reporter
-      - run: ls -ltra
-      - run: ./codacy-coverage-reporter ./coverage/lcov.info
+      - run: ls -ltra coverage
+      - run: ./codacy-coverage-reporter report -r coverage/lcov.info
 
 workflows:
   version: 2
