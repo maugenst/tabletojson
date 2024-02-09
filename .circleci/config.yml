@@ -6,13 +6,15 @@ jobs:
   buildAndTest:
     # Reuse Docker container specification given by the node Orb
     executor: node/default
-    docker:
-      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - node/install-packages
       - run: npm run build
       - run: npm test
+  codacy-coverage-report:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
       - coverage-reporter/send_report:
           coverage-reports: coverage/lcov.info
           project-token: $CODACY_PROJECT_TOKEN
@@ -22,3 +24,6 @@ workflows:
   build_and_test:
     jobs:
       - buildAndTest
+      - codacy-coverage-report:
+          requires:
+            - buildAndTest
