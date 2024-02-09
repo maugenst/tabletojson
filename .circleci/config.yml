@@ -15,7 +15,7 @@ jobs:
       
   codacyCoverageReport:
     docker:
-      - image: cimg/openjdk:lts
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - coverage-reporter/send_report:
