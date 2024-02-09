@@ -13,20 +13,20 @@ jobs:
       - run: npm run build
       - run: npm test
       
-  #codacyCoverageReport:
-  #  docker:
-  #    - image: cimg/openjdk:lts
-  #  steps:
-  #    - checkout
-  #    - coverage-reporter/send_report:
-  #        coverage-reports: ./coverage/lcov.info
-  #        project-token: $CODACY_PROJECT_TOKEN
+  codacyCoverageReport:
+    docker:
+      - image: cimg/openjdk:lts
+    steps:
+      - checkout
+      - coverage-reporter/send_report:
+          coverage-reports: ./coverage/lcov.info
+          project-token: $CODACY_PROJECT_TOKEN
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - buildAndTest
-      #- codacyCoverageReport:
-      #    requires:
-      #      - buildAndTest
+      - codacyCoverageReport:
+          requires:
+            - buildAndTest
