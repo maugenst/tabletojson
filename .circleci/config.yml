@@ -1,32 +1,21 @@
 version: 2.1
 orbs:
   node: circleci/node@5.1.0
-  coverage-reporter: codacy/coverage-reporter@13.15.1
 
 jobs:
   buildAndTest:
     docker:
       - image: cimg/node:lts
+    working_directory: /tmp
     steps:
       - checkout
       - node/install-packages
       - run: npm run build
       - run: npm test
-      
-  codacyCoverageReport:
-    docker:
-      - image: cimg/openjdk:lts
-    steps:
-      - checkout
-      - coverage-reporter/send_report:
-          coverage-reports: ./coverage/lcov.info
-          project-token: $CODACY_PROJECT_TOKEN
+      - run: apt-get install -y openjdk-8
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - buildAndTest
-      - codacyCoverageReport:
-          requires:
-            - buildAndTest
