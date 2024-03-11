@@ -146,15 +146,21 @@ console.log(converted);
 Tables with duplicate column headings, subsequent headings are suffixed with a
 count:
 
-PLACE | VALUE | PLACE | VALUE
-------|-------|-------|------
-  abc |     1 |   def |     2
+```md
+|| PLACE || VALUE || PLACE || VALUE ||
+|--------|--------|--------|---------|
+| abc    |      1 |    def |      2  |
+```
 
 ```json
-[{
-  PLACE: 'abc', VALUE: '1',
-  PLACE_2: 'def', VALUE_2: '2',
-}]
+[
+  {
+    "PLACE": "abc",
+    "VALUE": "1",
+    "PLACE_2": "def",
+    "VALUE_2": "2"
+  }
+]
 ```
 
 ### Tables with rowspan
@@ -162,7 +168,7 @@ PLACE | VALUE | PLACE | VALUE
 In tables with rowspan, the content of the spawned cell must be available in
 the respective object.
 
-<table id="table11" class="table" border="1">
+<table id="table11" class="table" style="border: solid">
     <thead>
     <tr>
         <th>Parent</th>
@@ -188,11 +194,11 @@ the respective object.
 </table>
 
 ```json
-[{
-  PARENT: 'Marry', CHILD: 'Tom', AGE, '3',
-  PARENT: 'Marry', CHILD: 'Steve', AGE, '12',
-  PARENT: 'Marry', CHILD: 'Sue', AGE, '15'
-}]
+[
+  {"Parent": "Marry", "Child": "Tom", "Age": "3"},
+  {"Parent": "Marry", "Child": "Steve", "Age": "12"},
+  {"Parent": "Marry", "Child": "Sue", "Age": "15"}
+]
 ```
 
 ### Tables with complex rowspan
@@ -232,13 +238,13 @@ In tables with complex rowspans, the content of the spawned cell must be availab
 </table>
 
 ```json
-[{
-  PARENT: 'Marry', CHILD: 'Sue', AGE, '15'
-  PARENT: 'Marry', CHILD: 'Steve', AGE, '12',
-  PARENT: 'Marry', CHILD: 'Tom', AGE, '3',
-  PARENT: 'Taylor', CHILD: 'Tom', AGE, '3',
-  PARENT: 'Taylor', CHILD: 'Peter', AGE, '17'
-}]
+[
+  {"Parent": "Marry", "Child": "Sue", "Age": "15"},
+  {"Parent": "Marry", "Child": "Steve", "Age": "12"},
+  {"Parent": "Marry", "Child": "Tom", "Age": "3"},
+  {"Parent": "Taylor", "Child": "Tom", "Age": "3"},
+  {"Parent": "Taylor", "Child": "Peter", "Age": "17"}
+]
 ```
 
 ### Tables with even more complex rowspans
@@ -390,7 +396,7 @@ Use the following rows as keys in the output json object. The values are flatten
 
 Input:
 
-<table id="table15" class="table" border="1">
+<table id="table15" class="table" style="border:solid">
     <tbody>
     <tr>
         <td rowspan="3">Industry</td>
@@ -650,29 +656,31 @@ console.log(JSON.stringify(converted, null, 2));
 Strip any HTML from heading cells. Default is true.
 
 ```md
-KEY | <b>VALUE</b>
-----|-------------
-abc |            1
-dev |            2
+||KEY || <b>VALUE</b><||
+|-----|----------------|
+| abc |              1 |
+| dev |              2 |
 ```
 
+Example output with stripHtmlFromHeadings:true
 ```json
-// Example output with stripHtmlFromHeadings:true
 [
     {
-        KEY: 'abc', VALUE: '1'
+        "KEY": "abc", "VALUE": "1"
     },
     {
-        KEY: 'dev', VALUE: '2'
+        "KEY": "dev", "VALUE": "2"
     }
 ]
-// Example output with stripHtmlFromHeadings:false
+```
+Example output with stripHtmlFromHeadings:false
+```json
 [
     {
-        KEY: 'abc', '<b>VALUE</b>': '1'
+        "KEY": "abc", "<b>VALUE</b>": "1"
     },
     {
-        KEY: 'dev', '<b>VALUE</b>': '2'
+        "KEY": "dev", "<b>VALUE</b>": "2"
     }
 ]
 ```
@@ -682,29 +690,31 @@ dev |            2
 Strip any HTML from tableBody cells. Default is true.
 
 ```md
-KEY |    VALUE
-----|---------
-abc | <i>1</i>
-dev | <i>2</i>
+||KEY ||    VALUE||
+|-----|-----------|
+|abc  |   <i>1</i>|
+|dev  |   <i>2</i>|
 ```
 
+Example output with stripHtmlFromHeadings:true
 ```json
-// Example output with stripHtmlFromHeadings:true
 [
     {
-        KEY: 'abc', VALUE: '1'
+        "KEY": "abc", "VALUE": "1"
     },
     {
-        KEY: 'dev', VALUE: '2'
+        "KEY": "dev", "VALUE": "2"
     }
 ]
-// Example output with stripHtmlFromHeadings:false
+```
+Example output with stripHtmlFromHeadings:false
+```json
 [
     {
-        KEY: 'abc', 'VALUE': '<i>1</i>'
+        "KEY": "abc", "VALUE": "<i>1</i>"
     },
     {
-        KEY: 'dev', 'VALUE': '<i>2</i>'
+        "KEY": "dev", "VALUE": "<i>2</i>"
     }
 ]
 ```
@@ -713,8 +723,7 @@ dev | <i>2</i>
 
 Instead of using column text (that sometime re-order the data), force an index as a number (string number).
 
-``` json
-// Some JSON (Other rows)
+```json
 {
   "0": "",
   "1": "Ａ会",
@@ -724,7 +733,6 @@ Instead of using column text (that sometime re-order the data), force an index a
   "5": "Else",
   "6": ""
 }
-// Some JSON (Other rows)
 ```
 
 ### countDuplicateHeadings
@@ -732,19 +740,19 @@ Instead of using column text (that sometime re-order the data), force an index a
 Default is `true`. If set to `false`, duplicate headings will not get a trailing
 number. The value of the field will be the last value found in the table row:
 ```md
-PLACE | VALUE | PLACE | VALUE
-------|-------|-------|------
-  abc |     1 |   def |     2
-  ghi |     3 |   jkl |     4
+||PLACE || VALUE || PLACE || VALUE||
+|-------|--------|--------|--------|
+|   abc |      1 |    def |     2  |
+|   ghi |      3 |    jkl |     4  |
 ```
-```js
-// Example output with countDuplicateHeadings:false
+Example output with countDuplicateHeadings:false
+```json
 [
     {
-        PLACE: 'def', VALUE: '2'
+        "PLACE": "def", "VALUE": "2"
     },
     {
-        PLACE: 'jkl', VALUE: '4'
+        "PLACE": "jkl", "VALUE": "4"
     }
 ]
 ```
@@ -753,23 +761,23 @@ PLACE | VALUE | PLACE | VALUE
 
 Array of indexes to be ignored, starting with 0. Default is 'null/undefined'.
 ```md
- NAME | PLACE | WEIGHT | SEX | AGE
-------|-------|--------|-----|----
- Mel  |     1 |     58 |   W |  23
- Tom  |     2 |     78 |   M |  54
- Bill |     3 |     92 |   M |  31
+|| NAME || PLACE || WEIGHT || SEX || AGE ||
+|-------|--------|---------|------|-------|
+| Mel   |      1 |      58 |    W |  23   |
+| Bill  |      3 |      92 |    M |  31   |
+| Tom   |      2 |      78 |    M |  54   |
 ```
-```js
-// Example output with ignoreColumns: [2, 3]
+Example output with ignoreColumns: [2, 3]
+```json
 [
     {
-        NAME: 'Mel', PLACE: '1', AGE: '23'
+        "NAME": "Mel", "PLACE": "1", "AGE": "23"
     },
     {
-        NAME: 'Tom', PLACE: '2', AGE: '54'
+        "NAME": "Tom", "PLACE": "2", "AGE": "54"
     },
     {
-        NAME: 'Bill', PLACE: '3', AGE: '31'
+        "NAME": "Bill", "PLACE": "3", "AGE": "31"
     }
 ]
 ```
@@ -779,23 +787,23 @@ Array of indexes to be ignored, starting with 0. Default is 'null/undefined'.
 Array of indexes that are taken, starting with 0. Default is 'null/undefined'.
 If given, this option overrides ignoreColumns.
 ```md
- NAME | PLACE | WEIGHT | SEX | AGE
-------|-------|--------|-----|----
- Mel  |     1 |     58 |   W |  23
- Tom  |     2 |     78 |   M |  54
- Bill |     3 |     92 |   M |  31
+|| NAME || PLACE || WEIGHT || SEX || AGE ||
+|-------|--------|---------|------|-------|
+| Mel   |      1 |      58 |    W |     23|
+| Tom   |      2 |      78 |    M |     54|
+| Bill  |      3 |      92 |    M |     31|
 ```
-```js
-// Example output with onlyColumns: [0, 4]
+Example output with onlyColumns: [0, 4]
+```json
 [
     {
-        NAME: 'Mel', AGE: '23'
+        "NAME": "Mel", "AGE": "23"
     },
     {
-        NAME: 'Tom', AGE: '54'
+        "NAME": "Tom", "AGE": "54"
     },
     {
-        NAME: 'Bill', AGE: '31'
+        "NAME": "Bill", "AGE": "31"
     }
 ]
 ```
@@ -804,41 +812,70 @@ If given, this option overrides ignoreColumns.
 
 Indicates if hidden rows (display:none) are ignored. Default is true:
 ```md
- NAME | PLACE | WEIGHT | SEX | AGE
-------|-------|--------|-----|----
- Mel  |     1 |     58 |   W |  23
- Tom  |     2 |     78 |   M |  54
- Bill |     3 |     92 |   M |  31
-* Cat |     4 |      4 |   W |   2*
+|| NAME || PLACE || WEIGHT || SEX || AGE ||
+|-------|--------|---------|------|-------|
+| Mel   |      1 |      58 |    W |     23|
+| Tom   |      2 |      78 |    M |     54|
+| Bill  |      3 |      92 |    M |     31|
+|* Cat  |      4 |       4 |    W |     2*|
 ```
-```js
-// Example output with ignoreHiddenRows:true
+Example output with ignoreHiddenRows:true
+```json
 [
-    {
-        NAME: 'Mel', PLACE: '1', WEIGHT: '58', SEX: 'W', AGE: '23'
-    },
-    {
-        NAME: 'Tom', PLACE: '2', WEIGHT: '78', SEX: 'M', AGE: '54'
-    },
-    {
-        NAME: 'Bill', PLACE: '3', WEIGHT: '92', SEX: 'M', AGE: '31'
-    }
+  {
+    "NAME":"Mel",
+    "PLACE":"1",
+    "WEIGHT":"58",
+    "SEX":"W",
+    "AGE":"23"
+  },
+  {
+    "NAME":"Tom",
+    "PLACE":"2",
+    "WEIGHT":"78",
+    "SEX":"M",
+    "AGE":"54"
+  },
+  {
+    "NAME":"Bill",
+    "PLACE":"3",
+    "WEIGHT":"92",
+    "SEX":"M",
+    "AGE":"31"
+  }
 ]
-// Example output with ignoreHiddenRows:false
+```
+Example output with ignoreHiddenRows:false
+```json
 [
-    {
-        NAME: 'Mel', PLACE: '1', WEIGHT: '58', SEX: 'W', AGE: '23'
-    },
-    {
-        NAME: 'Tom', PLACE: '2', WEIGHT: '78', SEX: 'M', AGE: '54'
-    },
-    {
-        NAME: 'Bill', PLACE: '3', WEIGHT: '92', SEX: 'M', AGE: '31'
-    }
-    },
-    {
-        NAME: 'Cat', PLACE: '4', WEIGHT: '4', SEX: 'W', AGE: '2'
-    }
+  {
+    "NAME":"Mel",
+    "PLACE":"1",
+    "WEIGHT":"58",
+    "SEX":"W",
+    "AGE":"23"
+  },
+  {
+    "NAME":"Tom",
+    "PLACE":"2",
+    "WEIGHT":"78",
+    "SEX":"M",
+    "AGE":"54"
+  },
+  {
+    "NAME":"Bill",
+    "PLACE":"3",
+    "WEIGHT":"92",
+    "SEX":"M",
+    "AGE":"31"
+  },
+  {
+    "NAME":"Cat",
+    "PLACE":"4",
+    "WEIGHT":"4",
+    "SEX":"W",
+    "AGE":"2"
+  }
 ]
 ```
 
@@ -849,63 +886,104 @@ Array of Strings to be used as headings. Default is `null`/`undefined`.
 If more headings are given than columns exist the overcounting ones will be ignored. If less headings
 are given than existing values the overcounting values are ignored.
 ```md
- NAME | PLACE | WEIGHT | SEX | AGE
-------|-------|--------|-----|----
- Mel  |     1 |     58 |   W |  23
- Tom  |     2 |     78 |   M |  54
- Bill |     3 |     92 |   M |  31
-* Cat |     4 |      4 |   W |   2*
+|| NAME || PLACE || WEIGHT || SEX || AGE ||
+|-------|--------|---------|------|-------|
+| Mel   |      1 |      58 |    W |     23|
+| Tom   |      2 |      78 |    M |     54|
+| Bill  |      3 |      92 |    M |     31|
+|* Cat  |      4 |       4 |    W |     2*|
 ```
-```js
-// Example output with headings: ['A','B','C','D','E']
+Example output with headings: ['A','B','C','D','E']
+```json
 [
-    {
-        A: 'Mel', B: '1', C: '58', D: 'W', E: '23'
-    },
-    {
-        A: 'Tom', B: '2', C: '78', D: 'M', E: '54'
-    },
-    {
-        A: 'Bill', B: '3', C: '92', D: 'M', E: '31'
-    }
+  {
+    "A":"Mel",
+    "B":"1",
+    "C":"58",
+    "D":"W",
+    "E":"23"
+  },
+  {
+    "A":"Tom",
+    "B":"2",
+    "C":"78",
+    "D":"M",
+    "E":"54"
+  },
+  {
+    "A":"Bill",
+    "B":"3",
+    "C":"92",
+    "D":"M",
+    "E":"31"
+  }
 ]
-// Example output with headings: ['A','B','C']
+```
+Example output with headings: ['A','B','C']
+```json
 [
-    {
-        A: 'Mel', B: '1', C: '58'
-    },
-    {
-        A: 'Tom', B: '2', C: '78'
-    },
-    {
-        A: 'Bill', B: '3', C: '92'
-    }
+  {
+    "A":"Mel",
+    "B":"1",
+    "C":"58"
+  },
+  {
+    "A":"Tom",
+    "B":"2",
+    "C":"78"
+  },
+  {
+    "A":"Bill",
+    "B":"3",
+    "C":"92"
+  }
 ]
-// Example output with headings: ['A','B','C','D','E','F','G','H']
+```
+Example output with headings: ['A','B','C','D','E','F','G','H']
+```json
 [
-    {
-        A: 'Mel', B: '1', C: '58', D: 'W', E: '23'
-    },
-    {
-        A: 'Tom', B: '2', C: '78', D: 'M', E: '54'
-    },
-    {
-        A: 'Bill', B: '3', C: '92', D: 'M', E: '31'
-    }
+  {
+    "A":"Mel",
+    "B":"1",
+    "C":"58",
+    "D":"W",
+    "E":"23"
+  },
+  {
+    "A":"Tom",
+    "B":"2",
+    "C":"78",
+    "D":"M",
+    "E":"54"
+  },
+  {
+    "A":"Bill",
+    "B":"3",
+    "C":"92",
+    "D":"M",
+    "E":"31"
+  }
 ]
-// Example output with headings: ['A','B','C'] && ignoreColumns: [2, 3]
+```
+Example output with headings: ['A','B','C'] && ignoreColumns: [2, 3]
+```json
 [
-    {
-        A: 'Mel', B: 'W', C: '23'
-    },
-    {
-        A: 'Tom', B: 'M', C: '54'
-    },
-    {
-        A: 'Bill', B: 'M', C: '31'
-    }
+  {
+    "A":"Mel",
+    "B":"W",
+    "C":"23"
+  },
+  {
+    "A":"Tom",
+    "B":"M",
+    "C":"54"
+  },
+  {
+    "A":"Bill",
+    "B":"M",
+    "C":"31"
+  }
 ]
-
 ```
 
 ### limitrows
@@ -915,38 +993,50 @@ Number of rows to which the resulting object should be limited to. Default is
 
 #### Huge Table (see test/tables.html)
 ```md
-Roleplayer Number | Name            | Text to say
-------------------|-----------------|------------
- 0                | Raife Parkinson | re dolor in hendrerit in vulputate ve
- 1                | Hazel Schultz   | usto duo dolores et ea rebum. Ste
- 2                | Montana Delgado | psum dolor sit amet. Lorem ipsum dolor
- 3                | Dianne Mcbride  | sit ame olor sit amet. Lorem ipsum
- 4                | Xena Lynch      | us est Lorem ipsum dol
- 5                | Najma Holding   | akimata sanctus est Lorem ipsum dolor sit
- 6                | Kiki House      | ame nvidunt ut
-...|
-197               | Montana Delgado | lores et ea rebum. Stet clita kasd gu a
-198               | Myrtle Conley   | rebum. Stet clita kasd gubergren, no sea
-199               | Hanna Ellis     | kimata sanctus est Lorem ipsum dolor si
+|| Roleplayer Number || Name            || Text to say||
+|--------------------|------------------|--------------|
+| 0                  | Raife Parkinson  | re dolor in hendrerit in vulputate ve|
+| 1                  | Hazel Schultz    | usto duo dolores et ea rebum. Ste|
+| 2                  | Montana Delgado  | psum dolor sit amet. Lorem ipsum dolor|
+| 3                  | Dianne Mcbride   | sit ame olor sit amet. Lorem ipsum|
+| 4                  | Xena Lynch       | us est Lorem ipsum dol|
+| 5                  | Najma Holding    | akimata sanctus est Lorem ipsum dolor sit|
+| 6                  | Kiki House       | ame nvidunt ut|
+|...|
+|197                 | Montana Delgado  | lores et ea rebum. Stet clita kasd gu a|
+|198                 | Myrtle Conley    | rebum. Stet clita kasd gubergren, no sea|
+|199                 | Hanna Ellis      | kimata sanctus est Lorem ipsum dolor si|
 ```
 #### Example output with limitrows: 5
 
-```js
-[ { 'Roleplayer Number': '0',
-        Name: 'Raife Parkinson',
-        'Text to say': 're dolor in hendrerit in vulputate ve' },
-      { 'Roleplayer Number': '1',
-        Name: 'Hazel Schultz',
-        'Text to say': 'usto duo dolores et ea rebum. Ste' },
-      { 'Roleplayer Number': '2',
-        Name: 'Montana Delgado',
-        'Text to say': 'psum dolor sit amet. Lorem ipsum dolor sit ame' },
-      { 'Roleplayer Number': '3',
-        Name: 'Dianne Mcbride',
-        'Text to say': 'olor sit amet. Lorem ipsum' },
-      { 'Roleplayer Number': '4',
-        Name: 'Xena Lynch',
-        'Text to say': 'us est Lorem ipsum dol' } ]
+```json
+[
+  {
+    "Roleplayer Number":"0",
+    "Name":"Raife Parkinson",
+    "Text to say":"re dolor in hendrerit in vulputate ve"
+  },
+  {
+    "Roleplayer Number":"1",
+    "Name":"Hazel Schultz",
+    "Text to say":"usto duo dolores et ea rebum. Ste"
+  },
+  {
+    "Roleplayer Number":"2",
+    "Name":"Montana Delgado",
+    "Text to say":"psum dolor sit amet. Lorem ipsum dolor sit ame"
+  },
+  {
+    "Roleplayer Number":"3",
+    "Name":"Dianne Mcbride",
+    "Text to say":"olor sit amet. Lorem ipsum"
+  },
+  {
+    "Roleplayer Number":"4",
+    "Name":"Xena Lynch",
+    "Text to say":"us est Lorem ipsum dol"
+  }
+]
 ```
 
 ### containsClasses

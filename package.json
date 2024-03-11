@@ -5,7 +5,7 @@
     "url": "https://github.com/maugenst"
   },
   "name": "tabletojson",
-  "version": "4.1.2",
+  "version": "4.1.3",
   "description": "Convert HTML tables to JSON objects",
   "main": "dist/lib/cjs/Tabletojson.js",
   "types": "./@typings/Tabletojson.d.ts",
