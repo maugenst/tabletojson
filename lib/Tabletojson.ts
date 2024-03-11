@@ -388,9 +388,19 @@ export class Tabletojson {
                 throw new Error('Tabletojson can just handle text/** mimetypes');
             }
             return callbackFunctionOrOptions.call(this, Tabletojson.convert(await result.text()));
+        } else if (typeof callbackFunctionOrOptions === 'object') {
+            // If neither argument is callback, return a promise
+            options = callbackFunctionOrOptions;
+            // Use a callback (if passed)
+            const result = await fetch(url, callbackFunctionOrOptions.fetchOptions || {});
+            const resultMimetype = result.headers.get('content-type');
+            if (resultMimetype && !resultMimetype.includes('text/')) {
+                throw new Error('Tabletojson can just handle text/** mimetypes');
+            }
+            return Tabletojson.convert(await result.text(), options);
         } else {
             // If neither argument is callback, return a promise
-            options = callbackFunctionOrOptions || {};
+            options = {};
             // If you need to pass in options for request (proxy)
             // add them to callbackFunctionOrOptions.request
             fetchOptions = options.fetchOptions || {};

@@ -244,8 +244,17 @@ export class Tabletojson {
             }
             return callbackFunctionOrOptions.call(this, Tabletojson.convert(await result.text()));
         }
+        else if (typeof callbackFunctionOrOptions === 'object') {
+            options = callbackFunctionOrOptions;
+            const result = await fetch(url, callbackFunctionOrOptions.fetchOptions || {});
+            const resultMimetype = result.headers.get('content-type');
+            if (resultMimetype && !resultMimetype.includes('text/')) {
+                throw new Error('Tabletojson can just handle text/** mimetypes');
+            }
+            return Tabletojson.convert(await result.text(), options);
+        }
         else {
-            options = callbackFunctionOrOptions || {};
+            options = {};
             fetchOptions = options.fetchOptions || {};
             const result = await fetch(url);
             const resultMimetype = result.headers.get('content-type');

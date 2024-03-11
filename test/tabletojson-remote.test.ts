@@ -122,4 +122,26 @@ describe('TableToJSON Remote', function () {
             expect(e.message).toContain('fetch failed');
         });
     });
+
+    // Issue 89 fixed with this test. Timeout of a fetch request can be used like described here:
+    // https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static
+    test('Fetch options - abort signal usage', async function () {
+        await tabletojson
+            .convertUrl('https://httpbin.org/delay/10', {
+                fetchOptions: {signal: AbortSignal.timeout(1000)},
+            })
+            .catch((e) => {
+                expect(e.message).toContain('The operation was aborted due to timeout');
+            });
+    });
+
+    test('Remote fetching fails due to incompatible mime type', async function () {
+        await tabletojson
+            .convertUrl('https://httpbin.org/delay/1', {
+                fetchOptions: {signal: AbortSignal.timeout(5000)},
+            })
+            .catch((e) => {
+                expect(e.message).toContain('Tabletojson can just handle text');
+            });
+    });
 });

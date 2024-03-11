@@ -280,8 +280,17 @@ class Tabletojson {
                 }
                 return callbackFunctionOrOptions.call(this, Tabletojson.convert(yield result.text()));
             }
+            else if (typeof callbackFunctionOrOptions === 'object') {
+                options = callbackFunctionOrOptions;
+                const result = yield fetch(url, callbackFunctionOrOptions.fetchOptions || {});
+                const resultMimetype = result.headers.get('content-type');
+                if (resultMimetype && !resultMimetype.includes('text/')) {
+                    throw new Error('Tabletojson can just handle text/** mimetypes');
+                }
+                return Tabletojson.convert(yield result.text(), options);
+            }
             else {
-                options = callbackFunctionOrOptions || {};
+                options = {};
                 fetchOptions = options.fetchOptions || {};
                 const result = yield fetch(url);
                 const resultMimetype = result.headers.get('content-type');
