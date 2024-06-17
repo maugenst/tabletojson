@@ -2,7 +2,8 @@
 {
     "transform": {
         "^.+\\.(ts|tsx)$": ["ts-jest", {
-            "diagnostics": false
+            "diagnostics": false,
+            "useESM": true
         }]
     },
     "extensionsToTreatAsEsm": [".ts", ".tsx"],

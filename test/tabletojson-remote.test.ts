@@ -37,9 +37,8 @@ describe('TableToJSON Remote', function () {
     test('Get table from Wikipedia using callBack function', async function () {
         await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', (converted) => {
             const mainTable = converted[0];
-            expect(mainTable[0]).toHaveProperty('ISO language name');
+            expect(mainTable[0]).toHaveProperty('ISO language names');
             expect(mainTable instanceof Array).toBeTruthy();
-            expect(mainTable[0]).toHaveProperty('ISO language name');
         });
     });
 
@@ -48,7 +47,7 @@ describe('TableToJSON Remote', function () {
             expect(converted).toBeDefined();
             const mainTable = converted[0];
             expect(mainTable instanceof Array).toBeTruthy();
-            expect(mainTable[0]).toHaveProperty('ISO language name');
+            expect(mainTable[0]).toHaveProperty('ISO language names');
         });
     });
 
@@ -58,7 +57,7 @@ describe('TableToJSON Remote', function () {
         expect(converted).toBeDefined();
         const mainTable = converted[0];
         expect(mainTable instanceof Array).toBeTruthy();
-        expect(mainTable[0]).toHaveProperty('ISO language name');
+        expect(mainTable[0]).toHaveProperty('ISO language names');
     });
 
     test('Get table from w3schools.com and use first row as heading', async function () {
@@ -101,7 +100,7 @@ describe('TableToJSON Remote', function () {
         });
 
         expect(converted).toBeDefined();
-        const table = converted[2];
+        const table = converted[3];
         expect(table instanceof Array).toBeTruthy();
 
         expect(_.has(table[0], 'Kanji')).toBeTruthy();
