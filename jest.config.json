@@ -1,10 +1,8 @@
-
 {
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["jest-extended/all"],
     "transform": {
-        "^.+\\.(ts|tsx)$": ["ts-jest", {
-            "diagnostics": false,
-            "useESM": true
-        }]
+        "^.+\\.(ts|tsx)$": ["@swc/jest"]
     },
     "extensionsToTreatAsEsm": [".ts", ".tsx"],
     "testRegex": "/.+test\\.ts",

@@ -71,8 +71,8 @@ export class Tabletojson {
             headings: null,
             containsClasses: null,
             id: null,
-            limitrows: null,
-        },
+            limitrows: null
+        }
     ): any[] {
         options = Object.assign(
             {
@@ -89,9 +89,9 @@ export class Tabletojson {
                 headings: null,
                 containsClasses: null,
                 id: null,
-                limitrows: null,
+                limitrows: null
             },
-            options,
+            options
         );
 
         if (options.stripHtml === true) {
@@ -121,14 +121,16 @@ export class Tabletojson {
             // To have the correct names of keys in the json result we need to first analyze the header rows
             // flatten them, and concatenate the values
             if (options.headers) {
-                if (options.headers.to === 0) return;
+                if (options.headers.to === 0) {
+                    return;
+                }
                 const rows: number[] = [];
                 for (let i = options.headers.from || 0; i <= options.headers.to; i++) {
                     rows.push(i);
                 }
 
                 // Analyze the table to find the amount of columns
-                let columnLength: number = 0;
+                let columnLength = 0;
                 // Get the amount of columns
                 const trs: cheerio.Cheerio = $(table).find('tr');
                 trs.each((_index: number, row: cheerio.Element) => {
@@ -154,14 +156,14 @@ export class Tabletojson {
                             Number(cheerioCell.attr('rowspan')).valueOf() || 1;
 
                         const cellContent: string = cheerioCell.text().trim();
-                        for (let x: number = 0; x < cheerioCellColspan; x++) {
+                        for (let x = 0; x < cheerioCellColspan; x++) {
                             if (headings[index][currentColumn] !== undefined) {
                                 currentColumn++;
                             }
 
                             headings[index][currentColumn] = cellContent;
                             if (cheerioCellRowspan > 1) {
-                                for (let y: number = 1; y < cheerioCellRowspan; y++) {
+                                for (let y = 1; y < cheerioCellRowspan; y++) {
                                     headings[index + y][currentColumn] = '';
                                 }
                             }
@@ -176,9 +178,9 @@ export class Tabletojson {
                     const numCols = arr[0].length;
                     const flattened: any[] = new Array(numCols).fill('');
 
-                    for (let col: number = 0; col < numCols; col++) {
-                        let columnString: string = '';
-                        for (let row: number = 0; row < numRows; row++) {
+                    for (let col = 0; col < numCols; col++) {
+                        let columnString = '';
+                        for (let row = 0; row < numRows; row++) {
                             columnString += (row > 0 ? ' ' : '') + arr[row][col];
                         }
                         flattened[col] = columnString.trim();
@@ -204,17 +206,20 @@ export class Tabletojson {
             if (options.useFirstRowForHeadings) {
                 trs = $(trs[0]);
             }
-            let headingsCounter: number = 0;
+            let headingsCounter = 0;
             // Use headings for objects key evaluation
             trs.each((_index: number, row: cheerio.Element) => {
                 const cells: cheerio.Cheerio = options.useFirstRowForHeadings
                     ? $(row).find('td, th')
                     : $(row).find('th');
                 cells.each((cellIndex: number, cell: cheerio.Element) => {
-                    if (options.onlyColumns && !options.onlyColumns.includes(cellIndex)) return;
-                    if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(cellIndex))
+                    if (options.onlyColumns && !options.onlyColumns.includes(cellIndex)) {
                         return;
-                    let value: string = '';
+                    }
+                    if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(cellIndex)) {
+                        return;
+                    }
+                    let value = '';
 
                     if (options.headings) {
                         value = options.headings[headingsCounter++];
@@ -259,7 +264,9 @@ export class Tabletojson {
 
                     // Add content from rowspans
                     rowspans.forEach((rowspan, index) => {
-                        if (!rowspan) return;
+                        if (!rowspan) {
+                            return;
+                        }
 
                         setColumn(index, rowspan.content);
 
@@ -276,20 +283,25 @@ export class Tabletojson {
                             const style: string | undefined = $(row).attr('style');
                             if (style) {
                                 const m = style.match(/.*display.*:.*none.*/g);
-                                if (m && m.length > 0) return;
+                                if (m && m.length > 0) {
+                                    return;
+                                }
                             }
                         }
 
                         // Apply rowspans offsets
                         const adjustedIndex = applyOffsets(cellIndex, rowspans);
 
-                        if (options.onlyColumns && !options.onlyColumns.includes(adjustedIndex)) return;
+                        if (options.onlyColumns && !options.onlyColumns.includes(adjustedIndex)) {
+                            return;
+                        }
                         if (
                             options.ignoreColumns &&
                             !options.onlyColumns &&
                             options.ignoreColumns.includes(adjustedIndex)
-                        )
+                        ) {
                             return;
+                        }
 
                         const cheerioCell: cheerio.Cheerio = $(cell);
                         const cheerioCellText: string = cheerioCell.text();
@@ -306,16 +318,22 @@ export class Tabletojson {
 
                         // Check rowspan
                         const value: number = cheerioCellRowspan ? parseInt(cheerioCellRowspan, 10) - 1 : 0;
-                        if (value > 0) nextrowspans[adjustedIndex] = {content, value};
+                        if (value > 0) {
+                            nextrowspans[adjustedIndex] = {content, value};
+                        }
                     });
 
                     rowspans = nextrowspans;
                     rowspans.forEach((rowspan, index) => {
-                        if (rowspan && rowspan.value === 0) rowspans[index] = null;
+                        if (rowspan && rowspan.value === 0) {
+                            rowspans[index] = null;
+                        }
                     });
 
                     // Skip blank rows
-                    if (JSON.stringify(rowAsJson) !== '{}') tableAsJson.push(rowAsJson);
+                    if (JSON.stringify(rowAsJson) !== '{}') {
+                        tableAsJson.push(rowAsJson);
+                    }
 
                     if (options.limitrows && i === options.limitrows) {
                         return false;
@@ -357,7 +375,7 @@ export class Tabletojson {
     static async convertUrl(
         url: string,
         callbackFunctionOrOptions?: TableToJsonOptions | CallbackFunction,
-        callbackFunction?: CallbackFunction,
+        callbackFunction?: CallbackFunction
     ): Promise<any> {
         let options: TableToJsonOptions;
         let fetchOptions: RequestInit;

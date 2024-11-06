@@ -14,7 +14,7 @@ export class Tabletojson {
         headings: null,
         containsClasses: null,
         id: null,
-        limitrows: null,
+        limitrows: null
     }) {
         options = Object.assign({
             useFirstRowForHeadings: false,
@@ -30,7 +30,7 @@ export class Tabletojson {
             headings: null,
             containsClasses: null,
             id: null,
-            limitrows: null,
+            limitrows: null
         }, options);
         if (options.stripHtml === true) {
             options.stripHtmlFromHeadings = true;
@@ -50,8 +50,9 @@ export class Tabletojson {
             const alreadySeen = {};
             const columnHeadings = [];
             if (options.headers) {
-                if (options.headers.to === 0)
+                if (options.headers.to === 0) {
                     return;
+                }
                 const rows = [];
                 for (let i = options.headers.from || 0; i <= options.headers.to; i++) {
                     rows.push(i);
@@ -119,10 +120,12 @@ export class Tabletojson {
                     ? $(row).find('td, th')
                     : $(row).find('th');
                 cells.each((cellIndex, cell) => {
-                    if (options.onlyColumns && !options.onlyColumns.includes(cellIndex))
+                    if (options.onlyColumns && !options.onlyColumns.includes(cellIndex)) {
                         return;
-                    if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(cellIndex))
+                    }
+                    if (options.ignoreColumns && !options.onlyColumns && options.ignoreColumns.includes(cellIndex)) {
                         return;
+                    }
                     let value = '';
                     if (options.headings) {
                         value = options.headings[headingsCounter++];
@@ -162,8 +165,9 @@ export class Tabletojson {
                     }
                 }
                 rowspans.forEach((rowspan, index) => {
-                    if (!rowspan)
+                    if (!rowspan) {
                         return;
+                    }
                     setColumn(index, rowspan.content);
                     rowspan.value--;
                 });
@@ -176,17 +180,20 @@ export class Tabletojson {
                         const style = $(row).attr('style');
                         if (style) {
                             const m = style.match(/.*display.*:.*none.*/g);
-                            if (m && m.length > 0)
+                            if (m && m.length > 0) {
                                 return;
+                            }
                         }
                     }
                     const adjustedIndex = applyOffsets(cellIndex, rowspans);
-                    if (options.onlyColumns && !options.onlyColumns.includes(adjustedIndex))
+                    if (options.onlyColumns && !options.onlyColumns.includes(adjustedIndex)) {
                         return;
+                    }
                     if (options.ignoreColumns &&
                         !options.onlyColumns &&
-                        options.ignoreColumns.includes(adjustedIndex))
+                        options.ignoreColumns.includes(adjustedIndex)) {
                         return;
+                    }
                     const cheerioCell = $(cell);
                     const cheerioCellText = cheerioCell.text();
                     const cheerioCellHtml = cheerioCell.html();
@@ -198,16 +205,19 @@ export class Tabletojson {
                             : '';
                     setColumn(adjustedIndex, content);
                     const value = cheerioCellRowspan ? parseInt(cheerioCellRowspan, 10) - 1 : 0;
-                    if (value > 0)
+                    if (value > 0) {
                         nextrowspans[adjustedIndex] = { content, value };
+                    }
                 });
                 rowspans = nextrowspans;
                 rowspans.forEach((rowspan, index) => {
-                    if (rowspan && rowspan.value === 0)
+                    if (rowspan && rowspan.value === 0) {
                         rowspans[index] = null;
+                    }
                 });
-                if (JSON.stringify(rowAsJson) !== '{}')
+                if (JSON.stringify(rowAsJson) !== '{}') {
                     tableAsJson.push(rowAsJson);
+                }
                 if (options.limitrows && i === options.limitrows) {
                     return false;
                 }

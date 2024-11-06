@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import 'jest-extended';
-import {tabletojson} from '../lib/Tabletojson';
 import nock from 'nock';
+import {tabletojson} from '../lib/Tabletojson';
 
 describe('TableToJSON Remote', function () {
     beforeEach(function () {
@@ -10,15 +10,16 @@ describe('TableToJSON Remote', function () {
 
     test('Get table from locally mocked server returning a json object', async function () {
         await expect(tabletojson.convertUrl('https://api.github.com/user')).rejects.toThrow(
-            /Tabletojson can just handle text/,
+            /Tabletojson can just handle text/
         );
     });
 
     test('Get table from locally mocked server returning a json object passing just a callback method', async function () {
-        // tslint:disable-next-line:no-empty
-        await expect(tabletojson.convertUrl('https://api.github.com/user', () => {})).rejects.toThrow(
-            /Tabletojson can just handle text/,
-        );
+        await expect(
+            tabletojson.convertUrl('https://api.github.com/user', () => {
+                // do nothing
+            })
+        ).rejects.toThrow(/Tabletojson can just handle text/);
     });
 
     test('Get table from locally mocked server returning a json object passing in an object and a callback method', async function () {
@@ -26,18 +27,19 @@ describe('TableToJSON Remote', function () {
             tabletojson.convertUrl(
                 'https://api.github.com/user',
                 {
-                    useFirstRowForHeadings: true,
+                    useFirstRowForHeadings: true
                 },
-                // tslint:disable-next-line:no-empty
-                () => {},
-            ),
+                () => {
+                    // do nothing
+                }
+            )
         ).rejects.toThrow(/Tabletojson can just handle text/);
     });
 
     test('Get table from Wikipedia using callBack function', async function () {
         await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', (converted) => {
             const mainTable = converted[0];
-            expect(mainTable[0]).toHaveProperty('ISO language names');
+            expect(mainTable[0]).toHaveProperty('ISO Language Names');
             expect(mainTable instanceof Array).toBeTruthy();
         });
     });
@@ -47,7 +49,7 @@ describe('TableToJSON Remote', function () {
             expect(converted).toBeDefined();
             const mainTable = converted[0];
             expect(mainTable instanceof Array).toBeTruthy();
-            expect(mainTable[0]).toHaveProperty('ISO language names');
+            expect(mainTable[0]).toHaveProperty('ISO Language Names');
         });
     });
 
@@ -57,12 +59,12 @@ describe('TableToJSON Remote', function () {
         expect(converted).toBeDefined();
         const mainTable = converted[0];
         expect(mainTable instanceof Array).toBeTruthy();
-        expect(mainTable[0]).toHaveProperty('ISO language names');
+        expect(mainTable[0]).toHaveProperty('ISO Language Names');
     });
 
     test('Get table from w3schools.com and use first row as heading', async function () {
         const converted = await tabletojson.convertUrl('https://www.w3schools.com/html/html_tables.asp', {
-            useFirstRowForHeadings: true,
+            useFirstRowForHeadings: true
         });
 
         expect(converted).toBeDefined();
@@ -88,15 +90,15 @@ describe('TableToJSON Remote', function () {
         await tabletojson.convertUrl(
             'https://www.w3schools.com/html/html_tables.asp',
             {
-                useFirstRowForHeadings: true,
+                useFirstRowForHeadings: true
             },
-            callbackFunction,
+            callbackFunction
         );
     });
 
     test('Get table from wikipedia containing Kanji, Hiragana, Katakana and latin texts', async function () {
         const converted = await tabletojson.convertUrl('https://en.wikipedia.org/wiki/Japanese_writing_system', {
-            containsClasses: ['wikitable'],
+            containsClasses: ['wikitable']
         });
 
         expect(converted).toBeDefined();
@@ -127,7 +129,7 @@ describe('TableToJSON Remote', function () {
     test('Fetch options - abort signal usage', async function () {
         await tabletojson
             .convertUrl('https://httpbin.org/delay/10', {
-                fetchOptions: {signal: AbortSignal.timeout(1000)},
+                fetchOptions: {signal: AbortSignal.timeout(1000)}
             })
             .catch((e) => {
                 expect(e.message).toContain('The operation was aborted due to timeout');
@@ -137,7 +139,7 @@ describe('TableToJSON Remote', function () {
     test('Remote fetching fails due to incompatible mime type', async function () {
         await tabletojson
             .convertUrl('https://httpbin.org/delay/1', {
-                fetchOptions: {signal: AbortSignal.timeout(5000)},
+                fetchOptions: {signal: AbortSignal.timeout(5000)}
             })
             .catch((e) => {
                 expect(e.message).toContain('Tabletojson can just handle text');
