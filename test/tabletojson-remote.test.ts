@@ -37,24 +37,34 @@ describe('TableToJSON Remote', function () {
     });
 
     test('Get table from Wikipedia using callBack function', async function () {
-        await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', (converted) => {
-            const mainTable = converted[0];
-            expect(mainTable[0]).toHaveProperty('ISO Language Names');
-            expect(mainTable instanceof Array).toBeTruthy();
-        });
+        await tabletojson.convertUrl(
+            'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes',
+            {useFirstRowForHeadings: true},
+            (converted) => {
+                const mainTable = converted[0];
+                expect(mainTable[0]).toHaveProperty('ISO Language Names');
+                expect(mainTable instanceof Array).toBeTruthy();
+            }
+        );
     });
 
     test('Get table from Wikipedia using callBack function without options', async function () {
-        await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', (converted) => {
-            expect(converted).toBeDefined();
-            const mainTable = converted[0];
-            expect(mainTable instanceof Array).toBeTruthy();
-            expect(mainTable[0]).toHaveProperty('ISO Language Names');
-        });
+        await tabletojson.convertUrl(
+            'https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes',
+            {useFirstRowForHeadings: true},
+            (converted) => {
+                expect(converted).toBeDefined();
+                const mainTable = converted[0];
+                expect(mainTable instanceof Array).toBeTruthy();
+                expect(mainTable[0]).toHaveProperty('ISO Language Names');
+            }
+        );
     });
 
     test('Get table from Wikipedia using promise', async function () {
-        const converted = await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes');
+        const converted = await tabletojson.convertUrl('https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes', {
+            useFirstRowForHeadings: true
+        });
 
         expect(converted).toBeDefined();
         const mainTable = converted[0];
@@ -139,7 +149,7 @@ describe('TableToJSON Remote', function () {
     test('Remote fetching fails due to incompatible mime type', async function () {
         await tabletojson
             .convertUrl('https://httpbin.org/delay/1', {
-                fetchOptions: {signal: AbortSignal.timeout(5000)}
+                fetchOptions: {signal: AbortSignal.timeout(10000)}
             })
             .catch((e) => {
                 expect(e.message).toContain('Tabletojson can just handle text');

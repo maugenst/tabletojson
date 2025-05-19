@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 import {TableToJsonOptions, tabletojson} from '../lib/Tabletojson';
+import {jest} from '@jest/globals';
 
 describe('TableToJSON Local', function () {
     let html = '';
@@ -799,5 +800,68 @@ describe('TableToJSON Local', function () {
         expect(converted).toBeDefined();
         expect(Array.isArray(converted)).toBeTruthy();
         expect(converted.length).toBe(0);
+    });
+
+    test('Tabletojson class reference for coverage', () => {
+        // Reference the class directly to ensure coverage
+        expect(typeof tabletojson.convert).toBe('function');
+    });
+
+    test('should skip hidden rows when ignoreHiddenRows is true', () => {
+        const html = `
+        <table>
+            <tr style="display: none"><td>Hidden</td></tr>
+            <tr><td>Visible</td></tr>
+        </table>
+    `;
+        const result = tabletojson.convert(html, {ignoreHiddenRows: true});
+        expect(result[0].length).toBe(1);
+        // Check the value of the only cell in the only row
+        expect(Object.values(result[0][0])).toContain('Visible');
+    });
+
+    test('should skip hidden rows with style display:none when ignoreHiddenRows is true', () => {
+        const html = `
+        <table>
+            <tr style="color: red; display: none;"><td>Hidden</td></tr>
+            <tr><td>Visible</td></tr>
+        </table>
+    `;
+        const result = tabletojson.convert(html, {ignoreHiddenRows: true});
+        expect(result[0].length).toBe(1);
+        expect(Object.values(result[0][0])).toContain('Visible');
+    });
+
+    test('should skip hidden rows with style display:none (no space) when ignoreHiddenRows is true', () => {
+        const html = `
+        <table>
+            <tr style="display:none"><td>Hidden</td></tr>
+            <tr><td>Visible</td></tr>
+        </table>
+    `;
+        const result = tabletojson.convert(html, {ignoreHiddenRows: true});
+        expect(result[0].length).toBe(1);
+        expect(Object.values(result[0][0])).toContain('Visible');
+    });
+
+    // Covers line 409 and 431
+    test('convertUrl with only URL (no options/callback)', async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            text: () => Promise.resolve('<table><tr><td>Test</td></tr></table>'),
+            headers: {get: () => 'text/html'}
+        });
+        const result = await tabletojson.convertUrl('https://example.com');
+        expect(Object.values(result[0][0])).toContain('Test');
+    });
+
+    // Covers line 417 and 431
+    test('convertUrl with callback as second argument', async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            text: () => Promise.resolve('<table><tr><td>Test2</td></tr></table>'),
+            headers: {get: () => 'text/html'}
+        });
+        await tabletojson.convertUrl('https://example.com', (result) => {
+            expect(Object.values(result[0][0])).toContain('Test2');
+        });
     });
 });
