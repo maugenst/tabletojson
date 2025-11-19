@@ -128,7 +128,7 @@ describe('TableToJSON Remote', function () {
         expect(table[0]['English translation']).toEqual('I, me');
     });
 
-    test('Try to get a table from a nonexisting domain', async function () {
+    test('Try to get a table from a nonexisting domain', function () {
         tabletojson.convertUrl('https://www.klhsfljkag.com/ydasdadad/adsaakhjg/jahsgajhvas.html').catch((e) => {
             expect(e.message).toContain('fetch failed');
         });
