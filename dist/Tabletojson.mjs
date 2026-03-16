@@ -1,5 +1,4 @@
 import * as cheerio from "cheerio";
-
 //#region lib/Tabletojson.ts
 var Tabletojson = class Tabletojson {
 	static convert(html, options = {
@@ -55,8 +54,8 @@ var Tabletojson = class Tabletojson {
 				const rows = [];
 				for (let i = options.headers.from || 0; i <= options.headers.to; i++) rows.push(i);
 				let columnLength = 0;
-				const trs$1 = $(table).find("tr");
-				trs$1.each((_index, row) => {
+				const trs = $(table).find("tr");
+				trs.each((_index, row) => {
 					const cells = $(row).find("td, th");
 					columnLength = cells.length > columnLength ? cells.length : columnLength;
 				});
@@ -65,7 +64,7 @@ var Tabletojson = class Tabletojson {
 				};
 				const headings = createNew2DArray(columnLength, rows.length, void 0);
 				rows.forEach((rowIndex, index) => {
-					const cells = $(trs$1[rowIndex]).find("td, th");
+					const cells = $(trs[rowIndex]).find("td, th");
 					let currentColumn = headings[index].indexOf(void 0);
 					cells.each((_j, cell) => {
 						const cheerioCell = $(cell);
@@ -230,6 +229,5 @@ const applyOffsets = (cellIndex, rowspans) => {
 	}
 	return cellIndex + rowspans.length - nullCount;
 };
-
 //#endregion
 export { Tabletojson, Tabletojson as tabletojson };

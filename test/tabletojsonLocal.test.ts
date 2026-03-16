@@ -1,10 +1,10 @@
 'use strict';
 
-import fs from 'fs';
-import path from 'path';
-import _ from 'lodash';
-import {TableToJsonOptions, tabletojson} from '../lib/Tabletojson';
 import {jest} from '@jest/globals';
+import fs from 'fs';
+import _ from 'lodash';
+import path from 'path';
+import {TableToJsonOptions, Tabletojson, tabletojson} from '../lib/Tabletojson';
 
 describe('TableToJSON Local', function () {
     let html = '';
@@ -803,8 +803,29 @@ describe('TableToJSON Local', function () {
     });
 
     test('Tabletojson class reference for coverage', () => {
-        // Reference the class directly to ensure coverage
+        // Reference and instantiate the class to ensure full coverage
+        const instance = new Tabletojson();
+        expect(instance).toBeDefined();
         expect(typeof tabletojson.convert).toBe('function');
+        expect(typeof Tabletojson.convert).toBe('function');
+    });
+
+    test('Headers option with empty header rows produces empty flatHeadings', () => {
+        const emptyHeaderHtml = `
+        <table>
+            <tr></tr>
+            <tr></tr>
+        </table>`;
+        const converted = tabletojson.convert(emptyHeaderHtml, {
+            headers: {
+                from: 0,
+                to: 1,
+                concatWith: ' '
+            }
+        });
+        expect(converted).toBeDefined();
+        expect(Array.isArray(converted)).toBeTruthy();
+        expect(converted.length).toBe(0);
     });
 
     test('should skip hidden rows when ignoreHiddenRows is true', () => {
