@@ -1,5 +1,5 @@
-import * as cheerio from 'cheerio';
 import type {Cheerio} from 'cheerio';
+import * as cheerio from 'cheerio';
 import {Element} from 'domhandler';
 /**
  * HeaderRows - defining the rows to be used as keys in the output json object
