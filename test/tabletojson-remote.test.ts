@@ -22,6 +22,14 @@ describe('TableToJSON Remote', function () {
         ).rejects.toThrow(/Tabletojson can just handle text/);
     });
 
+    test('Get table from locally mocked server returning a json object passing just an options object', async function () {
+        await expect(
+            tabletojson.convertUrl('https://api.github.com/user', {
+                useFirstRowForHeadings: true
+            })
+        ).rejects.toThrow(/Tabletojson can just handle text/);
+    });
+
     test('Get table from locally mocked server returning a json object passing in an object and a callback method', async function () {
         await expect(
             tabletojson.convertUrl(
@@ -42,7 +50,7 @@ describe('TableToJSON Remote', function () {
             {useFirstRowForHeadings: true},
             (converted) => {
                 const mainTable = converted[0];
-                expect(mainTable[0]).toHaveProperty('ISO Language Names');
+                expect(mainTable[0]).toHaveProperty('ISO language names');
                 expect(mainTable instanceof Array).toBeTruthy();
             }
         );
@@ -56,7 +64,7 @@ describe('TableToJSON Remote', function () {
                 expect(converted).toBeDefined();
                 const mainTable = converted[0];
                 expect(mainTable instanceof Array).toBeTruthy();
-                expect(mainTable[0]).toHaveProperty('ISO Language Names');
+                expect(mainTable[0]).toHaveProperty('ISO language names');
             }
         );
     });
@@ -69,7 +77,7 @@ describe('TableToJSON Remote', function () {
         expect(converted).toBeDefined();
         const mainTable = converted[0];
         expect(mainTable instanceof Array).toBeTruthy();
-        expect(mainTable[0]).toHaveProperty('ISO Language Names');
+        expect(mainTable[0]).toHaveProperty('ISO language names');
     });
 
     test('Get table from w3schools.com and use first row as heading', async function () {
@@ -149,10 +157,10 @@ describe('TableToJSON Remote', function () {
     test('Remote fetching fails due to incompatible mime type', async function () {
         await tabletojson
             .convertUrl('https://httpbin.org/delay/1', {
-                fetchOptions: {signal: AbortSignal.timeout(10000)}
+                fetchOptions: {signal: AbortSignal.timeout(30000)}
             })
             .catch((e) => {
                 expect(e.message).toContain('Tabletojson can just handle text');
             });
-    });
+    }, 35000);
 });
