@@ -1,10 +1,10 @@
 //#region lib/Tabletojson.d.ts
-type HeaderRows = {
+export type HeaderRows = {
   from?: number;
   to: number;
   concatWith: string;
 };
-type TableToJsonOptions = {
+export type TableToJsonOptions = {
   useFirstRowForHeadings?: boolean;
   headers?: HeaderRows;
   stripHtmlFromHeadings?: boolean;
@@ -21,10 +21,10 @@ type TableToJsonOptions = {
   limitrows?: number | null;
   fetchOptions?: RequestInit;
 };
-type CallbackFunction = (conversionResult: any) => any;
-declare class Tabletojson {
+export type CallbackFunction = (conversionResult: any) => any;
+export declare class Tabletojson {
   static convert(html: string, options?: TableToJsonOptions): any[];
   static convertUrl(url: string, callbackFunctionOrOptions?: TableToJsonOptions | CallbackFunction, callbackFunction?: CallbackFunction): Promise<any>;
 }
 //#endregion
-export { CallbackFunction, HeaderRows, TableToJsonOptions, Tabletojson, Tabletojson as tabletojson };
+export { Tabletojson as tabletojson };
