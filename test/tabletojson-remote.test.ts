@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import 'jest-extended';
 import nock from 'nock';
 import {tabletojson} from '../lib/Tabletojson';
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import {jest} from '@jest/globals';
+import {vi} from 'vitest';
 import fs from 'fs';
 import _ from 'lodash';
 import path from 'path';
@@ -867,7 +867,7 @@ describe('TableToJSON Local', function () {
 
     // Covers line 409 and 431
     test('convertUrl with only URL (no options/callback)', async () => {
-        global.fetch = jest.fn().mockResolvedValue({
+        global.fetch = vi.fn().mockResolvedValue({
             text: () => Promise.resolve('<table><tr><td>Test</td></tr></table>'),
             headers: {get: () => 'text/html'}
         });
@@ -877,7 +877,7 @@ describe('TableToJSON Local', function () {
 
     // Covers line 417 and 431
     test('convertUrl with callback as second argument', async () => {
-        global.fetch = jest.fn().mockResolvedValue({
+        global.fetch = vi.fn().mockResolvedValue({
             text: () => Promise.resolve('<table><tr><td>Test2</td></tr></table>'),
             headers: {get: () => 'text/html'}
         });
